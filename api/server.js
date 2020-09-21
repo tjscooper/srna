@@ -10,6 +10,8 @@ app.use(cors())
 
 // place holder for the data
 const users = [];
+const files = {}
+const current_user = "public"
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../my-app/build')));
@@ -19,12 +21,15 @@ app.get('/api/users', (req, res) => {
   res.json(users);
 });
 
+
 app.post('/api/user', (req, res) => {
   const user = req.body.user;
   console.log('Adding user:::::', user);
   users.push(user);
+  files[user] = []
   res.json("user addedd");
 });
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'public')
@@ -34,7 +39,7 @@ var storage = multer.diskStorage({
     }
   })
   
-  var upload = multer({ storage: storage }).array('file')
+var upload = multer({ storage: storage }).array('file')
   
 app.get('/',function(req,res){
     return res.send('Hello Server')
@@ -57,9 +62,6 @@ app.post('/upload',function(req, res) {
       })
 });
 
-app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
-});
 
 app.listen(port, () => {
     console.log(`Server listening on the port::${port}`);

@@ -86,7 +86,7 @@ onChangeHandler=event=>{
     for(var x = 0; x<this.state.selectedFile.length; x++) {
       data.append('file', this.state.selectedFile[x])
     }
-    axios.post("http://localhost:3080/upload", data, {
+    axios.post("http://35.162.241.80:3080/upload", data, {
       onUploadProgress: ProgressEvent => {
         this.setState({
           loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
