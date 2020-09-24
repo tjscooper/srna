@@ -93,7 +93,7 @@ app.post('/upload',function(req, res) {
 
 });
 
-var exec = require('child_process').execSync;
+var exec = require('child_process').exec;
 
 app.post('/execute',function(req, res) {
   //executes a pipeline on currently uploaded file\
