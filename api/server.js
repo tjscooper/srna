@@ -10,7 +10,9 @@ app.use(cors())
 
 // place holder for the data
 const users = [];
+var outfile = "";
 const files = {}
+var fileMap = {}
 const current_user = "public"
 
 app.use(bodyParser.json());
@@ -20,6 +22,21 @@ app.get('/api/users', (req, res) => {
   console.log('api/users called!')
   res.json(users);
 });
+
+app.get('/download/:file(*)',(req, res) => {
+var file = req.params.file;
+var fileLocation = path.join('./reports',file);
+console.log(fileLocation);
+res.download(fileLocation, file);
+});
+
+app.get('/hello',function(req,res){
+  res.send("Hello World!");
+});
+
+app.post('/testing', async (req, res) => {
+  const user = await User.findOne({email: req.body.email})
+})
 
 
 app.post('/api/user', (req, res) => {
@@ -44,9 +61,10 @@ var upload = multer({ storage: storage }).array('file')
 app.get('/',function(req,res){
     return res.send('Hello Server')
 })
+
 app.post('/upload',function(req, res) {
   //console.log('Adding user:::::', user);
-    
+    console.log(req.body)
     upload(req, res, function (err) {
      
         if (err instanceof multer.MulterError) {
@@ -56,12 +74,55 @@ app.post('/upload',function(req, res) {
             return res.status(501).json(err)
           // An unknown error occurred when uploading.
         } 
-        
+        var filenames = req.files.map(function(file) {
+          return file.filename; // or file.originalname
+        });
+        var oldfilenames = req.files.map(function(file) {
+          return file.originalname; // or file.originalname
+        });
+        console.log(filenames)
+        console.log(oldfilenames)
+        for (z = 0; z < filenames.length; z++) {
+          fileMap[oldfilenames[z]] = filenames[z]
+        }
+        console.log(fileMap)
         return res.status(200).send(req.file)
         // Everything went fine.
       })
+
 });
 
+var exec = require('child_process').exec;
+
+app.post('/execute',function(req, res) {
+  //executes a pipeline on currently uploaded file\
+    console.log("you've made it this far")
+    console.log(req.body)
+    var cmd = 'bash informatics/run_pipeline.sh'
+    outfile = Date.now() + "-out.txt"
+    cmd = cmd.concat(" " + outfile)
+    for (x = 0; x < req.body.length; x++) {
+        cmd = cmd.concat(" ")
+        cmd = cmd.concat(req.body[x])
+        console.log(cmd)
+
+    }
+    child = exec(cmd,
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+    });
+    try {
+      child();
+    } catch (error) {
+      console.log("finished")
+      res.json(outfile)
+    }
+    
+});
 
 app.listen(port, () => {
     console.log(`Server listening on the port::${port}`);

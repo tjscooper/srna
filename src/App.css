@@ -22,3 +22,10 @@
 .mrgnbtm {
   margin-top: 20px;
 }
+.App {
+  margin-top: 15px;
+}
+
+.App .navbar-brand {
+  font-weight: bold;
+}
