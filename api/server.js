@@ -104,7 +104,7 @@ app.post('/execute',function(req, res) {
     cmd = cmd.concat(" " + outfile)
     for (x = 0; x < req.body.length; x++) {
         cmd = cmd.concat(" ")
-        cmd = cmd.concat(req.body[x])
+        cmd = cmd.concat(fileMap[req.body[x]])
         console.log(cmd)
 
     }
