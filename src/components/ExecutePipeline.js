@@ -39,7 +39,7 @@ class ExecutePipeline extends Component {
   async monitorUntilJobFinished () {
     console.log("monitoring " + this.state.outfile)
     //var xmlHttp = new XMLHttpRequest();
-    axios.get('https://35.162.241.80:3080/hello')
+    axios.get('http://35.162.241.80:3080/hello')
       .then(function (response) {
         console.log(response);
       })
@@ -84,11 +84,11 @@ class ExecutePipeline extends Component {
       }
     }
     console.log(data)
-    axios.post("https://35.162.241.80:3080/execute", data, {})
+    axios.post("http://35.162.241.80:3080/execute", data, {})
     .then(res => {
       console.log("post execute")
       console.log(res);
-      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'https://35.162.241.80:3080/download/' + res.data})
+      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'http://35.162.241.80:3080/download/' + res.data})
       console.log(this.state.outfile)
       this.monitorUntilJobFinished()
 
