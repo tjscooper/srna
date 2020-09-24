@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+var https = require('https');
 const app = express(),
       bodyParser = require("body-parser");
       port = 3080;
@@ -99,7 +100,7 @@ app.post('/execute',function(req, res) {
     console.log("you've made it this far")
     console.log(req.body)
     var cmd = 'bash informatics/run_pipeline.sh'
-    outfile = Date.now() + "-out.txt"
+    outfile = Date.now() + "-out.zip"
     cmd = cmd.concat(" " + outfile)
     for (x = 0; x < req.body.length; x++) {
         cmd = cmd.concat(" ")
