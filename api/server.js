@@ -7,8 +7,8 @@ const fs = require('fs');
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
 const httpsServer = https.createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/my_api_url/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/my_api_url/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
 }, app);
 
 
