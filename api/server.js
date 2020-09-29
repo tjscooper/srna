@@ -6,6 +6,12 @@ var https = require('https');
 const fs = require('fs');
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
+
+const app = express(),
+      bodyParser = require("body-parser");
+      port = 3080;
+
+
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
@@ -17,9 +23,6 @@ const httpsServer = https.createServer({
 const httpServer = http.createServer(app);
 
 
-const app = express(),
-      bodyParser = require("body-parser");
-      port = 3080;
 
 var multer = require('multer')
 var cors = require('cors');
