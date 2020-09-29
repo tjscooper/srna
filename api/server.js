@@ -1,6 +1,22 @@
 const express = require('express');
 const path = require('path');
+
+const http = require('http');
 var https = require('https');
+const fs = require('fs');
+
+// serve the API with signed certificate on 443 (SSL/HTTPS) port
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/my_api_url/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/my_api_url/fullchain.pem'),
+}, app);
+
+
+
+// serve the API on 80 (HTTP) port
+const httpServer = http.createServer(app);
+
+
 const app = express(),
       bodyParser = require("body-parser");
       port = 3080;
@@ -125,6 +141,12 @@ app.post('/execute',function(req, res) {
     
 });
 
-app.listen(port, () => {
-    console.log(`Server listening on the port::${port}`);
+
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+});
+
+
+httpServer.listen(80, () => {
+    console.log('HTTP Server running on port 80');
 });
