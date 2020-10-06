@@ -146,9 +146,9 @@ app.post('/execute',function(req, res) {
 });
 
 
-httpsServer.listen(443, () => {
-    console.log('HTTPS Server running on port 443');
-});
+//httpsServer.listen(443, () => {
+//    console.log('HTTPS Server running on port 443');
+//});
 
 
 httpServer.listen(80, () => {
