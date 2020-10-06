@@ -12,11 +12,7 @@ const app = express(),
       port = 3080;
 
 
-const httpsServer = https.createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
-  dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
-}, app);
+
 
 
 
@@ -144,6 +140,13 @@ app.post('/execute',function(req, res) {
     }
     
 });
+
+
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
+  dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
+}, app);
 
 
 httpsServer.listen(443, () => {
