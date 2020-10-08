@@ -53,6 +53,7 @@ class ExecutePipeline extends Component {
     //var xmlHttp = new XMLHttpRequest();
     axios.get(this.state.statusPath)
       .then(function (response) {
+        console.log("we are checking the status")
         console.log(response);
         this.setState({loaded: response.progress, status: response.state})
       })
