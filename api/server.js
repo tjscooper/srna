@@ -17,7 +17,7 @@ const app = express(),
 
 
 // serve the API on 80 (HTTP) port
-const httpServer = http.createServer(app);
+//const httpServer = http.createServer(app);
 
 
 
