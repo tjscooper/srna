@@ -51,7 +51,7 @@ app.get('/hello',function(req,res){
   res.send("Hello World!");
 });
 
-app.get('/status:file(*)',function(req,res) => {
+app.get('/status:file(*)',function(req,res){
   var file = req.params.file;
   console.log(file)
   var retJson = {'state': "Testing", "progress": "2"}
