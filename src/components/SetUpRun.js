@@ -187,7 +187,7 @@ addCat = (e) => {
         
               </div> 
               
-              <div className="col-md-8" >
+              <div className="form-group files" >
               { ( this.state.primed ) ? (
               <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} >Upload</button>) : ( 
               <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} disabled>Upload</button>) }

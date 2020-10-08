@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import download from 'js-file-download';
 
+
 class ExecutePipeline extends Component { 
   
   constructor(props) {
@@ -13,9 +14,12 @@ class ExecutePipeline extends Component {
       this.state = {
         outfile: "",
         fullPathOutfile: "",
+        statusPath: "",
         isRunning: false,
         intervalID: null,
         outfileExists: false,
+        loaded: 0,
+        status: "Nothing is Cooking"
       }
    
   }
@@ -42,6 +46,15 @@ class ExecutePipeline extends Component {
     axios.get('https://booshboosh.net:3080/hello')
       .then(function (response) {
         console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })  
+    //var xmlHttp = new XMLHttpRequest();
+    axios.get(this.state.statusPath)
+      .then(function (response) {
+        console.log(response);
+        this.setState({loaded: response.progress, status: response.state})
       })
       .catch(function (error) {
         console.log(error);
@@ -88,7 +101,7 @@ class ExecutePipeline extends Component {
     .then(res => {
       console.log("post execute")
       console.log(res);
-      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'https://booshboosh.net:3080/download/' + res.data})
+      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'https://booshboosh.net:3080/download/' + res.data, statusPath:'https://booshboosh.net:3080/status/' + res.data})
       console.log(this.state.outfile)
       this.monitorUntilJobFinished()
 
@@ -102,12 +115,20 @@ class ExecutePipeline extends Component {
   render() {
     return (
       <div>
-      <div className="col-md-8" >
+      <div className="form-group files" >
       { ( !this.state.isRunning && this.props.fileNames.length != 0) ? (
       <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} >Run</button>) : ( 
       <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} disabled>Run</button>) }
       </div>
-      <div className="col-md-8" >
+      <div className="form-group files" >
+      <ToastContainer />
+      <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded, 2) }%</Progress>
+      <label>{this.state.status}</label>
+      </div>
+
+     
+
+      <div className="form-group files" >
       { ( this.state.outfileExists ) ? (
       <a href={this.state.fullPathOutfile}><button type="button" class="btn btn-success btn-block" >Download</button></a>) : ( 
       <button type="button" class="btn btn-success btn-block"  disabled>Download</button>) }
