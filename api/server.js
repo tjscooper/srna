@@ -165,11 +165,9 @@ const httpsServer = https.createServer({
   dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
 }, app);
 
-
 httpsServer.listen(3080, () => {
     console.log('HTTPS Server running on port 3080');
 });
-
 
 /*
 const httpServer = http.createServer(app);
