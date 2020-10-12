@@ -149,6 +149,16 @@ app.post('/execute',function(req, res) {
 });
 
 /*
+
+IF YOU EVER NEED TO FIX SSL CERT on AWS LINUX 2
+https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
+https://aws.amazon.com/blogs/compute/extending-amazon-linux-2-with-epel-and-lets-encrypt/
+
+then, use this command:
+
+sudo certbot certonly --nginx --debug -w /var/www/test -d test.net
+*/
+
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
@@ -159,10 +169,10 @@ const httpsServer = https.createServer({
 httpsServer.listen(3080, () => {
     console.log('HTTPS Server running on port 3080');
 });
-*/
 
+/*
 const httpServer = http.createServer(app);
 
 httpServer.listen(3080, () => {
-    console.log('HTTP Server running on port 80');
+    console.log('HTTP Server running on port 3080');
 });
