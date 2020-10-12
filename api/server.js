@@ -17,7 +17,7 @@ const app = express(),
 
 
 // serve the API on 80 (HTTP) port
-//const httpServer = http.createServer(app);
+//
 
 
 
@@ -148,7 +148,7 @@ app.post('/execute',function(req, res) {
     
 });
 
-
+/*
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
@@ -159,8 +159,10 @@ const httpsServer = https.createServer({
 httpsServer.listen(3080, () => {
     console.log('HTTPS Server running on port 3080');
 });
+*/
 
+const httpServer = http.createServer(app);
 
-//httpServer.listen(80, () => {
-//    console.log('HTTP Server running on port 80');
-//});
+httpServer.listen(3080, () => {
+    console.log('HTTP Server running on port 80');
+});
