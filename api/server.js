@@ -170,9 +170,11 @@ httpsServer.listen(3080, () => {
     console.log('HTTPS Server running on port 3080');
 });
 
+
 /*
 const httpServer = http.createServer(app);
 
 httpServer.listen(3080, () => {
     console.log('HTTP Server running on port 3080');
 });
+*/
