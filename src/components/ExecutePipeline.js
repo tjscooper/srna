@@ -69,12 +69,12 @@ class ExecutePipeline extends Component {
                 clearInterval(intervalID2)
               }
               axios.get(this.state.statusPath)
-                .then(function (response) {
+                .then(function (res2) {
                   console.log("we are checking the status")
-                  console.log(response);
-                  console.log(response.data.progress);
-                  console.log(response.data.state);
-                  this.setState({loaded: response.data.progress, status: response.data.state})
+                  console.log(res2);
+                  console.log(res2.data.progress);
+                  console.log(res2.data.state);
+                  this.setState({loaded: res2.data.progress, status: res2.data.state})
                 })
                 .catch(function (error) {
                   console.log(error);
