@@ -56,9 +56,10 @@ app.get('/status:file(*)',function(req,res){
   var file = req.params.file;
   console.log(file)
   console.log("yoyoyoyoyoy")
-  fs.readFile('api/public/json/pipeline_status.json', function (err, data) {
+  const path = require("path");
+  fs.readFile(path.resolve(__dirname, 'public/json/pipeline_status.json'), function (err, data) {
   if (err) throw err;
-  var json1 = JSON.stringify(eval("(" + str + ")"));
+  var json1 = JSON.stringify(eval("(" + data + ")"));
   var key1 = file.substring(1);
   var key = key1.slice(0, key1.indexOf('.'))
   var retJson = json1[key]
