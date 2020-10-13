@@ -19,7 +19,7 @@ do
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '. + { "\($var1)": { "state": "Trimming \($var3)", "progress": "\($var2)" } }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Trimming \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json pipeline_status.json
 
     echo "Aligning with bowtie2"
 
