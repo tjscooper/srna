@@ -61,7 +61,9 @@ app.get('/status:file(*)',function(req,res){
   if (err) throw err;
   console.log("data")
   console.log(data)
-  var json1 = JSON.stringify(eval("(" + data + ")"));
+  var json2 = JSON.stringify(eval("(" + data + ")"));
+  console.log("json2")
+  var json1 = JSON.parse(json2);
   console.log("json1")
   console.log(json1)
   Object.keys(json1).forEach(function(k) {
