@@ -37,21 +37,21 @@ class ExecutePipeline extends Component {
 }
 
   statusReport = () =>{
-    let ret_data = {}
-    axios.get(this.state.statusPath)
+    
+    return axios.get(this.state.statusPath)
       .then(function (res2) {
         console.log("we are checking the status")
         console.log(res2);
         console.log(res2.data.progress);
         console.log(res2.data.state);
-        this.res2 = res2.data
-        return this.res2
+        return res2.data
+        
         //this.setState({loaded: res2.data.progress, status: res2.data.state})
       })
       .catch(function (error) {
         console.log(error);
       })
-    return ret_data
+    
 }
 
   stopInterval = () => {
