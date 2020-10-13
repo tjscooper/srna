@@ -36,6 +36,22 @@ class ExecutePipeline extends Component {
 
 }
 
+  statusReport = () =>{
+
+    axios.get(this.state.statusPath)
+      .then(function (res2) {
+        console.log("we are checking the status")
+        console.log(res2);
+        console.log(res2.data.progress);
+        console.log(res2.data.state);
+        this.setState({loaded: res2.data.progress, status: res2.data.state})
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+
+}
+
   stopInterval = () => {
     
     this.setState({intervalID: null})
@@ -53,6 +69,17 @@ class ExecutePipeline extends Component {
       })  
     //var xmlHttp = new XMLHttpRequest();
 
+    
+    try {
+      var intervalID3 = setInterval(async () => {
+        this.statusReport()
+        if (this.loaded == 100) {
+          clearInterval(intervalID3)
+        }
+      }, 5000);
+    } catch(e) {
+      console.log(e);
+    }
 
     axios.get(this.state.fullPathOutfile)
       .then(function (response) {
@@ -61,30 +88,20 @@ class ExecutePipeline extends Component {
       .catch(function (error) {
         console.log(error);
       });
-      try {
-            var intervalID2 = setInterval(async () => {
-              const blocks = this.fileExists()
-              console.log(blocks)
-              if (blocks) {
-                this.setState({outfileExists: true, isRunning:false})
-                clearInterval(intervalID2)
-              }
-              axios.get(this.state.statusPath)
-                .then(function (res2) {
-                  console.log("we are checking the status")
-                  console.log(res2);
-                  console.log(res2.data.progress);
-                  console.log(res2.data.state);
-                  this.setState({loaded: res2.data.progress, status: res2.data.state})
-                })
-                .catch(function (error) {
-                  console.log(error);
-                })  
-            }, 5000);
-          } catch(e) {
-            console.log(e);
-          }
+    try {
+          var intervalID2 = setInterval(async () => {
+            const blocks = this.fileExists()
+            console.log(blocks)
+            if (blocks) {
+              this.setState({outfileExists: true, isRunning:false})
+              clearInterval(intervalID2)
+            }
+              
+          }, 5000);
+        } catch(e) {
+          console.log(e);
         }
+      }
 
   onClickHandler = () => {
     const data = []
