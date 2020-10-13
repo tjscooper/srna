@@ -44,6 +44,7 @@ class ExecutePipeline extends Component {
         console.log(res2);
         console.log(res2.data.progress);
         console.log(res2.data.state);
+        this.setState({loaded: res2.data.progress, status: res2.data.state})
         return res2.data
         
         //this.setState({loaded: res2.data.progress, status: res2.data.state})
