@@ -44,7 +44,8 @@ class ExecutePipeline extends Component {
         console.log(res2);
         console.log(res2.data.progress);
         console.log(res2.data.state);
-        this.setState({loaded: res2.data.progress, status: res2.data.state})
+        return res2
+        //this.setState({loaded: res2.data.progress, status: res2.data.state})
       })
       .catch(function (error) {
         console.log(error);
@@ -72,8 +73,9 @@ class ExecutePipeline extends Component {
     
     try {
       var intervalID3 = setInterval(async () => {
-        this.statusReport()
-        if (this.loaded == 100) {
+        const res2 = this.statusReport()
+        this.setState({loaded: res2.data.progress, status: res2.data.state})
+        if (res2.data.progress == 100) {
           clearInterval(intervalID3)
         }
       }, 5000);
