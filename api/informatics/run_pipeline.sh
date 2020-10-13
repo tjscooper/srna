@@ -1,5 +1,5 @@
 #!/bin/bash
-source ~/.bashrc
+#source ~/.bashrc
 now=$(date +"%Y%m%d.%H%M%S%3N")
 #touch reports/$1
 ref_split=(${1//./ })
