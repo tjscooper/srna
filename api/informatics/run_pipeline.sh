@@ -71,7 +71,8 @@ do
     rm public/$p.sam
     rm public/$p.bam
     rm public/$p.sorted.bam
-  	rm public/json/tmp*.json
+    rm public/$p.sorted.bam.bai
+  	rm -f public/json/tmp*.json
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" '."\($var1)" = { "state": "Preparing for next file", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
@@ -79,13 +80,13 @@ do
 done
 
 echo "Archiving report files"
-#zip
+zip -r reports/$ref_name.zip public/$ref_name
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 jq -c --arg var1 "$ref_name" --arg var2 "$progress" '."\($var1)" = { "state": "Archiving run", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
    
 echo "Final cleaning"
-#rms
+rm -rf public/$ref_name
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 jq -c --arg var1 "$ref_name" --arg var2 "$progress" '."\($var1)" = { "state": "Complete", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
