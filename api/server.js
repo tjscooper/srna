@@ -59,10 +59,15 @@ app.get('/status:file(*)',function(req,res){
   const path = require("path");
   fs.readFile(path.resolve(__dirname, 'public/json/pipeline_status.json'), function (err, data) {
   if (err) throw err;
+  console.log(data)
   var json1 = JSON.stringify(eval("(" + data + ")"));
+  console.log(json1)
   var key1 = file.substring(1);
+  console.log(key1)
   var key = key1.slice(0, key1.indexOf('.'))
+  console.log(key)
   var retJson = json1[key]
+  console.log(retJson)
   res.json(retJson);
 });
 
