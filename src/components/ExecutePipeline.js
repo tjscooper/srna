@@ -51,15 +51,7 @@ class ExecutePipeline extends Component {
         console.log(error);
       })  
     //var xmlHttp = new XMLHttpRequest();
-    axios.get(this.state.statusPath)
-      .then(function (response) {
-        console.log("we are checking the status")
-        console.log(response);
-        this.setState({loaded: response.progress, status: response.state})
-      })
-      .catch(function (error) {
-        console.log(error);
-      })  
+
 
     axios.get(this.state.fullPathOutfile)
       .then(function (response) {
@@ -76,6 +68,17 @@ class ExecutePipeline extends Component {
                 this.setState({outfileExists: true, isRunning:false})
                 clearInterval(intervalID2)
               }
+              axios.get(this.state.statusPath)
+                .then(function (response) {
+                  console.log("we are checking the status")
+                  console.log(response);
+                  console.log(response.progress);
+                  console.log(response.state);
+                  this.setState({loaded: response.progress, status: response.state})
+                })
+                .catch(function (error) {
+                  console.log(error);
+                })  
             }, 5000);
           } catch(e) {
             console.log(e);
