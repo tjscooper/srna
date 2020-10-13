@@ -32,7 +32,7 @@ do
 	
     echo "Aligning with bowtie2"
 	#bowtie
-	(bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt
+	(bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) #2> public/$ref_name/$p.align.txt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Converting sams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
