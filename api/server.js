@@ -64,6 +64,10 @@ app.get('/status:file(*)',function(req,res){
   var json1 = JSON.stringify(eval("(" + data + ")"));
   console.log("json1")
   console.log(json1)
+  Object.keys(json1).forEach(function(k) {
+    var value = json1[k];
+    console.log(k)
+    console.log(value)})
   var key1 = file.substring(1);
   console.log("key1")
   console.log(key1)
