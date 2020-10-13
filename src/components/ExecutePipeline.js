@@ -80,7 +80,7 @@ class ExecutePipeline extends Component {
         if (this.state.progress == 100) {
           clearInterval(intervalID3)
         }
-      }, 5000);
+      }, 1000);
     } catch(e) {
       console.log(e);
     }
