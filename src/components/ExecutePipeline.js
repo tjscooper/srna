@@ -75,11 +75,12 @@ class ExecutePipeline extends Component {
     
     try {
       var intervalID3 = setInterval(async () => {
-        const res2 = this.statusReport()
-        console.log("**********************")
+        const res2 = await axios.get(this.state.statusPath).then(function (res2) {
+          console.log("we are checking the status"); console.log(res2); console.log(res2.data.progress); console.log(res2.data.state);}).catch(function (error) {
+          console.log(error);})
         console.log(res2)
-        this.setState({loaded: res2.progress, status: res2.state})
-        if (res2.progress == 100) {
+        this.setState({loaded: res2.data.progress, status: res2.data.state})
+        if (res2.data.progress == 100) {
           clearInterval(intervalID3)
         }
       }, 5000);
