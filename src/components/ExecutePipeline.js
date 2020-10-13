@@ -1,4 +1,3 @@
-  
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Progress} from 'reactstrap';
@@ -37,22 +36,20 @@ class ExecutePipeline extends Component {
 }
 
   statusReport = () =>{
-    
-    return axios.get(this.state.statusPath)
+    let ret_data = {}
+    axios.get(this.state.statusPath)
       .then(function (res2) {
         console.log("we are checking the status")
         console.log(res2);
         console.log(res2.data.progress);
         console.log(res2.data.state);
-        this.setState({loaded: res2.data.progress, status: res2.data.state})
-        return res2.data
-        
+        ret_data = res2.data
         //this.setState({loaded: res2.data.progress, status: res2.data.state})
       })
       .catch(function (error) {
         console.log(error);
       })
-    
+    return ret_data
 }
 
   stopInterval = () => {
@@ -75,12 +72,11 @@ class ExecutePipeline extends Component {
     
     try {
       var intervalID3 = setInterval(async () => {
-        const res2 = await axios.get(this.state.statusPath).then(function (res2) {
-          console.log("we are checking the status"); console.log(res2); console.log(res2.data.progress); console.log(res2.data.state);}).catch(function (error) {
-          console.log(error);})
+        const res2 = this.statusReport()
+        console.log("**********************")
         console.log(res2)
-        this.setState({loaded: res2.data.progress, status: res2.data.state})
-        if (res2.data.progress == 100) {
+        this.setState({loaded: res2.progress, status: res2.state})
+        if (res2.progress == 100) {
           clearInterval(intervalID3)
         }
       }, 5000);
