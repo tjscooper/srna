@@ -77,7 +77,7 @@ class ExecutePipeline extends Component {
         console.log("**********************")
         //console.log(res2)
         //this.setState({loaded: res2.progress, status: res2.state})
-        if (this.state.progress == 100) {
+        if (this.state.progress == '100.00') {
           clearInterval(intervalID3)
         }
       }, 1000);
