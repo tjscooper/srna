@@ -15,10 +15,13 @@ jq -c --arg var1 "$ref_name" '. + { "\($var1)": { "state": "Initializing", "prog
 for file in "$@" 
 do
     echo "File: $file";
+    l=(${file//./ })
+    p=${l[0]}
+    echo "Prefix: $p";
     echo "Trimming with cutadapt"
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
     jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Trimming \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
-
+    cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -o public/$p.trimmed.fastq.gz public/$file > public/$p.trim.txt
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
