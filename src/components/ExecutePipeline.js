@@ -11,16 +11,17 @@ class ExecutePipeline extends Component {
   
   constructor(props) {
     super(props);
-      this.state = {
-        outfile: "",
-        fullPathOutfile: "",
-        statusPath: "",
-        isRunning: false,
-        intervalID: null,
-        outfileExists: false,
-        loaded: 0,
-        status: "Nothing is Cooking"
-      }
+    this.state = {
+      outfile: "",
+      fullPathOutfile: "",
+      statusPath: "",
+      isRunning: false,
+      intervalID: null,
+      outfileExists: false,
+      loaded: 0,
+      status: "Nothing is Cooking"
+    }
+    this.monitorUntilJobFinished = this.monitorUntilJobFinished.bind(this)
    
   }
   
