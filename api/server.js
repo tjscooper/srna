@@ -44,6 +44,7 @@ app.get('/download/:file(*)',(req, res) => {
 var file = req.params.file;
 var fileLocation = path.join('./reports',file);
 console.log(fileLocation);
+
 res.download(fileLocation, file);
 });
 
@@ -55,8 +56,15 @@ app.get('/status:file(*)',function(req,res){
   var file = req.params.file;
   console.log(file)
   console.log("yoyoyoyoyoy")
-  var retJson = {'state': "Testing", "progress": "2"}
+  fs.readFile('api/public/json/pipeline_status.json', function (err, data) {
+  if (err) throw err;
+  var json1 = JSON.stringify(eval("(" + str + ")"));
+  var key1 = file.substring(1);
+  var key = key1.slice(0, key1.indexOf('.'))
+  var retJson = json1[key]
   res.json(retJson);
+});
+
 });
 
 app.post('/testing', async (req, res) => {
