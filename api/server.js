@@ -136,9 +136,9 @@ app.post('/upload',function(req, res) {
         var cmd2 = "bash informatics/store_files.sh "
         for (z = 0; z < filenames.length; z++) {
           fileMap[oldfilenames[z]] = filenames[z]
-          cmd = cmd.concat(" " + filenames[z])
+          cmd2 = cmd2.concat(" " + filenames[z])
         }
-        child2 = exec(cmd,
+        child2 = exec(cmd2,
           function (error, stdout, stderr) {
             console.log('stdout: ' + stdout);
             console.log('stderr: ' + stderr);
