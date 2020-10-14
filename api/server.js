@@ -132,23 +132,25 @@ app.post('/upload',function(req, res) {
         });
         console.log(filenames)
         console.log(oldfilenames)
+
+        var cmd2 = "bash informatics/store_files.sh "
         for (z = 0; z < filenames.length; z++) {
           fileMap[oldfilenames[z]] = filenames[z]
-          var cmd = "bash informatics/store_files.sh " + filenames[z]
-          child2 = exec(cmd,
-            function (error, stdout, stderr) {
-              console.log('stdout: ' + stdout);
-              console.log('stderr: ' + stderr);
-              if (error !== null) {
-                   console.log('exec error: ' + error);
-              }
-            });
-            try {
-              child2();
-            } catch (error) {
-              console.log("finished upload")
-            }
+          cmd = cmd.concat(" " + filenames[z])
         }
+        child2 = exec(cmd,
+          function (error, stdout, stderr) {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            if (error !== null) {
+                 console.log('exec error: ' + error);
+            }
+          });
+          try {
+            child2();
+          } catch (error) {
+            console.log("finished upload")
+          }
         console.log(fileMap)
         return res.status(200).send(req.file)
         // Everything went fine.
