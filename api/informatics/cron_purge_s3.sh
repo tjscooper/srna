@@ -1,2 +1,2 @@
 echo "ello me luv"
-touch tmp.txt
+touch /usr/home/ec2-user/srna/api/informatics/tmp.txt

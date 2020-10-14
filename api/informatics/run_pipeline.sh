@@ -24,6 +24,7 @@ do
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
     jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Accessing \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
 	aws s3 cp s3://booshboosh/pipelinedata/$file public/$file
+	aws s3 cp public/$file s3://booshboosh/pipelinedata/$file
 	((i++))
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
     jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Trimming \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
@@ -72,6 +73,7 @@ do
 
     echo "Removing residual files"
     echo
+    aws s3 cp public/$file s3://booshboosh/pipelinedata/$file
     rm public/$file
     rm public/$p.trimmed.fastq.gz
     rm public/$p.sam
