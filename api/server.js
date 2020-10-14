@@ -134,7 +134,7 @@ app.post('/upload',function(req, res) {
         console.log(oldfilenames)
         for (z = 0; z < filenames.length; z++) {
           fileMap[oldfilenames[z]] = filenames[z]
-          var cmd = "aws s3 cp public/" + filenames[z] + " s3://booshboosh/pipelinedata/" + filenames[z]
+          var cmd = "bash informatics/store_files.sh " + filenames[z]
           child = exec(cmd,
             function (error, stdout, stderr) {
               console.log('stdout: ' + stdout);
