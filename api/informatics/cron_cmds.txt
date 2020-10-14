@@ -1,0 +1,1 @@
+*/5 * * * * /home/ec2-user/srna/api/informatics/cron_purge_s3.sh
