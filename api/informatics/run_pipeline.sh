@@ -9,7 +9,7 @@ mkdir public/$ref_name
 shift
 i=0
 num_files=${#@}
-num_steps=$(( 7*num_files + 2 ))
+num_steps=$(( 8*num_files + 2 ))
 echo "Number of steps: $num_steps"
 
 jq -c --arg var1 "$ref_name" '. + { "\($var1)": { "state": "Initializing", "progress": "0" } }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
@@ -20,11 +20,16 @@ do
     echo "File: $file";
     l=(${file//./ })
     p=${l[0]}
-    echo "Prefix: $p";
-    echo "Trimming with cutadapt"
+    echo "Prefix: $p: Downloading from booshboosh s3";
+    progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
+    jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Accessing \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	aws s3 cp s3://booshboosh/pipelinedata/$file public/$file
+	((i++))
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
     jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Trimming \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
-    ../../anaconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -m 10 -o public/$p.trimmed.fastq.gz public/$file > public/$ref_name/$p.trim.txt
+    
+	echo "Trimming with cutadapt"
+	../../anaconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -m 10 -o public/$p.trimmed.fastq.gz public/$file > public/$ref_name/$p.trim.txt
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
@@ -67,6 +72,7 @@ do
 
     echo "Removing residual files"
     echo
+    rm public/$file
     rm public/$p.trimmed.fastq.gz
     rm public/$p.sam
     rm public/$p.bam
