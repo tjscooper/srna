@@ -134,6 +134,21 @@ app.post('/upload',function(req, res) {
         console.log(oldfilenames)
         for (z = 0; z < filenames.length; z++) {
           fileMap[oldfilenames[z]] = filenames[z]
+          var cmd = "aws s3 cp public/" + filenames[z] + " s3://booshboosh/pipelinedata/" + filenames[z]
+          child = exec(cmd,
+            function (error, stdout, stderr) {
+              console.log('stdout: ' + stdout);
+              console.log('stderr: ' + stderr);
+              if (error !== null) {
+                   console.log('exec error: ' + error);
+              }
+            });
+            try {
+              child();
+            } catch (error) {
+              console.log("finished")
+              res.json(outfile)
+            }
         }
         console.log(fileMap)
         return res.status(200).send(req.file)
