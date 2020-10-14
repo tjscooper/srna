@@ -135,7 +135,7 @@ app.post('/upload',function(req, res) {
         for (z = 0; z < filenames.length; z++) {
           fileMap[oldfilenames[z]] = filenames[z]
           var cmd = "bash informatics/store_files.sh " + filenames[z]
-          child = exec(cmd,
+          child2 = exec(cmd,
             function (error, stdout, stderr) {
               console.log('stdout: ' + stdout);
               console.log('stderr: ' + stderr);
@@ -144,10 +144,9 @@ app.post('/upload',function(req, res) {
               }
             });
             try {
-              child();
+              child2();
             } catch (error) {
-              console.log("finished")
-              res.json(outfile)
+              console.log("finished upload")
             }
         }
         console.log(fileMap)
