@@ -209,6 +209,8 @@ cd samtools-1.9
 ./configure --prefix=/usr/local
 make
 sudo make install
+cd
+sudo yum install emacs
 
 
 
@@ -218,6 +220,7 @@ for helmet: https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 https://aws.amazon.com/blogs/compute/extending-amazon-linux-2-with-epel-and-lets-encrypt/
 ***
 
+-first, update IP on google domains DNS settings
 -then, use these commands:
 sudo mkdir /var/www/test
 sudo openssl dhparam -out /var/www/test/dh-strong.pem 2048
@@ -230,6 +233,7 @@ cd ~/srna/api
 mkdir reports
 mkdir public
 mkdir public/json
+echo '{ "key1": "value1", "key2": "value2", "key3": "value3" }' > public/json/pipeline_status.json
 sudo npm run dev
 */
 

@@ -81,7 +81,7 @@ class SetUpRun extends Component {
   }
   checkFileSize=(event)=>{
     let files = event.target.files
-    let size = 200000000
+    let size = 20000000000
     let err = []; 
     for(var x = 0; x<files.length; x++) {
     if (files[x].size > size) {
