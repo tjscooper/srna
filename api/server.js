@@ -192,13 +192,45 @@ app.post('/execute',function(req, res) {
 
 /*
 
+-Install cutadapt and samtools and bowtie2:
+scp -i 2020DYLANDO.pem Downloads/Miniconda3-latest-Linux-x86_64.sh ec2-user@ec2-52-41-194-224.us-west-2.compute.amazonaws.com:
+bash Miniconda3-latest-Linux-x86_64.sh
+miniconda3/bin/conda config --add channels bioconda
+miniconda3/bin/conda config --add channels conda-forge
+miniconda3/bin/conda install bowtie2
+miniconda3/bin/conda install cutadapt
+rm miniconda3/pkgs/*.bz2
+sudo yum group install "Development Tools"
+sudo yum install ncurses-devel bzip2-devel xz-devel
+cd /tmp
+wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
+tar xvjf samtools-1.9.tar.bz2
+cd samtools-1.9
+./configure --prefix=/usr/local
+make
+sudo make install
+
+
+
+***
 IF YOU EVER NEED TO FIX SSL CERT on AWS LINUX 2
-https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
+for helmet: https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 https://aws.amazon.com/blogs/compute/extending-amazon-linux-2-with-epel-and-lets-encrypt/
+***
 
-then, use this command:
-
+-then, use these commands:
+sudo mkdir /var/www/test
+sudo openssl dhparam -out /var/www/test/dh-strong.pem 2048
+sudo wget -r --no-parent -A 'epel-release-*.rpm' http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/
+sudo rpm -Uvh dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-*.rpm
+sudo yum-config-manager --enable epel*
+sudo yum install -y python-certbot-nginx
 sudo certbot certonly --nginx --debug -w /var/www/test -d test.net
+cd ~/srna/api
+mkdir reports
+mkdir public
+mkdir public/json
+sudo npm run dev
 */
 
 const httpsServer = https.createServer({
