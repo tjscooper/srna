@@ -31,6 +31,7 @@ do
     
 	echo "Trimming with cutadapt"
 	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -m 10 -o public/$p.trimmed.fastq.gz public/$file > public/$ref_name/$p.trim.txt
+	rm public/$file
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
@@ -39,6 +40,7 @@ do
     echo "Aligning with bowtie2"
 	#bowtie
 	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt
+    rm public/$p.trimmed.fastq.gz
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Converting sams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
@@ -46,6 +48,7 @@ do
     echo "Converting sam to bam with samtools"
     #samtools
     /tmp/samtools-1.9/samtools view -bS public/$p.sam > public/$p.bam
+    rm public/$p.sam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Sorting bams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
@@ -53,6 +56,7 @@ do
     echo "Sorting bam with samtools"
     #samtools
     /tmp/samtools-1.9/samtools sort -m 10M public/$p.bam -o public/$p.sorted.bam
+    rm public/$p.bam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Indexing bams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
@@ -73,11 +77,6 @@ do
 
     echo "Removing residual files"
     echo
-    aws s3 cp public/$file s3://booshboosh/pipelinedata/$file
-    rm public/$file
-    rm public/$p.trimmed.fastq.gz
-    rm public/$p.sam
-    rm public/$p.bam
     rm public/$p.sorted.bam
     rm public/$p.sorted.bam.bai
   	rm -f public/json/tmp*.json
