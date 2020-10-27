@@ -1,6 +1,7 @@
 #!/bin/bash
 if ! screen -list | grep -q "queue"; then
     screen -d -m -S queue
+    screen -S queue -X stuff "cd ~/srna/api"
 fi
 
 cmd="bash informatics/run_pipeline.sh"
