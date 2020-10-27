@@ -4,8 +4,12 @@ if ! screen -list | grep -q "queue"; then
 fi
 
 cmd="bash informatics/run_pipeline.sh"
+echo $cmd
 for arg in "$@"
-	cmd="${cmd} ${arg}" 
 do
+	echo $arg
+	cmd="${cmd} ${arg}" 
+	echo $cmd
+done
 cmd="${cmd}^M"
 screen -S queue -X stuff "$cmd"
