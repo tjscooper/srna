@@ -47,7 +47,7 @@ do
 
     echo "Converting sam to bam with samtools"
     #samtools
-    /tmp/samtools-1.9/samtools view -bS public/$p.sam > public/$p.bam
+    ../../samtools-1.9/samtools view -bS public/$p.sam > public/$p.bam
     rm public/$p.sam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
@@ -55,7 +55,7 @@ do
 
     echo "Sorting bam with samtools"
     #samtools
-    /tmp/samtools-1.9/samtools sort -m 10M public/$p.bam -o public/$p.sorted.bam
+    ../../samtools-1.9/samtools sort -m 10M public/$p.bam -o public/$p.sorted.bam
     rm public/$p.bam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
@@ -63,14 +63,14 @@ do
 
     echo "Indexing bam with samtools"
     #samtools
-    /tmp/samtools-1.9/samtools index public/$p.sorted.bam
+    ../../samtools-1.9/samtools index public/$p.sorted.bam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Generating counts \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
     
     echo "Generating count stats with samtools"
     #samtools
-    /tmp/samtools-1.9/samtools idxstats public/$p.sorted.bam > public/$ref_name/$p.counts.txt
+    ../../samtools-1.9/samtools idxstats public/$p.sorted.bam > public/$ref_name/$p.counts.txt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Removing temporary files \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
