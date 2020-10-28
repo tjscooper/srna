@@ -129,8 +129,34 @@ app.get('/',function(req,res){
 })
 
 
-app.post('/upload', upload.array('file',1), function (req, res, next) {
-    res.send("Uploaded!");
+app.post('/upload', function (req, res, next) { 
+  upload.array(req, res, function (err){
+     
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+          // A Multer error occurred when uploading.
+        } else if (err) {
+            return res.status(501).json(err)
+          // An unknown error occurred when uploading.
+        } 
+        var filenames = req.files.map(function(file) {
+          return file.filename; // or file.originalname
+        });
+        var oldfilenames = req.files.map(function(file) {
+          return file.originalname; // or file.originalname
+        });
+        console.log(filenames)
+        console.log(oldfilenames)
+
+        for (z = 0; z < filenames.length; z++) {
+          fileMap[oldfilenames[z]] = filenames[z]
+        }
+        
+        console.log(fileMap)
+        return res.status(200).send(req.file)
+        // Everything went fine.
+      })
+
 });
 
 /*
@@ -240,6 +266,23 @@ sudo yum install emacs
 
 ***
 CREATING AWS KEY AND SECRET
+in the AIM console, go to the the Security credentials of developer1
+add a new key and keep track of the key and secret
+
+in the ec2 terminal
+cd
+aws configure
+fill out the info
+1. access key
+2. secret
+3. region -> us-west-2
+4. type -> json
+
+then
+
+emacs config.json
+{ "accessKeyId": <YOUR_ACCESS_KEY_ID>, "secretAccessKey": <YOUR_SECRET_ACCESS_KEY>, "region": "us-east-1" }
+ctrl-x ctrl-s ctrl-x ctrl-c
 
 
 
