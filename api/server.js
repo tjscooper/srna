@@ -126,14 +126,14 @@ var storages3 = multerS3({
   
 
 //change "storages3" to "storage" if you want to store local. here i am storing with an s3 bucket
-var upload = multer({ storage: storages3 }).array('file')
+var upload = multer({ storage: storages3 })
   
 app.get('/',function(req,res){
     return res.send('Hello Server')
 })
 
 
-app.post('/upload', upload.array('upl',1), function (req, res, next) {
+app.post('/upload', upload.array('file',1), function (req, res, next) {
     res.send("Uploaded!");
 });
 
