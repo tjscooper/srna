@@ -132,6 +132,15 @@ app.get('/',function(req,res){
     return res.send('Hello Server')
 })
 
+
+app.post('/upload', upload.array('upl',1), function (req, res, next) {
+    res.send("Uploaded!");
+});
+
+/*
+
+/// this is if you upload locally instead of to an S3
+
 app.post('/upload',function(req, res) {
   //console.log('Adding user:::::', user);
     console.log(req.body)
@@ -177,7 +186,7 @@ app.post('/upload',function(req, res) {
       })
 
 });
-
+*/
 var exec = require('child_process').exec;
 
 app.post('/execute',function(req, res) {
