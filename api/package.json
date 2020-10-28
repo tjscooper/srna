@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/bbachi/react-nodejs-example#readme",
   "dependencies": {
+    "aws-sdk": "^2.780.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.4",
@@ -26,9 +27,11 @@
     "multer": "^1.4.2",
     "request": "^2.79.0"
   },
-  
   "nodemonConfig": {
-    "ignore": ["public/*", "reports/*"]
+    "ignore": [
+      "public/*",
+      "reports/*"
+    ]
   },
   "devDependencies": {
     "del": "^5.1.0",
