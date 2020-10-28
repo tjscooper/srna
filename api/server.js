@@ -4,15 +4,13 @@ const path = require('path');
 const http = require('http');
 var https = require('https');
 const fs = require('fs');
+var aws = require('aws-sdk'),
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
 
 const app = express(),
       bodyParser = require("body-parser");
       port = 3080;
-
-
-
 
 
 
@@ -97,6 +95,8 @@ app.post('/api/user', (req, res) => {
   res.json("user addedd");
 });
 
+
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'public')
@@ -105,8 +105,27 @@ var storage = multer.diskStorage({
       cb(null, Date.now() + '-' +file.originalname )
     }
   })
+
+aws.config.update({
+    secretAccessKey: '/Pc2lUR8kGCLsx1SKN6JbXmvxyywQCH/sUG1mlRs',
+    accessKeyId: 'AKIAJSJ4JQ74UNWJAHYQ',
+    region: 'us-west-2'
+});
+
+var s3 = new aws.S3();
+
+var storages3 = multerS3({
+      s3: s3,
+      bucket: 'booshboosh',
+      key: function (req, file, cb) {
+          console.log(file);
+          cb(null, "pipelinedata/" + Date.now() + '-' +file.originalname ); //use Date.now() for unique file keys
+      }
+  })
   
-var upload = multer({ storage: storage }).array('file')
+
+//change "storages3" to "storage" if you want to store local. here i am storing with an s3 bucket
+var upload = multer({ storage: storages3 }).array('file')
   
 app.get('/',function(req,res){
     return res.send('Hello Server')
@@ -202,7 +221,7 @@ miniconda3/bin/conda install cutadapt
 rm miniconda3/pkgs/*.bz2
 sudo yum group install "Development Tools"
 sudo yum install ncurses-devel bzip2-devel xz-devel
-cd /tmp
+cd
 wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
 tar xvjf samtools-1.9.tar.bz2
 cd samtools-1.9
