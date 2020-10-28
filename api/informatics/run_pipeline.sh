@@ -17,25 +17,28 @@ jq -c --arg var1 "$ref_name" '. + { "\($var1)": { "state": "Initializing", "prog
 
 for file in "$@" 
 do
-    echo "File: $file";
-    l=(${file//./ })
+	e=(${file//"/"/ })
+	f=${l[-1]}
+    echo "File: $f";
+    l=(${f//./ })
     p=${l[0]}
+
     echo "Prefix: $p: Downloading from booshboosh s3";
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-    jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Accessing \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
-	aws s3 cp s3://booshboosh/pipelinedata/$file public/$file
-	aws s3 cp public/$file s3://booshboosh/pipelinedata/$file
+    jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Accessing \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	aws s3 cp s3://booshboosh/pipelinedata/$f public/$f
+	aws s3 cp public/$f s3://booshboosh/pipelinedata/$f
 	((i++))
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-    jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Trimming \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+    jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Trimming \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
     
 	echo "Trimming with cutadapt"
-	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -m 10 -o public/$p.trimmed.fastq.gz public/$file > public/$ref_name/$p.trim.txt
-	rm public/$file
+	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -m 10 -o public/$p.trimmed.fastq.gz public/$f > public/$ref_name/$p.trim.txt
+	rm public/$f
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Aligning \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Aligning \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
 	
     echo "Aligning with bowtie2"
 	#bowtie
@@ -43,7 +46,7 @@ do
     rm public/$p.trimmed.fastq.gz
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Converting sams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Converting sams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
 
     echo "Converting sam to bam with samtools"
     #samtools
@@ -51,7 +54,7 @@ do
     rm public/$p.sam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Sorting bams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Sorting bams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
 
     echo "Sorting bam with samtools"
     #samtools
@@ -59,21 +62,21 @@ do
     rm public/$p.bam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Indexing bams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Indexing bams \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
 
     echo "Indexing bam with samtools"
     #samtools
     ../../samtools-1.9/samtools index public/$p.sorted.bam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Generating counts \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Generating counts \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
     
     echo "Generating count stats with samtools"
     #samtools
     ../../samtools-1.9/samtools idxstats public/$p.sorted.bam > public/$ref_name/$p.counts.txt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$file" '."\($var1)" = { "state": "Removing temporary files \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
+	jq -c --arg var1 "$ref_name" --arg var2 "$progress" --arg var3 "$f" '."\($var1)" = { "state": "Removing temporary files \($var3)", "progress": "\($var2)" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json
 
     echo "Removing residual files"
     echo
