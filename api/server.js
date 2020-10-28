@@ -4,7 +4,7 @@ const path = require('path');
 const http = require('http');
 var https = require('https');
 const fs = require('fs');
-var aws = require('aws-sdk'),
+var aws = require('aws-sdk');
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
 
