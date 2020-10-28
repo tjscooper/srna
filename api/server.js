@@ -107,11 +107,7 @@ var storage = multer.diskStorage({
     }
   })
 
-aws.config.update({
-    secretAccessKey: '',
-    accessKeyId: '',
-    region: 'us-west-2'
-});
+aws.config.loadFromPath('./../../config.json');
 
 var s3 = new aws.S3();
 
@@ -240,6 +236,10 @@ make
 sudo make install
 cd
 sudo yum install emacs
+
+
+***
+CREATING AWS KEY AND SECRET
 
 
 
