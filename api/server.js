@@ -130,7 +130,7 @@ app.get('/',function(req,res){
 
 
 app.post('/upload', function (req, res, next) { 
-  upload.array(req, res, function (err){
+  upload(req, res, function (err){
      
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
