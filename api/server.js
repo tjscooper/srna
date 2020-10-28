@@ -140,7 +140,7 @@ app.post('/upload', function (req, res, next) {
           // An unknown error occurred when uploading.
         } 
         var filenames = req.files.map(function(file) {
-          return file.filename; // or file.originalname
+          return file.key; // or file.originalname
         });
         var oldfilenames = req.files.map(function(file) {
           return file.originalname; // or file.originalname
