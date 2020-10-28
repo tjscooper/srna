@@ -17,8 +17,7 @@ jq -c --arg var1 "$ref_name" '. + { "\($var1)": { "state": "Initializing", "prog
 
 for file in "$@" 
 do
-	e=(${file//// })
-	f=${l[-1]}
+	f="$(cut -d'/' -f2 <<<"$file")"
     echo "File: $f";
     l=(${f//./ })
     p=${l[0]}
