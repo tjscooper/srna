@@ -108,8 +108,8 @@ var storage = multer.diskStorage({
   })
 
 aws.config.update({
-    secretAccessKey: '/Pc2lUR8kGCLsx1SKN6JbXmvxyywQCH/sUG1mlRs',
-    accessKeyId: 'AKIAJSJ4JQ74UNWJAHYQ',
+    secretAccessKey: '',
+    accessKeyId: '',
     region: 'us-west-2'
 });
 
