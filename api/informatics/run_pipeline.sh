@@ -103,7 +103,7 @@ rm -rf public/$ref_name
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Complete\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv public/json/tmp.$$.json public/json/pipeline_status.json^M"
-screen -S jq_qq_queue -X stuff "jq -c 'del( .[0] )' api/public/json/queue.json > api/public/json/tmp2.$$.json && mv api/public/json/tmp2.$$.json api/public/json/queue.json^M"
+screen -S jq_qq_queue -X stuff "jq -c 'del( .[0] )' public/json/queue.json > public/json/tmp2.$$.json && mv public/json/tmp2.$$.json public/json/queue.json^M"
 
 q_ele=$(<public/json/queue.json jq -r '. | @sh')
 echo $q_ele
