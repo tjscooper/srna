@@ -1,2 +1,2 @@
 #!/bin/bash
-echo '[]' > api/public/json/queue.json
+echo '[]' > public/json/queue.json
