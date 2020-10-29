@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.bundle.js",
     "build": "webpack",
-    "dev": "nodemon ./server.js"
+    "dev": "./informatics/reset_queue.sh & nodemon ./server.js"
   },
   "repository": {
     "type": "git",
