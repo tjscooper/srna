@@ -215,7 +215,7 @@ app.post('/execute',function(req, res) {
   //executes a pipeline on currently uploaded file\
     console.log("you've made it this far")
     console.log(req.body)
-    var cmd = 'screen -S qqqq -X stuff \"bash informatics/q.sh\"'
+    var cmd = "screen -S qqqq -X stuff \"bash informatics/q.sh"
     outfile = Date.now() + "-out.zip"
     cmd = cmd.concat(" " + outfile)
     for (x = 0; x < req.body.length; x++) {
@@ -224,6 +224,7 @@ app.post('/execute',function(req, res) {
         console.log(cmd)
 
     }
+    cmd = cmd.concat("\"")
     child = exec(cmd,
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
