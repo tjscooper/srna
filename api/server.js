@@ -262,7 +262,7 @@ make
 sudo make install
 cd
 sudo yum install emacs
-sudo chmod +x srna/api/informatics/reset_queue.sh
+sudo chmod +x srna/api/informatics/reset_jsons.sh
 
 ***
 CREATING AWS KEY AND SECRET
