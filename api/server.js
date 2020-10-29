@@ -224,7 +224,7 @@ app.post('/execute',function(req, res) {
         console.log(cmd)
 
     }
-    cmd = cmd.concat("\"")
+    cmd = cmd.concat("^M\"")
     child = exec(cmd,
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
