@@ -162,7 +162,8 @@ app.post('/upload', function (req, res, next) {
 /*
 
 /// this is if you upload locally instead of to an S3
-
+ 
+ 
 app.post('/upload',function(req, res) {
   //console.log('Adding user:::::', user);
     console.log(req.body)
