@@ -28,16 +28,15 @@ READS_WRITTEN = 1
 #-------------------------------------------------------------------------------------------
 # main, serves as pipeline
 def main():
+	print("Generating plots")
 	options = parser.parse_args()
 	raw_data = loadData(str(options.i))
-	print(raw_data[COUNTS])
-	print(raw_data[ALIGN])
-	print(raw_data[TRIM])
 	alignPlot(raw_data[ALIGN])
 	heatmap(raw_data[COUNTS])
 	normalHeatmap(raw_data[COUNTS])
 	normalHeatmapNoZeroes(raw_data[COUNTS])
 	trimPlot(raw_data[TRIM])
+	print("Plots printed")
 
 def trimPlot(data):
 	k = list(data.keys())
