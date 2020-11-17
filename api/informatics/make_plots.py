@@ -40,7 +40,7 @@ def main():
 	trimPlot(raw_data[TRIM])
 
 def trimPlot(data):
-	k = data.keys()
+	k = list(data.keys())
 	k.sort()
 	y1 = [ data[y][READS_W_ADAPTERS] for y in k ]
 	y2 = [ data[y][READS_WRITTEN] for y in k ]
@@ -51,7 +51,7 @@ def trimPlot(data):
 	fig.write_html("trim_plot.html")
 
 def alignPlot(data):
-	k = data.keys()
+	k = list(data.keys())
 	k.sort()
 	y = [ data[y] for y in k ]
 	fig = go.Figure()
@@ -60,9 +60,9 @@ def alignPlot(data):
 
 
 def heatmap(data):
-	k = data.keys()
+	k = list(data.keys())
 	k.sort()
-	mir_k = data[k[0]].keys()
+	mir_k = list(data[k[0]].keys())
 	mir_k.sort()
 	z = [ [ data[y][m]["count"] for y in k ] for m in mir_k ]
 	fig = go.Figure(data=go.Heatmap(
@@ -73,9 +73,9 @@ def heatmap(data):
 	fig.write_html("heatmap.html")
 
 def normalHeatmap(data):
-	k = data.keys()
+	k = list(data.keys())
 	k.sort()
-	mir_k = data[k[0]].keys()
+	mir_k = list(data[k[0]].keys())
 	mir_k.sort()
 	sums = { y: sum([ data[y][m]["count"] for m in mir_k ]) for y in k }
 	z = [ [ (float(data[y][m]["count"]) / float(sums[y]))*100.0 if float(sums[y]) != 0 else 0 for y in k ] for m in mir_k ]
@@ -87,9 +87,9 @@ def normalHeatmap(data):
 	fig.write_html("normal_heatmap.html")
 
 def normalHeatmapNoZeroes(data):
-	k = data.keys()
+	k = list(data.keys())
 	k.sort()
-	mir_k = data[k[0]].keys()
+	mir_k = list(data[k[0]].keys())
 	mir_k.sort()
 	sums = { y: sum([ data[y][m]["count"] for m in mir_k ]) for y in k }
 	z = [ [ (float(data[y][m]["count"]) / float(sums[y]))*100.0 if float(sums[y]) != 0 else 0 for y in k ] for m in mir_k ]
