@@ -39,8 +39,11 @@ function retrieveConfig(){
     console.log("hello\n")
     for (var i in fff){
       if (i < 10){
-        console.log(i)
 
+        console.log(i)
+        for (var j in fff[i]){
+          console.log("\t" + j)
+        }
       }
 
     }
