@@ -31,6 +31,12 @@ const files = {}
 var fileMap = {}
 const current_user = "public"
 
+
+aws.config.loadFromPath('./../../config.json');
+
+var s3 = new aws.S3();
+
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../my-app/build')));
 
@@ -113,20 +119,17 @@ var storage = multer.diskStorage({
     }
   })
 
-aws.config.loadFromPath('./../../config.json');
-
-var s3 = new aws.S3();
-
 //The retrieveFile function
 function retrieveFile(filename,res){
 
   const getParams = {
-    Bucket: 'booshboosh',
+    Bucket: 'booshboosh/pipelinedata',
     Key: filename
   };
 
   s3.getObject(getParams, function(err, data) {
     if (err){
+      console.log(filename)
       return res.status(400).send({success:false,err:err});
     }
     else{
