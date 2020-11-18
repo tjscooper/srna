@@ -39,10 +39,9 @@ function retrieveConfig(){
     var ffff = JSON.parse(fff);
     console.log("hello\n")
     for (var i in ffff){
-      if (i < 10){
 
-        console.log(i)
-      }
+      console.log(i)
+      
 
     }
     return fff
