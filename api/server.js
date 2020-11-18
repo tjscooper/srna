@@ -40,12 +40,36 @@ app.get('/api/users', (req, res) => {
 });
 
 app.get('/download/:file(*)',(req, res) => {
-var file = req.params.file;
-var fileLocation = path.join('./reports',file);
-console.log(fileLocation);
+  var file = req.params.file;
+  var fileLocation = path.join('./reports',file);
+  console.log(fileLocation);
 
-res.download(fileLocation, file);
+  res.download(fileLocation, file);
 });
+
+app.get('/dloading/:file_name',(req,res)=>{
+  retrieveFile(req.params.file_name, res);
+});
+
+//The retrieveFile function
+function retrieveFile(filename,res){
+
+  const getParams = {
+    Bucket: 'booshboosh',
+    Key: filename
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err){
+      return res.status(400).send({success:false,err:err});
+    }
+    else{
+      console.log(data.Body)
+      return res.send(data.Body);
+    }
+  });
+}
+
 
 app.get('/hello',function(req,res){
   res.send("Hello World!");
@@ -163,7 +187,7 @@ app.post('/upload', function (req, res, next) {
 
 /// this is if you upload locally instead of to an S3
  
- 
+
 app.post('/upload',function(req, res) {
   //console.log('Adding user:::::', user);
     console.log(req.body)

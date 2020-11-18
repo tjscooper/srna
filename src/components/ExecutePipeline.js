@@ -127,7 +127,7 @@ class ExecutePipeline extends Component {
     .then(res => {
       console.log("post execute")
       console.log(res);
-      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'https://booshboosh.net:3080/download/' + res.data, statusPath:'https://booshboosh.net:3080/status/' + res.data})
+      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'https://booshboosh.net:3080/dloading/' + res.data, statusPath:'https://booshboosh.net:3080/status/' + res.data})
       console.log(this.state.outfile)
       this.monitorUntilJobFinished()
 

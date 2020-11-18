@@ -15,6 +15,12 @@ parser.add_argument('-i',
     required=True,
     type=str,
     help="input directory reports from srna bioinformatics pipeline")
+parser.add_argument('-o',  
+    action='store', 
+    dest='o',
+    required=True,
+    type=str,
+    help="output prefix")
 
 
 #-------------------------------------------------------------------------------------------
@@ -31,14 +37,14 @@ def main():
 	print("Generating plots")
 	options = parser.parse_args()
 	raw_data = loadData(str(options.i))
-	alignPlot(raw_data[ALIGN])
-	heatmap(raw_data[COUNTS])
-	normalHeatmap(raw_data[COUNTS])
-	normalHeatmapNoZeroes(raw_data[COUNTS])
-	trimPlot(raw_data[TRIM])
+	alignPlot(raw_data[ALIGN], str(options.o))
+	heatmap(raw_data[COUNTS], str(options.o))
+	normalHeatmap(raw_data[COUNTS], str(options.o))
+	normalHeatmapNoZeroes(raw_data[COUNTS], str(options.o))
+	trimPlot(raw_data[TRIM], str(options.o))
 	print("Plots printed")
 
-def trimPlot(data):
+def trimPlot(data, out_pre):
 	k = list(data.keys())
 	k.sort()
 	y1 = [ data[y][READS_W_ADAPTERS] for y in k ]
@@ -47,18 +53,18 @@ def trimPlot(data):
 	fig.add_trace(go.Histogram(histfunc="sum", y=y1, x=k, name="reads with adapters"))
 	fig.add_trace(go.Histogram(histfunc="sum", y=y2, x=k, name="reads written"))
 
-	fig.write_html("trim_plot.html")
+	fig.write_html(str(out_pre) + "/trim_plot.html")
 
-def alignPlot(data):
+def alignPlot(data, out_pre):
 	k = list(data.keys())
 	k.sort()
 	y = [ data[y] for y in k ]
 	fig = go.Figure()
 	fig.add_trace(go.Histogram(histfunc="sum", y=y, x=k, name="percent aligned to miR reference"))
-	fig.write_html("align_plot.html")
+	fig.write_html(str(out_pre) + "/align_plot.html")
 
 
-def heatmap(data):
+def heatmap(data, out_pre):
 	k = list(data.keys())
 	k.sort()
 	mir_k = list(data[k[0]].keys())
@@ -69,9 +75,9 @@ def heatmap(data):
 	                   x=k,
 	                   y=mir_k,
 	                   hoverongaps = False))
-	fig.write_html("heatmap.html")
+	fig.write_html(str(out_pre) + "/heatmap.html")
 
-def normalHeatmap(data):
+def normalHeatmap(data, out_pre):
 	k = list(data.keys())
 	k.sort()
 	mir_k = list(data[k[0]].keys())
@@ -83,9 +89,9 @@ def normalHeatmap(data):
 	                   x=k,
 	                   y=mir_k,
 	                   hoverongaps = False))
-	fig.write_html("normal_heatmap.html")
+	fig.write_html(str(out_pre) + "/normal_heatmap.html")
 
-def normalHeatmapNoZeroes(data):
+def normalHeatmapNoZeroes(data, out_pre):
 	k = list(data.keys())
 	k.sort()
 	mir_k = list(data[k[0]].keys())
@@ -99,7 +105,7 @@ def normalHeatmapNoZeroes(data):
 	                   x=k,
 	                   y=zeroed_mir_k,
 	                   hoverongaps = False))
-	fig.write_html("normal_no_zeroes_heatmap.html")
+	fig.write_html(str(out_pre) + "/normal_no_zeroes_heatmap.html")
 
 def ScatterPlotReg():
 	np.random.seed(1)

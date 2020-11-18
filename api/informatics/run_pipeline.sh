@@ -5,11 +5,12 @@ now=$(date +"%Y%m%d.%H%M%S%3N")
 ref_split=(${1//./ })
 ref_name=${ref_split[0]}
 mkdir public/$ref_name
+mkdir public/$ref_name/plots
 
 shift
 i=0
 num_files=${#@}
-num_steps=$(( 8*num_files + 2 ))
+num_steps=$(( 8*num_files + 3 ))
 echo "Number of steps: $num_steps"
 
 #screen -S jq_qq_queue -X stuff "jq -c '. + [\"$ref_name\"]' public/json/queue.json > public/json/tmp2.$$.json && mv --force public/json/tmp.$$.json public/json/queue.json^M"
@@ -91,6 +92,11 @@ do
 	screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Preparing for next file\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
    
 done
+echo "Generating plots"
+python informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots
+((i++))
+progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
+screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Drawing plots\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
 
 echo "Archiving report files"
 zip -r reports/$ref_name.zip public/$ref_name
@@ -99,6 +105,8 @@ progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Archiving run\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
    
 echo "Final cleaning"
+aws s3 cp --recursive public/$ref_name s3://booshboosh/pipelinedata/$ref_name
+aws s3 cp reports/$ref_name.zip s3://booshboosh/pipelinedata/$ref_name.zip
 rm -rf public/$ref_name
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
