@@ -81,12 +81,11 @@ app.get('/dloading/:file_name',(req,res)=>{
 });
 
 app.get('/booshers/*', function(req,res){
-    let aw2 = aws
     s3Proxy({
       bucket: 'booshboosh',
-      prefix: '',
-      accessKeyId: aw2.config.credentials.accessKeyId,
-      secretAccessKey: aw2.config.credentials.secretAccessKey,
+      prefix: 'pipelinedata',
+      accessKeyId: aws.config.credentials.accessKeyId,
+      secretAccessKey: aws.config.credentials.secretAccessKey,
       overrideCacheControl: 'max-age=100000'
 })});
 
