@@ -83,6 +83,7 @@ app.get('/booshers/*', s3Proxy({
   bucket: 'booshboosh',
   accessKeyId: aws.config.credentials.accessKeyId,
   secretAccessKey: aws.config.credentials.secretAccessKey,
+  region: "us-east-1"
   overrideCacheControl: 'max-age=100000'
 }));
 
