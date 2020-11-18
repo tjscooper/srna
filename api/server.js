@@ -37,6 +37,8 @@ function retrieveConfig(){
   fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
     config2 = JSON.stringify(eval("(" + data + ")"));
     console.log("hello\n")
+    for (var i in config2)
+      console.log(i)
     return config2
 });}
 
