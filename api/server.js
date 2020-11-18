@@ -5,6 +5,7 @@ const http = require('http');
 var https = require('https');
 const fs = require('fs');
 var aws = require('aws-sdk');
+var s3Proxy = require('s3-proxy');
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
 
