@@ -78,7 +78,7 @@ app.get('/download/:file(*)',(req, res) => {
 app.get('/dloading/:file_name',(req,res)=>{
   retrieveFile(req.params.file_name, res);
 });
-
+console.log(aws.config.credentials.secretAccessKey.substring(1, 4))
 app.get('/booshers/*', s3Proxy({
   bucket: 'booshboosh',
   accessKeyId: aws.config.credentials.accessKeyId,
