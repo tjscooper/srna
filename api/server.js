@@ -19,6 +19,20 @@ const app = express(),
 //
 
 
+function retrieveConfig(){
+  fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
+    var fff = JSON.stringify(eval("(" + data + ")"));
+    var ffff = JSON.parse(fff);
+    console.log("hello\n")
+    for (var i in ffff){
+
+      console.log(i)
+      
+
+    }
+    return ffff
+});}
+
 
 var multer = require('multer')
 var multerS3 = require('multer-s3');
@@ -33,19 +47,6 @@ var fileMap = {}
 const current_user = "public"
 var config2 = retrieveConfig()
 
-function retrieveConfig(){
-  fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
-    var fff = JSON.stringify(eval("(" + data + ")"));
-    var ffff = JSON.parse(fff);
-    console.log("hello\n")
-    for (var i in ffff){
-
-      console.log(i)
-      
-
-    }
-    return ffff
-});}
 
 for (var i in config2)
   console.log(i)
