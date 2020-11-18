@@ -33,9 +33,9 @@ const current_user = "public"
 
 
 aws.config.loadFromPath('./../../config.json');
-
 var s3 = new aws.S3();
-
+for (var i in aws.config.credentials)
+  console.log(i)
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../my-app/build')));
