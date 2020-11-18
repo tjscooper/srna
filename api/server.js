@@ -31,11 +31,18 @@ var outfile = "";
 const files = {}
 var fileMap = {}
 const current_user = "public"
-
+var config2 = {}
+fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
+  config2 = JSON.stringify(eval("(" + data + ")"));
+});
+for (var i in config2)
+  console.log(i)
 
 aws.config.loadFromPath('./../../config.json');
 var s3 = new aws.S3();
 for (var i in aws.config.credentials)
+  console.log(i)
+for (var i in config2)
   console.log(i)
 
 app.use(bodyParser.json());
