@@ -79,14 +79,16 @@ app.get('/dloading/:file_name',(req,res)=>{
   retrieveFile(req.params.file_name, res);
 });
 console.log(aws.config.credentials.secretAccessKey.substring(1, 4))
-app.get('/booshers/*', s3Proxy({
+
+var s4 = express();
+s4.get('/*', s3Proxy({
   bucket: 'booshboosh',
   accessKeyId: aws.config.credentials.accessKeyId,
   secretAccessKey: aws.config.credentials.secretAccessKey,
   region: "us-east-1",
   overrideCacheControl: 'max-age=100000'
 }));
-
+app.use('/booshers/', s4);
 
 app.get('/hello',function(req,res){
   res.send("Hello World!");
