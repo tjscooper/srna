@@ -81,8 +81,8 @@ app.get('/dloading/:file_name',(req,res)=>{
 app.get('/booshers/*', s3Proxy({
   bucket: 'booshboosh',
   prefix: 'pipelinedata',
-  accessKeyId: config2.accessKeyId,
-  secretAccessKey: config2["secretAccessKey"],
+  accessKeyId: aws.config.credentials.accessKeyId,
+  secretAccessKey: aws.config.credentials.secretAccessKey,
   overrideCacheControl: 'max-age=100000'
 }));
 
