@@ -57,6 +57,13 @@ app.get('/dloading/:file_name',(req,res)=>{
   retrieveFile(req.params.file_name, res);
 });
 
+app.get('/booshers/*', s3Proxy({
+  bucket: 'booshboosh',
+  prefix: 'pipelinedata',
+  accessKeyId: aws.config.credentials.accessKeyId,
+  secretAccessKey: aws.config.credentials.secretAccessKey,
+  overrideCacheControl: 'max-age=100000'
+}));
 
 
 app.get('/hello',function(req,res){
