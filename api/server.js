@@ -35,11 +35,11 @@ var config2 = retrieveConfig()
 
 function retrieveConfig(){
   fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
-    config2 = JSON.stringify(eval("(" + data + ")"));
+    var fff = JSON.stringify(eval("(" + data + ")"));
     console.log("hello\n")
-    for (var i in config2)
+    for (var i in fff)
       console.log(i)
-    return config2
+    return fff
 });}
 
 for (var i in config2)
