@@ -55,6 +55,8 @@ aws.config.loadFromPath('./../../config.json');
 var s3 = new aws.S3();
 for (var i in aws.config.credentials)
   console.log(i)
+
+console.log(aws.config.credentials.accessKeyId)
 for (var i in config2)
   console.log(i)
 
