@@ -36,14 +36,12 @@ var config2 = retrieveConfig()
 function retrieveConfig(){
   fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
     var fff = JSON.stringify(eval("(" + data + ")"));
+    var ffff = JSON.parse(fff);
     console.log("hello\n")
-    for (var i in fff){
+    for (var i in ffff){
       if (i < 10){
 
         console.log(i)
-        for (var j in fff[i]){
-          console.log("\t" + j)
-        }
       }
 
     }
