@@ -80,7 +80,7 @@ app.get('/dloading/:file_name',(req,res)=>{
 });
 console.log(aws.config.credentials.secretAccessKey.substring(1, 4))
 app.get('/booshers/*', s3Proxy({
-  bucket: 'booshboosh',
+  bucket: 'booshboosh/pipelinedata',
   accessKeyId: aws.config.credentials.accessKeyId,
   secretAccessKey: aws.config.credentials.secretAccessKey,
   region: "us-east-1",
