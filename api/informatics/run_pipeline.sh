@@ -93,7 +93,7 @@ do
    
 done
 echo "Generating plots"
-python informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots
+../../miniconda3/bin/python3.8 informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Drawing plots\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
