@@ -31,10 +31,14 @@ var outfile = "";
 const files = {}
 var fileMap = {}
 const current_user = "public"
-var config2 = {}
-fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
-  config2 = JSON.stringify(eval("(" + data + ")"));
-});
+var config2 = retrieveConfig()
+
+function retrieveConfig(){
+  fs.readFile(path.resolve(__dirname, './../../config.json'), function (err, data) {
+    config2 = JSON.stringify(eval("(" + data + ")"));
+    return config2
+});}
+
 for (var i in config2)
   console.log(i)
 
