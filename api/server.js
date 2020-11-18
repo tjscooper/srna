@@ -51,24 +51,6 @@ app.get('/dloading/:file_name',(req,res)=>{
   retrieveFile(req.params.file_name, res);
 });
 
-//The retrieveFile function
-function retrieveFile(filename,res){
-
-  const getParams = {
-    Bucket: 'booshboosh',
-    Key: filename
-  };
-
-  s3.getObject(getParams, function(err, data) {
-    if (err){
-      return res.status(400).send({success:false,err:err});
-    }
-    else{
-      console.log(data.Body)
-      return res.send(data.Body);
-    }
-  });
-}
 
 
 app.get('/hello',function(req,res){
@@ -134,6 +116,26 @@ var storage = multer.diskStorage({
 aws.config.loadFromPath('./../../config.json');
 
 var s3 = new aws.S3();
+
+//The retrieveFile function
+function retrieveFile(filename,res){
+
+  const getParams = {
+    Bucket: 'booshboosh',
+    Key: filename
+  };
+
+  s3.getObject(getParams, function(err, data) {
+    if (err){
+      return res.status(400).send({success:false,err:err});
+    }
+    else{
+      console.log(data.Body)
+      return res.send(data.Body);
+    }
+  });
+}
+
 
 var storages3 = multerS3({
       s3: s3,
