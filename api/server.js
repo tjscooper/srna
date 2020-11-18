@@ -44,7 +44,7 @@ function retrieveConfig(){
       
 
     }
-    return fff
+    return ffff
 });}
 
 for (var i in config2)
@@ -80,8 +80,8 @@ app.get('/dloading/:file_name',(req,res)=>{
 app.get('/booshers/*', s3Proxy({
   bucket: 'booshboosh',
   prefix: 'pipelinedata',
-  accessKeyId: aws.config.credentials.accessKeyId,
-  secretAccessKey: aws.config.credentials.secretAccessKey,
+  accessKeyId: config2["accessKeyId"],
+  secretAccessKey: config2["secretAccessKey"],
   overrideCacheControl: 'max-age=100000'
 }));
 
