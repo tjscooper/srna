@@ -99,7 +99,7 @@ def loadHTMLtoString(i):
 	ret_html = ""
 	with open(i, 'r') as f:
 		for j, line in enumerate(f):
-			if j != and line != "</html>":
+			if j != 0 and line != "</html>":
 				ret_html += line
 	return ret_html
 
