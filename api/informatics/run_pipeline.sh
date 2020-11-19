@@ -93,7 +93,7 @@ do
    
 done
 echo "Generating plots"
-../../miniconda3/bin/python3.8 informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots
+../../miniconda3/bin/python3.8 informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots -s $ref_name
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Drawing plots\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
@@ -105,7 +105,7 @@ progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Archiving run\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
    
 echo "Final cleaning"
-aws s3 cp --recursive public/$ref_name s3://booshboosh/pipelinedata/$ref_name
+aws s3 cp public/$ref_name/plots/$ref_name-report.html s3://booshboosh/pipelinedata/
 aws s3 cp reports/$ref_name.zip s3://booshboosh/pipelinedata/$ref_name.zip
 rm -rf public/$ref_name
 ((i++))

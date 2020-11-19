@@ -21,6 +21,12 @@ parser.add_argument('-o',
     required=True,
     type=str,
     help="output prefix")
+parser.add_argument('-s',  
+    action='store', 
+    dest='s',
+    required=True,
+    type=str,
+    help="unique identifier")
 
 
 #-------------------------------------------------------------------------------------------
@@ -43,6 +49,60 @@ def main():
 	normalHeatmapNoZeroes(raw_data[COUNTS], str(options.o))
 	trimPlot(raw_data[TRIM], str(options.o))
 	print("Plots printed")
+	print("Conglomerating reports")
+	conglomerate(options.o, options.s)
+	print("Report Finished")
+
+def conglomerate(directory, code):
+	output_name = str(code) + "-report.html"
+	html = "<div>\n" + \
+				"\t<div style=\"position:fixed; top: 0; z-index:10; font-size:22px; font-family:'Open Sans', verdana, arial, sans-serif; background-color:white\">\n" +\
+					"\t\t<a href=\"" + str(output_name) + "#trim\">Trim Stats</a>\n" +\
+					"\t\t<a href=\"" + str(output_name) + "#align\">Alignment Rates</a>\n" +\
+					"\t\t<a href=\"" + str(output_name) + "#heat\">Heatmaps</a>\n" +\
+				"\t</div>\n" + \
+				"\t<a id=\"trim\n" +\
+					"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+						"\t\t\tTrim Stats\n" +\
+					"\t\t</div>\n" +\
+				"\t</a>\n"
+	html += loadHTMLtoString(str(directory) + "/trim_plot.html")
+	html += "\n\t<a id=\"align\n" +\
+				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+					"\t\t\tAlignment Rates\n" +\
+				"\t\t</div>\n" +\
+			"\t</a>\n"
+	html += loadHTMLtoString(str(directory) + "/align_plot.html")
+	html += "\n\t<a id=\"heat\n" +\
+				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+					"\t\t\tHeatmaps\n" +\
+				"\t\t</div>\n" +\
+			"\t</a>\n" +\
+			"\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tRaw Count Heatmap\n" +\
+			"\t</div>\n" +\
+	html += loadHTMLtoString(str(directory) + "/heatmap.html")
+	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tNormalized Heatmap\n" +\
+			"\t</div>\n" +\
+	html += loadHTMLtoString(str(directory) + "/normal_heatmap.html")
+	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tNormalized Heatmap (Zeroes Removed)\n" +\
+			"\t</div>\n" +\
+	html += loadHTMLtoString(str(directory) + "/normal_no_zeroes_heatmap.html")
+	html += "</div>\n</html>"
+	
+	with open(output_name, "w") as f:
+    	f.write(html)
+
+def loadHTMLtoString(i):
+	ret_html = ""
+	with open(i, 'r') as f:
+		for j, line in enumerate(f):
+			if j != and line != "</html>":
+				ret_html += line
+	return ret_html
+
 
 def trimPlot(data, out_pre):
 	k = list(data.keys())

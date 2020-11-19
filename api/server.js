@@ -88,7 +88,7 @@ s4.get('/*', s3Proxy({
   region: "us-east-1",
   overrideCacheControl: 'max-age=100000'
 }));
-app.use('/booshers/', s4);
+app.use('/boosh/', s4);
 
 app.get('/hello',function(req,res){
   res.send("Hello World!");
