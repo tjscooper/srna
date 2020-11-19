@@ -80,15 +80,15 @@ def conglomerate(directory, code):
 			"\t</a>\n" +\
 			"\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tRaw Count Heatmap\n" +\
-			"\t</div>\n" +\
+			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/heatmap.html")
 	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tNormalized Heatmap\n" +\
-			"\t</div>\n" +\
+			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/normal_heatmap.html")
 	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tNormalized Heatmap (Zeroes Removed)\n" +\
-			"\t</div>\n" +\
+			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/normal_no_zeroes_heatmap.html")
 	html += "</div>\n</html>"
 	
