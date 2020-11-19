@@ -128,7 +128,13 @@ class ExecutePipeline extends Component {
     .then(res => {
       console.log("post execute")
       console.log(res);
-      this.setState({outfile: res.data, isRunning:true, fullPathOutfile:'https://booshboosh.net:3080/dloading/' + res.data, fullPathOutfileOld:'https://booshboosh.net:3080/download/' + res.data, statusPath:'https://booshboosh.net:3080/status/' + res.data})
+      let report = res.data.split("-")[0] + "-report.html"
+      this.setState({outfile: res.data, 
+          isRunning:true, 
+          dataPath:'https://booshboosh.net:3080/boosh/pipelinedata/' + report, 
+          fullPathOutfile:'https://booshboosh.net:3080/dloading/' + res.data, 
+          fullPathOutfileOld:'https://booshboosh.net:3080/download/' + res.data, 
+          statusPath:'https://booshboosh.net:3080/status/' + res.data})
       console.log(this.state.outfile)
       this.monitorUntilJobFinished()
 
@@ -157,8 +163,10 @@ class ExecutePipeline extends Component {
 
       <div className="form-group files" >
       { ( this.state.outfileExists ) ? (
-      <a href={this.state.fullPathOutfile}><button type="button" class="btn btn-success btn-block" >Download</button></a>) : ( 
-      <button type="button" class="btn btn-success btn-block"  disabled>Download</button>) }
+      <a href={this.state.fullPathOutfile}><button type="button" class="btn btn-success btn-block" >Download</button></a>
+      <a href={this.state.dataPath}><button type="button" class="btn btn-success btn-block" >View Data</button></a>) : ( 
+      <button type="button" class="btn btn-success btn-block"  disabled>Download</button>) 
+      <button type="button" class="btn btn-success btn-block"  disabled>View Data</button>) }
       </div></div>
     );
   }
