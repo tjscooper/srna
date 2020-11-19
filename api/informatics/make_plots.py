@@ -92,7 +92,7 @@ def conglomerate(directory, code):
 	html += loadHTMLtoString(str(directory) + "/normal_no_zeroes_heatmap.html")
 	html += "</div>\n</html>"
 	
-	with open(output_name, "w") as f:
+	with open(str(directory) + "/" + str(output_name), "w") as f:
 		f.write(html)
 
 def loadHTMLtoString(i):
