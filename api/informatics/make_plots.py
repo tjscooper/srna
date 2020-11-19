@@ -61,19 +61,19 @@ def conglomerate(directory, code):
 					"\t\t<a href=\"" + str(output_name) + "#align\">Alignment Rates</a>\n" +\
 					"\t\t<a href=\"" + str(output_name) + "#heat\">Heatmaps</a>\n" +\
 				"\t</div>\n" + \
-				"\t<a id=\"trim\n" +\
+				"\t<a id=\"trim\">\n" +\
 					"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 						"\t\t\tTrim Stats\n" +\
 					"\t\t</div>\n" +\
 				"\t</a>\n"
 	html += loadHTMLtoString(str(directory) + "/trim_plot.html")
-	html += "\n\t<a id=\"align\n" +\
+	html += "\n\t<a id=\"align\">\n" +\
 				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 					"\t\t\tAlignment Rates\n" +\
 				"\t\t</div>\n" +\
 			"\t</a>\n"
 	html += loadHTMLtoString(str(directory) + "/align_plot.html")
-	html += "\n\t<a id=\"heat\n" +\
+	html += "\n\t<a id=\"heat\">\n" +\
 				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 					"\t\t\tHeatmaps\n" +\
 				"\t\t</div>\n" +\
