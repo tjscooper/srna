@@ -93,7 +93,7 @@ def conglomerate(directory, code):
 	html += "</div>\n</html>"
 	
 	with open(output_name, "w") as f:
-    	f.write(html)
+		f.write(html)
 
 def loadHTMLtoString(i):
 	ret_html = ""
