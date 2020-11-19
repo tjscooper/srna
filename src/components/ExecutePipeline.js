@@ -128,7 +128,7 @@ class ExecutePipeline extends Component {
     .then(res => {
       console.log("post execute")
       console.log(res);
-      let report = res.data.split("-")[0] + "-report.html"
+      let report = res.data.split("-")[0] + "-out-report.html"
       this.setState({outfile: res.data, 
           isRunning:true, 
           dataPath:'https://booshboosh.net:3080/boosh/pipelinedata/' + report, 
