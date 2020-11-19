@@ -165,7 +165,7 @@ class ExecutePipeline extends Component {
       { ( this.state.outfileExists ) ? (
       <a href={this.state.fullPathOutfile}><button type="button" class="btn btn-success btn-block" >Download</button></a>
       <a href={this.state.dataPath}><button type="button" class="btn btn-success btn-block" >View Data</button></a>) : ( 
-      <button type="button" class="btn btn-success btn-block"  disabled>Download</button>) 
+      <button type="button" class="btn btn-success btn-block"  disabled>Download</button>
       <button type="button" class="btn btn-success btn-block"  disabled>View Data</button>) }
       </div></div>
     );
