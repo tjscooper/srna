@@ -71,7 +71,7 @@ class SetUpRun extends Component {
   }
   maxSelectFile=(event)=>{
     let files = event.target.files
-        if (files.length > 20) { 
+        if (files.length > 50) { 
            const msg = 'Only 20 fastqs can be uploaded at a time'
            event.target.value = null
            toast.warn(msg)
