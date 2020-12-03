@@ -175,8 +175,8 @@ def sizeDistributionBarPlot(data, out_pre):
 		sizes = defaultdict(int)
 		for d in data[sample]:
 			sizes[data[sample][d]["length"]] += data[sample][d]["count"]
-		s = sizes.keys()
-		all_sizes = all_sizes + list(s)
+		s = list(sizes.keys())
+		all_sizes = all_sizes + s
 		s.sort()
 		c = [ sizes[size] for size in s ]
 
@@ -211,7 +211,7 @@ def sizeDistributionBarPlot(data, out_pre):
 		for r in range(grid[1]): 
 			for d in data[k[count]]:
 				sizes[data[k[count]][d]["length"]] += data[k[count]][d]["count"]
-			s = sizes.keys()
+			s = list(sizes.keys())
 			s.sort()
 			c = [ sizes[size] for size in s ]
 			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
