@@ -3,8 +3,14 @@ import sys
 import plotly.express as px
 import numpy as np
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.figure_factory as ff
 import argparse
 import glob
+from collections import defaultdict 
+from math import sqrt
+from math import floor
+from math import ceil
 
 #-------------------------------------------------------------------------------------------
 # arguments for main
@@ -44,6 +50,7 @@ def main():
 	options = parser.parse_args()
 	raw_data = loadData(str(options.i))
 	alignPlot(raw_data[ALIGN], str(options.o))
+	sizeDistributionBarPlot(raw_data[COUNTS], str(options.o))
 	heatmap(raw_data[COUNTS], str(options.o))
 	normalHeatmap(raw_data[COUNTS], str(options.o))
 	normalHeatmapNoZeroes(raw_data[COUNTS], str(options.o))
@@ -59,6 +66,7 @@ def conglomerate(directory, code):
 				"\t<div style=\"position:fixed; top: 0; z-index:10; font-size:22px; font-family:'Open Sans', verdana, arial, sans-serif; background-color:white\">\n" +\
 					"\t\t<a href=\"" + str(output_name) + "#trim\">Trim Stats</a>\n" +\
 					"\t\t<a href=\"" + str(output_name) + "#align\">Alignment Rates</a>\n" +\
+					"\t\t<a href=\"" + str(output_name) + "#sizes\">Size Distributions</a>\n" +\
 					"\t\t<a href=\"" + str(output_name) + "#heat\">Heatmaps</a>\n" +\
 				"\t</div>\n" + \
 				"\t<a id=\"trim\">\n" +\
@@ -73,6 +81,31 @@ def conglomerate(directory, code):
 				"\t\t</div>\n" +\
 			"\t</a>\n"
 	html += loadHTMLtoString(str(directory) + "/align_plot.html")
+	html += "\n\t<a id=\"sizes\">\n" +\
+				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+					"\t\t\tSize Distribution\n" +\
+				"\t\t</div>\n" +\
+			"\t</a>\n" +\
+			"\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tSize Distribution Histogram\n" +\
+			"\t</div>\n"
+	html += loadHTMLtoString(str(directory) + "/size_bar_plot.html")
+	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tSize Distribution Histogram Grid\n" +\
+			"\t</div>\n"
+	html += loadHTMLtoString(str(directory) + "/size_bar_grid_plot.html")
+	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tSize Distribution Violin Plots\n" +\
+			"\t</div>\n"
+	html += loadHTMLtoString(str(directory) + "/size_violin_plot.html")
+	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tSize Distribution Line and Rug Plot\n" +\
+			"\t</div>\n"
+	html += loadHTMLtoString(str(directory) + "/size_dist_plot.html")
+	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\tSize Distribution Combo Plot\n" +\
+			"\t</div>\n"
+	html += loadHTMLtoString(str(directory) + "/size_distbars_plot.html")
 	html += "\n\t<a id=\"heat\">\n" +\
 				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 					"\t\t\tHeatmaps\n" +\
@@ -110,7 +143,6 @@ def trimPlot(data, out_pre):
 	y1 = [ data[y][READS_W_ADAPTERS] for y in k ]
 	y2 = [ data[y][READS_WRITTEN] for y in k ]
 	fig = go.Figure()
-	fig.add_trace(go.Histogram(histfunc="sum", y=y1, x=k, name="reads with adapters"))
 	fig.add_trace(go.Histogram(histfunc="sum", y=y2, x=k, name="reads written"))
 
 	fig.write_html(str(out_pre) + "/trim_plot.html")
@@ -122,6 +154,61 @@ def alignPlot(data, out_pre):
 	fig = go.Figure()
 	fig.add_trace(go.Histogram(histfunc="sum", y=y, x=k, name="percent aligned to miR reference"))
 	fig.write_html(str(out_pre) + "/align_plot.html")
+
+def sizeDistributionBarPlot(data, out_pre):
+	all_sizes = []
+	dist_data = []
+	k = list(data.keys())
+	k.sort()
+	fig = go.Figure()
+	fig3 = go.Figure()
+	for sample in k:
+		sizes = defaultdict(int)
+		for d in data[sample]:
+			sizes[data[sample][d]["length"]] += data[sample][d]["count"]
+		s = sizes.keys()
+		all_sizes = all_sizes + s
+		s.sort()
+		c = [ sizes[size] for size in s ]
+
+		s2 = []
+		k2 = []
+		for i, s1 in enumerate(s):
+			for n in range(c[i]):
+				s2.append(s1)
+				k2.append(sample)
+		dist_data.append(s2)
+		fig.add_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min(s), end=max(s), size=1)))
+		fig3.add_trace(go.Violin(y=s2, x=k2, name=sample, box_visible=True, meanline_visible=True))
+
+	fig.update_layout(
+	    bargap=0.01, # gap between bars of adjacent location coordinates
+	    bargroupgap=0.0 # gap between bars of the same location coordinates
+	)
+	fig.write_html(str(out_pre) + "/size_bar_plot.html")
+	fig3.write_html(str(out_pre) + "/size_violin_plot.html")
+	
+	fig4 = ff.create_distplot(dist_data, k, show_hist=False)
+	fig5 = ff.create_distplot(dist_data, k)
+	fig4.write_html(str(out_pre) + "/size_dist_plot.html")
+	fig5.write_html(str(out_pre) + "/size_distbars_plot.html")
+
+	min_size = min(all_sizes)
+	max_size = max(all_sizes)
+	grid = getGrid(len(k))
+	fig2 = make_subplots(rows=grid[0], cols=grid[1])
+	count = 0
+	for g in range(grid[0]):
+		for r in range(grid[1]): 
+			for d in data[k[count]]:
+				sizes[data[k[count]][d]["length"]] += data[k[count]][d]["count"]
+			s = sizes.keys()
+			s.sort()
+			c = [ sizes[size] for size in s ]
+			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
+	fig2.write_html(str(out_pre) + "/size_bar_grid_plot.html")
+
+
 
 
 def heatmap(data, out_pre):
@@ -194,7 +281,7 @@ def loadData(directory):
 	align_data = {}
 
 	for i in glob.glob(str(directory) + "/*.align.txt"):
-		sample = i.split("-")[-1].split("_")[0]
+		sample = "-".join(i.split("-")[1:]).split("_")[0]
 		align_data[sample] = 0
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
@@ -205,7 +292,7 @@ def loadData(directory):
 	count_data = {}
 
 	for i in glob.glob(str(directory) + "/*.counts.txt"):
-		sample = i.split("-")[-1].split("_")[0]
+		sample = "-".join(i.split("-")[1:]).split("_")[0]
 		count_data[sample] = {}
 		with open(i, 'r') as f:
 			for line in f:
@@ -218,7 +305,7 @@ def loadData(directory):
 	trim_data = {}
 
 	for i in glob.glob(str(directory) + "/*.trim.txt"):
-		sample = i.split("-")[-1].split("_")[0]
+		sample = "-".join(i.split("-")[1:]).split("_")[0]
 		trim_data[sample] = []
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
@@ -227,7 +314,10 @@ def loadData(directory):
 
 	return (align_data, count_data, trim_data)
 
-
+def getGrid(k):
+	rows = floor(sqrt(k))
+	columns = ceil(k / rows)
+	return (int(rows), int(columns))
 
 #-------------------------------------------------------------------------------------------
 if __name__ == "__main__":
