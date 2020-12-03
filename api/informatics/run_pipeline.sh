@@ -39,7 +39,7 @@ do
 	echo "Trimming with cutadapt"
 	../../miniconda3/bin/cutadapt -u -4 -o public/$p.pretrimmed.fastq.gz public/$f
 	rm public/$f
-	../../miniconda3/bin/cutadapt -a AGATCGGAAGAGC -u 4 -m 10 -o public/$p.trimmed.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt
+	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -m 10 -o public/$p.trimmed.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt
 	rm public/$p.pretrimmed.fastq.gz
 	#cutadapt
 	((i++))
