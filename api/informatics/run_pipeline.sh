@@ -37,8 +37,10 @@ do
     screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Trimming \"$f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
     
 	echo "Trimming with cutadapt"
-	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -u -4 -m 10 -o public/$p.trimmed.fastq.gz public/$f > public/$ref_name/$p.trim.txt
+	../../miniconda3/bin/cutadapt -u -4 -o public/$p.pretrimmed.fastq.gz public/$f
 	rm public/$f
+	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -m 10 -o public/$p.trimmed.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt
+	rm public/$p.pretrimmed.fastq.gz
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")

@@ -42,6 +42,15 @@ COUNTS = 1
 TRIM = 2
 READS_W_ADAPTERS = 0
 READS_WRITTEN = 1
+COLORSCALE = [
+        [0, 'rgb(7, 0, 77)'],        #0
+        [1./10000, 'rgb(76, 0, 112)'], #10
+        [1./1000, 'rgb(148, 0, 109)'],  #100
+        [1./100, 'rgb(183, 0, 28)'],   #1000
+        [1./10, 'rgb(219, 93, 0)'],       #10000
+        [1., 'rgb(252, 255, 0)'],             #100000
+
+    ],
 
 #-------------------------------------------------------------------------------------------
 # main, serves as pipeline
@@ -221,7 +230,9 @@ def heatmap(data, out_pre):
 	                   z=z,
 	                   x=k,
 	                   y=mir_k,
-	                   hoverongaps = False))
+	                   hoverongaps = False,
+	                   colorscale=COLORSCALE[0],
+	                   ))
 	fig.write_html(str(out_pre) + "/heatmap.html")
 
 def normalHeatmap(data, out_pre):
@@ -235,7 +246,9 @@ def normalHeatmap(data, out_pre):
 	                   z=z,
 	                   x=k,
 	                   y=mir_k,
-	                   hoverongaps = False))
+	                   hoverongaps = False,
+	                   colorscale=COLORSCALE[0],
+	                   ))
 	fig.write_html(str(out_pre) + "/normal_heatmap.html")
 
 def normalHeatmapNoZeroes(data, out_pre):
@@ -251,7 +264,9 @@ def normalHeatmapNoZeroes(data, out_pre):
 	                   z=zeroed_z,
 	                   x=k,
 	                   y=zeroed_mir_k,
-	                   hoverongaps = False))
+	                   hoverongaps = False,
+	                   colorscale=COLORSCALE[0],
+	                   ))
 	fig.write_html(str(out_pre) + "/normal_no_zeroes_heatmap.html")
 
 def ScatterPlotReg():
