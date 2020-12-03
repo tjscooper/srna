@@ -176,7 +176,7 @@ def sizeDistributionBarPlot(data, out_pre):
 		for d in data[sample]:
 			sizes[data[sample][d]["length"]] += data[sample][d]["count"]
 		s = sizes.keys()
-		all_sizes = all_sizes + s
+		all_sizes = all_sizes + list(s)
 		s.sort()
 		c = [ sizes[size] for size in s ]
 
