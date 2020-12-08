@@ -94,11 +94,7 @@ def conglomerate(directory, code):
 				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 					"\t\t\tSize Distribution\n" +\
 				"\t\t</div>\n" +\
-			"\t</a>\n" +\
-			"\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
-				"\t\tSize Distribution Histogram\n" +\
-			"\t</div>\n"
-	html += loadHTMLtoString(str(directory) + "/size_bar_plot.html")
+			"\t</a>\n"
 	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tSize Distribution Histogram Grid\n" +\
 			"\t</div>\n"
@@ -111,19 +107,11 @@ def conglomerate(directory, code):
 				"\t\tSize Distribution Line and Rug Plot\n" +\
 			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/size_dist_plot.html")
-	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
-				"\t\tSize Distribution Combo Plot\n" +\
-			"\t</div>\n"
-	html += loadHTMLtoString(str(directory) + "/size_distbars_plot.html")
 	html += "\n\t<a id=\"heat\">\n" +\
 				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 					"\t\t\tHeatmaps\n" +\
 				"\t\t</div>\n" +\
-			"\t</a>\n" +\
-			"\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
-				"\t\tRaw Count Heatmap\n" +\
-			"\t</div>\n"
-	html += loadHTMLtoString(str(directory) + "/heatmap.html")
+			"\t</a>\n"
 	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tNormalized Heatmap\n" +\
 			"\t</div>\n"
