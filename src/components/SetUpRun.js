@@ -52,6 +52,7 @@ class SetUpRun extends Component {
          console.log(files[x].type);
          console.log(files[x].name);
          console.log(files[x].name.split('.'))
+         console.log(files[x].name.split('.').pop())
          console.log(types.indexOf(files[x].name.split('.')[-1]))
          //console.log(files[x].name.split('.')[-1])
          if (files[x].name.split('.').pop() == "gz" <= -1) {
