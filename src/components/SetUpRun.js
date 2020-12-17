@@ -48,6 +48,7 @@ class SetUpRun extends Component {
     const beforeFiles = this.state.preUploadedFiles
     for(var x = 0; x<files.length; x++) {
      // compare file type find doesn't matach
+         console.log("CHECKING MIME TYPE")
          console.log(files[x].type);
          console.log(files[x].name);
          console.log(files[x].name.split('.'))
