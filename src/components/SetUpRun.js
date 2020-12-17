@@ -46,6 +46,7 @@ class SetUpRun extends Component {
     const types = ['fq', 'fastq', "gz", 'fq.gz', 'fastq.gz']
     // loop access array
     const beforeFiles = this.state.preUploadedFiles
+    const addedFiles = []
     for(var x = 0; x<files.length; x++) {
      // compare file type find doesn't matach
          console.log("CHECKING MIME TYPE")
@@ -74,10 +75,8 @@ class SetUpRun extends Component {
           else {
             // passed all checks
             console.log(file_listified)
-            const addedFiles = []
             addedFiles.push(files[x].name)
 
-            this.setState({preUploadedFiles: addedFiles})
 
             console.log(this.state.preUploadedFiles)
             console.log("END MIME TYPE")
@@ -85,6 +84,7 @@ class SetUpRun extends Component {
           }
         }
      };
+    this.setState({preUploadedFiles: addedFiles})
      for(var z = 0; z<err.length; z++) {// if message not same old that mean has error 
          // discard selected file
         toast.error(err[z])
