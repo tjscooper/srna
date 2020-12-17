@@ -59,7 +59,7 @@ class SetUpRun extends Component {
          // checking if gzipped
          if (file_listified.pop() != "gz") {
          // create error message and assign to container   
-          err[x] = files[x].type+' is not a supported format\n';
+          err[x] = files[x].name +'\'s file type is not supported\n';
           this.setState({preUploadedFiles: beforeFiles})
         }
 
@@ -68,13 +68,13 @@ class SetUpRun extends Component {
           // checking if fastq or fq
           if (file_listified.pop() != "fastq" && file_listified.pop() != "fq") {
            // create error message and assign to container   
-            err[x] = files[x].type+' is not a supported format\n';
+            err[x] = files[x].name +'\'s file type is not supported\n';
             this.setState({preUploadedFiles: beforeFiles})
           }
           else {
             // passed all checks
             console.log(file_listified)
-            const addedFiles = this.state.preUploadedFiles
+            const addedFiles = []
             addedFiles.push(files[x].name)
 
             this.setState({preUploadedFiles: addedFiles})
