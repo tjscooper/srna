@@ -59,7 +59,7 @@ class SetUpRun extends Component {
           err[x] = files[x].type+' is not a supported format\n';
           this.setState({preUploadedFiles: beforeFiles})
         }
-        else (){
+        else {
           const addedFiles = this.state.preUploadedFiles
           addedFiles.push(files[x].name)
 
