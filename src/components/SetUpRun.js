@@ -56,7 +56,7 @@ class SetUpRun extends Component {
          console.log(types.indexOf(files[x].name.split('.')[-1]))
          let file_listified = files[x].name.split('.')
 
-         //console.log(files[x].name.split('.')[-1])
+         // checking if gzipped
          if (file_listified.pop() != "gz") {
          // create error message and assign to container   
           err[x] = files[x].type+' is not a supported format\n';
@@ -65,11 +65,24 @@ class SetUpRun extends Component {
 
         else {
           console.log(file_listified)
+          // checking if fastq or fq
+          if (file_listified.pop() != "fastq" && file_listified.pop() != "fq") {
+           // create error message and assign to container   
+            err[x] = files[x].type+' is not a supported format\n';
+            this.setState({preUploadedFiles: beforeFiles})
+          }
+          else {
+            // passed all checks
+            console.log(file_listified)
+            const addedFiles = this.state.preUploadedFiles
+            addedFiles.push(files[x].name)
 
-          const addedFiles = this.state.preUploadedFiles
-          addedFiles.push(files[x].name)
+            this.setState({preUploadedFiles: addedFiles})
 
-          this.setState({preUploadedFiles: addedFiles})
+            console.log(this.state.preUploadedFiles)
+            console.log("END MIME TYPE")
+
+          }
         }
      };
      for(var z = 0; z<err.length; z++) {// if message not same old that mean has error 
