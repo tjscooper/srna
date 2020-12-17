@@ -54,13 +54,18 @@ class SetUpRun extends Component {
          console.log(files[x].name.split('.'))
          console.log(files[x].name.split('.').pop())
          console.log(types.indexOf(files[x].name.split('.')[-1]))
+         let file_listified = files[x].name.split('.')
+
          //console.log(files[x].name.split('.')[-1])
-         if (files[x].name.split('.').pop() == "gz" <= -1) {
+         if (file_listified.pop() != "gz") {
          // create error message and assign to container   
           err[x] = files[x].type+' is not a supported format\n';
           this.setState({preUploadedFiles: beforeFiles})
         }
+
         else {
+          console.log(file_listified)
+
           const addedFiles = this.state.preUploadedFiles
           addedFiles.push(files[x].name)
 
