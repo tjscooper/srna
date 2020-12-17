@@ -58,9 +58,12 @@ class SetUpRun extends Component {
           err[x] = files[x].type+' is not a supported format\n';
           this.setState({preUploadedFiles: beforeFiles})
         }
-        const addedFiles = this.state.preUploadedFiles
-        addedFiles.push(files[x].name)
-        this.setState({preUploadedFiles: addedFiles})
+        else (){
+          const addedFiles = this.state.preUploadedFiles
+          addedFiles.push(files[x].name)
+
+          this.setState({preUploadedFiles: addedFiles})
+        }
      };
      for(var z = 0; z<err.length; z++) {// if message not same old that mean has error 
          // discard selected file
