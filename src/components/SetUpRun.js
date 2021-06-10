@@ -75,12 +75,15 @@ class SetUpRun extends Component {
           else {
             // passed all checks
             console.log(file_listified)
+            
+
+            // check if file is uploaded
             addedFiles.push(files[x].name)
 
 
             console.log(this.state.preUploadedFiles)
             console.log("END MIME TYPE")
-
+                      
           }
         }
      };
