@@ -623,7 +623,7 @@
   margin: 4px 2px;
   border-radius: 4px;
   border-width: thin;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.19);
   background-image: url(assets/check_blue1.png);
   background-repeat: no-repeat;
 }
@@ -638,7 +638,7 @@
   margin: 4px 2px;
   border-radius: 4px;
   border-width: thin;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 14px 0 rgba(0, 0, 0, 0.19);
   background-image: url(assets/check_darkgrey.png);
   background-repeat: no-repeat;
 }
@@ -689,7 +689,7 @@
   border-radius: 4px;
   margin: 4px 2px;
   border-width: thin;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.19);
   background-image: url(assets/plus_grey3.png);
   background-repeat: no-repeat;
 }
@@ -704,7 +704,7 @@
   border-radius: 4px;
   margin: 4px 2px;
   border-width: thin;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 14px 0 rgba(0, 0, 0, 0.19);
   background-image: url(assets/plus_darkgrey.png);
   background-repeat: no-repeat;
 }

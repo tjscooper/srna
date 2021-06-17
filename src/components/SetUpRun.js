@@ -240,8 +240,8 @@ addCat = (e) => {
              
               
 
-
-            <label className={(this.state.loaded==100 ? "App h2" : "App h2 hidden")}>Choose files for analysis </label>
+            <div className={(this.state.loaded==100 ? "App appear " : "App disappear")} >
+            <label className="App h2">Choose files for analysis </label>
              <form onSubmit={this.handleSubmit} onChange={this.handleCatChange} >
               {cats.map((val, idx)=> {
                 let catId = `cat-${idx}`, ageId = `age-${idx}`
@@ -264,6 +264,7 @@ addCat = (e) => {
           })
         }
              </form>
+             </div>
              <div className="App short-spacer" />
 
               <ExecutePipeline fileNames={cats} />
