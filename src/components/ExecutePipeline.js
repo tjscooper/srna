@@ -19,7 +19,7 @@ class ExecutePipeline extends Component {
       intervalID: null,
       outfileExists: false,
       loaded: 0,
-      status: "Nothing is Cooking"
+      status: "No job queued"
     }
     this.monitorUntilJobFinished = this.monitorUntilJobFinished.bind(this)
    
@@ -145,32 +145,41 @@ class ExecutePipeline extends Component {
 })
   }
 
+  getColor = (quantity) => {
+    if (quantity === 0) return 'idle';
+    if (quantity < 100) return 'in-process';
+    if (quantity == 100) return 'complete';
+  }
+
   render() {
     return (
       <div>
-      <div className="form-group files" >
-      { ( !this.state.isRunning && this.props.fileNames.length != 0) ? (
-      <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} >Run</button>) : ( 
-      <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} disabled>Run</button>) }
-      </div>
-      <div className="form-group files" >
-      <ToastContainer />
-      <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded, 2) }%</Progress>
-      <label>{this.state.status}</label>
-      </div>
+        <div className={( this.props.fileNames.length != 0 ? "App appear" : "App disappear" )} >
+          { ( !this.state.isRunning && this.props.fileNames.length != 0) ? (
+          <button type="button" className="App primarybutton-active" onClick={this.onClickHandler} >RUN</button>) : ( 
+          <button type="button" className="App primarybutton-inactive" onClick={this.onClickHandler} disabled>RUN</button>) }
+          </div>
 
-     
+             <div className="App short-spacer" />
+        <div className="form-group files" >
+          <ToastContainer />
+          <Progress max="100" color={(this.getColor(this.state.loaded))} value={this.state.loaded} className={(this.state.isRunning || this.state.outfileExists ? "App progress-vis" : "App progress-invis")}>{Math.round(this.state.loaded, 2) }%</Progress>
+          <label className={( this.state.isRunning ? "App label appear" : "App label disappear" )}>{this.state.status}</label>
+        </div>
 
-      <div className="form-group files" >
-      { ( this.state.outfileExists ) ? (
-      <a href={this.state.fullPathOutfile}><button type="button" class="btn btn-success btn-block" >Download</button></a>) : ( 
-      <button type="button" class="btn btn-success btn-block"  disabled>Download</button>) }
+         
+
+        <div className={( this.state.outfileExists ? "App appear" : "App disappear" )} >
+          { ( this.state.outfileExists ) ? (
+          <a href={this.state.fullPathOutfile}><button type="button" className="App primarybutton-active" >DOWNLOAD</button></a>) : ( 
+          <button type="button" className="primarybutton-inactive"  disabled>DOWNLOAD</button>) }
+        </div>
+        <div className={( this.state.outfileExists ? "App appear" : "App disappear" )} >
+          { ( this.state.outfileExists ) ? (
+          <a href={this.state.dataPath}><button type="button" className="App primarybutton-active" >VIEW DATA</button></a>) : ( 
+          <button type="button" className="primarybutton-inactive" disabled>VIEW DATA</button>) }
+        </div>
       </div>
-      <div className="form-group files" >
-      { ( this.state.outfileExists ) ? (
-      <a href={this.state.dataPath}><button type="button" class="btn btn-success btn-block" >View Data</button></a>) : ( 
-      <button type="button" class="btn btn-success btn-block" disabled>View Data</button>) }
-      </div></div>
     );
   }
 }

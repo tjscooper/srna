@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App1 from "./App.js";
+import App from "./App.js";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import * as serviceWorker from './serviceWorker';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
 
 ReactDOM.render(
-  <Router>
-    <App1 />
-  </Router>,
+  <div>
+    <App/>
+  </div>,
   document.getElementById('root')
 );
 

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ExecutePipeline from './../components/ExecutePipeline'
 import List from 'react-list-select'
 import CatInputs from "./CatInputs"
+import "./../App.css";
 class SetUpRun extends Component { 
   
   constructor(props) {
@@ -151,6 +152,8 @@ class SetUpRun extends Component {
           const uFiles = []
           for(var z = 0; z < this.state.preUploadedFiles.length; z++) {
             uFiles.push(this.state.preUploadedFiles[z])
+
+            console.log("setting statet")
             this.setState((prevState) => ({
               cats: [...prevState.cats, {name:this.state.preUploadedFiles[z], isChecked:true}],
             }));
@@ -181,16 +184,29 @@ handleCatChange = (e) => {
   console.log(e.target)
   console.log(e.target.value)
   console.log(e.target.checked)
+  console.log(e.target.className)
+  console.log(e.target.dataset.id)
+  console.log("meow")
+  console.log(this.state.cats)
     if (["name", "age"].includes(e.target.className) ) {
       let cats = [...this.state.cats]
       cats[e.target.dataset.id].isChecked = e.target.checked
+
+            console.log("setting statet")
       this.setState({ cats }, () => console.log(this.state.cats))
     } else {
+      console.log("we're in here")
+      let cats = [...this.state.cats]
+      cats[e.target.dataset.id].isChecked = e.target.checked
+
+            console.log("setting statet")
+      this.setState({ cats }, () => console.log(this.state.cats))
       this.setState({ [e.target.name]: e.target.value.toUpperCase() })
     }
   }
 addCat = (e) => {
 
+    console.log("setting statet")
     this.setState((prevState) => ({
       cats: [...prevState.cats, {name:"", age:""}],
     }));
@@ -204,33 +220,35 @@ addCat = (e) => {
         <div class="row">
           <div class="offset-md-3 col-md-6">
                <div class="form-group files">
-                <label>Upload Your File </label>
-                <input type="file" class="form-control" multiple onChange={this.onChangeHandler}/>
-              </div>  
+                <label className="App h2">Drag and drop file(s) below </label>
+
+                <input type="file" title="Drag and drop files or file browse" class="custom-file-input" id="upload-file" multiple onChange={this.onChangeHandler}/>
+              </div>
+              <div className={( this.state.primed ? "App appear" : "App disappear" )}>  
               <div class="form-group">
                 <ToastContainer />
-                <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
+                <Progress max="100" color={(this.state.loaded==100 ? "complete" : "in-process")} value={this.state.loaded} className={(this.state.loaded!=0 ? "App progress-vis" : "App progress-invis")}>{Math.round(this.state.loaded,2) }%</Progress>
         
               </div> 
               
               <div className="form-group files" >
               { ( this.state.primed ) ? (
-              <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} >Upload</button>) : ( 
-              <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler} disabled>Upload</button>) }
+              <button type="button" class="primarybutton-active" onClick={this.onClickHandler} >UPLOAD</button>) : ( 
+              <button type="button" class="primarybutton-inactive" onClick={this.onClickHandler} disabled>UPLOAD</button>) }
               </div>
-              <ExecutePipeline fileNames={cats} />
               
              
               
 
 
+            <label className={(this.state.loaded==100 ? "App h2" : "App h2 hidden")}>Choose files for analysis </label>
              <form onSubmit={this.handleSubmit} onChange={this.handleCatChange} >
               {cats.map((val, idx)=> {
                 let catId = `cat-${idx}`, ageId = `age-${idx}`
                 let name = cats[idx].name
                 return (
-                  <div key={idx}>
-                    <label htmlFor={catId}>{name}</label>
+                  <div key={idx} className={(cats[idx].isChecked ? "App loaded-file" : "App unloaded-file")} >
+                    <label htmlFor={catId} className={(cats[idx].isChecked ? "App loaded-file-label" : "App unloaded-file-label")} >{name} </label>
                     <input
                       type="text"
                       name={catId}
@@ -238,7 +256,7 @@ addCat = (e) => {
                       id={catId}            
                       type="checkbox"
                       value={cats[idx].name} 
-                      className="name"
+                      className="App loaded-file-checkbox"
                       defaultChecked={cats[idx].isChecked}
                     />
                   </div>
@@ -246,7 +264,10 @@ addCat = (e) => {
           })
         }
              </form>
+             <div className="App short-spacer" />
 
+              <ExecutePipeline fileNames={cats} />
+        </div>
         </div>
       </div>
       </div>
