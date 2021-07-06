@@ -262,6 +262,29 @@
   color: #3F3F3F;
 }
 
+.App .loading:after {
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 15px;
+  display: inline-block;
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+  animation: ellipsis steps(4,end) 900ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 15px;    
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 15px;    
+  }
+}
+
 .App .footnote {
   line-height: 12px;
   letter-spacing: 0px;

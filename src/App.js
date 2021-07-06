@@ -34,10 +34,18 @@ class App extends Component {
       this.state = {
         tab:"/"
       };
+
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        alert( "This page is reloaded" );
+      } else {
+        alert( "This page is not reloaded");
+      }
+}
    
   }
 
-  componentDidUpdate(){    
+  componentDidUpdate(){ 
   window.onpopstate = (e) => {
       console.log("BUTTON PRESSED ON BROWSER")
       console.log(e)
@@ -55,7 +63,6 @@ class App extends Component {
     }
   }
 
-  
 
   render() {
     
@@ -66,7 +73,7 @@ class App extends Component {
         <Navbar fluid collapseOnSelect>
           <Navbar.Header  >
             <Navbar.Brand>
-              <a href="https://perkinelmer-appliedgenomics.com/">
+              <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
                 <div className="App logo"/>
               </a>
               <div style={{width: "100px"}} />

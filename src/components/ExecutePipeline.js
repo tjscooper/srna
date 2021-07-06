@@ -164,19 +164,19 @@ class ExecutePipeline extends Component {
         <div className="form-group files" >
           <ToastContainer />
           <Progress max="100" color={(this.getColor(this.state.loaded))} value={this.state.loaded} className={(this.state.isRunning || this.state.outfileExists ? "App progress-vis" : "App progress-invis")}>{Math.round(this.state.loaded, 2) }%</Progress>
-          <label className={( this.state.isRunning ? "App label appear" : "App label disappear" )}>{this.state.status}</label>
+          <label className={( this.state.isRunning ? "App label loading appear" : "App label disappear" )}>{this.state.status} </label>
         </div>
 
          
 
         <div className={( this.state.outfileExists ? "App appear" : "App disappear" )} >
           { ( this.state.outfileExists ) ? (
-          <a href={this.state.fullPathOutfile}><button type="button" className="App primarybutton-active" >DOWNLOAD</button></a>) : ( 
+          <a target="_blank" rel="noopener noreferrer" href={this.state.fullPathOutfile}><button type="button" className="App primarybutton-active" >DOWNLOAD</button></a>) : ( 
           <button type="button" className="primarybutton-inactive"  disabled>DOWNLOAD</button>) }
         </div>
         <div className={( this.state.outfileExists ? "App appear" : "App disappear" )} >
           { ( this.state.outfileExists ) ? (
-          <a href={this.state.dataPath}><button type="button" className="App primarybutton-active" >VIEW DATA</button></a>) : ( 
+          <a target="_blank" rel="noopener noreferrer" href={this.state.dataPath}><button type="button" className="App primarybutton-active" >VIEW DATA</button></a>) : ( 
           <button type="button" className="primarybutton-inactive" disabled>VIEW DATA</button>) }
         </div>
       </div>

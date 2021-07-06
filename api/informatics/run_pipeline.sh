@@ -10,7 +10,7 @@ mkdir public/$ref_name/plots
 shift
 i=0
 num_files=${#@}
-num_steps=$(( 8*num_files + 3 ))
+num_steps=$(( 8*num_files + 3 )) # IMPORTANT
 echo "Number of steps: $num_steps"
 
 #screen -S jq_qq_queue -X stuff "jq -c '. + [\"$ref_name\"]' public/json/queue.json > public/json/tmp2.$$.json && mv --force public/json/tmp.$$.json public/json/queue.json^M"
@@ -40,7 +40,7 @@ do
 	#../../miniconda3/bin/cutadapt -u -4 -o public/$p.pretrimmed.fastq.gz public/$f
 	cp public/$f public/$p.pretrimmed.fastq.gz
 	rm public/$f
-	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -m 10 -o public/$p.trimmed.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt
+	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -m 10 -o public/$p.trimmed.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt # IMPORTANT TRIM
 	rm public/$p.pretrimmed.fastq.gz
 	#cutadapt
 	((i++))
@@ -49,7 +49,7 @@ do
 	
     echo "Aligning with bowtie2"
 	#bowtie
-	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt
+	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
     rm public/$p.trimmed.fastq.gz
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
@@ -96,7 +96,7 @@ do
    
 done
 echo "Generating plots"
-../../miniconda3/bin/python3.8 informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots -s $ref_name
+../../miniconda3/bin/python3.8 informatics/make_plots.py -i public/$ref_name -o public/$ref_name/plots -s $ref_name # IMPORTANT PYTHON
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Drawing plots\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
@@ -125,3 +125,5 @@ do
     screen -S jq_pipe_queue -X stuff "jq -c '. + { \"$ele\": { \"state\": \"In Queue: Position $queue_pos\", \"progress\": \"0\" } }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
     ((i++))
 done
+
+ # IMPORTANT SEND EMAIL

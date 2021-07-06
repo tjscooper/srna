@@ -37,7 +37,11 @@ function retrieveConfig(){
 var multer = require('multer')
 var multerS3 = require('multer-s3');
 var cors = require('cors');
-app.use(cors())
+app.use(cors({
+  'allowedHeaders': ['Content-Type'],
+  'origin': '*',
+  'preflightContinue': true
+}))
 
 // place holder for the data
 const users = [];
