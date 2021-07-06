@@ -62,7 +62,7 @@ class ExecutePipeline extends Component {
   async monitorUntilJobFinished () {
     console.log("monitoring " + this.state.outfile)
     //var xmlHttp = new XMLHttpRequest();
-    axios.get('https://booshboosh.net:3080/hello')
+    axios.get('https://booshboosh.net:7432/hello')
       .then(function (response) {
         console.log(response);
       })
@@ -124,17 +124,17 @@ class ExecutePipeline extends Component {
       }
     }
     console.log(data)
-    axios.post("https://booshboosh.net:3080/execute", data, {})
+    axios.post("https://booshboosh.net:7432/execute", data, {})
     .then(res => {
       console.log("post execute")
       console.log(res);
       let report = res.data.split("-")[0] + "-out-report.html"
       this.setState({outfile: res.data, 
           isRunning:true, 
-          dataPath:'https://booshboosh.net:3080/boosh/pipelinedata/' + report, 
-          fullPathOutfile:'https://booshboosh.net:3080/dloading/' + res.data, 
-          fullPathOutfileOld:'https://booshboosh.net:3080/download/' + res.data, 
-          statusPath:'https://booshboosh.net:3080/status/' + res.data})
+          dataPath:'https://booshboosh.net:7432/boosh/pipelinedata/' + report, 
+          fullPathOutfile:'https://booshboosh.net:7432/dloading/' + res.data, 
+          fullPathOutfileOld:'https://booshboosh.net:7432/download/' + res.data, 
+          statusPath:'https://booshboosh.net:7432/status/' + res.data})
       console.log(this.state.outfile)
       this.monitorUntilJobFinished()
 

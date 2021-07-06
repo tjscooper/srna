@@ -11,7 +11,7 @@ var s3Proxy = require('s3-proxy');
 
 const app = express(),
       bodyParser = require("body-parser");
-      port = 3080;
+      port = 7432;
 
 
 
@@ -37,11 +37,7 @@ function retrieveConfig(){
 var multer = require('multer')
 var multerS3 = require('multer-s3');
 var cors = require('cors');
-app.use(cors({
-  'allowedHeaders': ['Content-Type'],
-  'origin': '*',
-  'preflightContinue': true
-}))
+app.use(cors())
 
 // place holder for the data
 const users = [];
@@ -381,8 +377,8 @@ const httpsServer = https.createServer({
   dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
 }, app);
 
-httpsServer.listen(3080, () => {
-    console.log('HTTPS Server running on port 3080');
+httpsServer.listen(7432, () => {
+    console.log('HTTPS Server running on port 7432');
 });
 
 /*
