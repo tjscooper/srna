@@ -9,6 +9,7 @@ var s3Proxy = require('s3-proxy');
 var gm = require('./../../gm.json');
 console.log("gm")
 console.log(gm)
+console.log(gm["usr"])
 
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
