@@ -6,6 +6,10 @@ var https = require('https');
 const fs = require('fs');
 var aws = require('aws-sdk');
 var s3Proxy = require('s3-proxy');
+var gm = require('./../../gm.json');
+console.log("gm")
+console.log(gm)
+
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
 
@@ -36,8 +40,20 @@ function retrieveConfig(){
 
 var multer = require('multer')
 var multerS3 = require('multer-s3');
+var nodemailer = require('nodemailer');
 var cors = require('cors');
 app.use(cors())
+
+// create reusable transporter object using the default SMTP transport
+const transporter = nodemailer.createTransport({
+port: 465,               // true for 465, false for other ports
+host: "smtp.gmail.com",
+   auth: {
+        user: gm["usr"],
+        pass: gm["pwd"],
+     },
+secure: true,
+});
 
 // place holder for the data
 const users = [];
@@ -312,6 +328,12 @@ miniconda3/bin/conda config --add channels bioconda
 miniconda3/bin/conda config --add channels conda-forge
 miniconda3/bin/conda install bowtie2
 miniconda3/bin/conda install cutadapt
+miniconda3/bin/conda install plotly
+sudo miniconda3/bin/conda install plotly
+miniconda3/bin/conda install pandas
+sudo miniconda3/bin/conda install pandas
+miniconda3/bin/conda install scipy
+sudo miniconda3/bin/conda install scipy
 rm miniconda3/pkgs/*.bz2
 sudo yum group install "Development Tools"
 sudo yum install ncurses-devel bzip2-devel xz-devel
