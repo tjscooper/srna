@@ -69,7 +69,7 @@ from: gm["usr"],  // sender address
 };
 
 
-transporter.sendMail(mailOptions, function (err, info) {
+transporter.sendMail(mailData, function (err, info) {
    if(err)
      console.log(err)
    else
