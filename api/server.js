@@ -11,7 +11,7 @@ var s3Proxy = require('s3-proxy');
 
 const app = express(),
       bodyParser = require("body-parser");
-      port = 7432;
+      port = 443;
 
 
 
@@ -362,6 +362,7 @@ sudo wget -r --no-parent -A 'epel-release-*.rpm' http://dl.fedoraproject.org/pub
 sudo rpm -Uvh dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-*.rpm
 sudo yum-config-manager --enable epel*
 sudo yum install -y python-certbot-nginx
+
 sudo certbot certonly --nginx --debug -w /var/www/test -d test.net
 cd ~/srna/api
 mkdir reports
@@ -377,8 +378,8 @@ const httpsServer = https.createServer({
   dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
 }, app);
 
-httpsServer.listen(7432, () => {
-    console.log('HTTPS Server running on port 7432');
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
 });
 
 /*
