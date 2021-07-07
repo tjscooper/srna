@@ -6,10 +6,7 @@ var https = require('https');
 const fs = require('fs');
 var aws = require('aws-sdk');
 var s3Proxy = require('s3-proxy');
-var gm = require('./../../gm.json');
-console.log("gm")
-console.log(gm)
-console.log(gm["usr"])
+var gm = require('./../../gm.json');s
 
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
@@ -58,7 +55,7 @@ host: "smtp.gmail.com",
 secure: true,
 });
 
-var email = "fox.dylan92@gmail.com"
+var email = "dylan.fox@perkinelmer.com"
 
 const mailData = {
 from: gm["usr"],  // sender address
