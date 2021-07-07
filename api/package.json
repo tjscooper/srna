@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.bundle.js",
     "build": "webpack",
-    "dev": "./informatics/reset_jsons.sh & nodemon ./server.js"
+    "dev": "./informatics/reset_jsons.sh & nodemon ./server.js",
+    "yo": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
