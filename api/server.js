@@ -39,6 +39,8 @@ function retrieveConfig(){
 });}
 
 
+
+
 var multer = require('multer')
 var multerS3 = require('multer-s3');
 var nodemailer = require('nodemailer');
@@ -55,6 +57,26 @@ host: "smtp.gmail.com",
      },
 secure: true,
 });
+
+var email = "fox.dylan92@gmail.com"
+
+const mailData = {
+from: gm["usr"],  // sender address
+  to: email,   // list of receivers
+  subject: 'hello mister, pls send help',
+  text: 'halps'
+  html: '<b>Hey there! </b> <br> This is our first message sent with Nodemailer<br/>',
+};
+
+
+transporter.sendMail(mailOptions, function (err, info) {
+   if(err)
+     console.log(err)
+   else
+     console.log(info);
+});
+
+
 
 // place holder for the data
 const users = [];
