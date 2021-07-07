@@ -64,7 +64,7 @@ const mailData = {
 from: gm["usr"],  // sender address
   to: email,   // list of receivers
   subject: 'hello mister, pls send help',
-  text: 'halps'
+  text: 'halps',
   html: '<b>Hey there! </b> <br> This is our first message sent with Nodemailer<br/>',
 };
 
