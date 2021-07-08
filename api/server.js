@@ -62,7 +62,7 @@ from: gm["usr"],  // sender address
   to: email,   // list of receivers
   subject: "ATTN: please send help",
   text: 'halps',
-  html: '<b>HEY pls send help</b> <br>It's almost xmas, are u me mum???<br/>',
+  html: '<b>HEY pls send help</b> <br>It\'s almost xmas, are u me mum???<br/>',
 };
 
 
