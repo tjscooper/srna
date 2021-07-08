@@ -55,14 +55,14 @@ host: "smtp.gmail.com",
 secure: true,
 });
 
-var email = "dylan.fox@perkinelmer.com"
+var email = "andres.garza@perkinelmer.com"
 
 const mailData = {
 from: gm["usr"],  // sender address
   to: email,   // list of receivers
-  subject: 'hello mister, pls send help',
+  subject: "ATTN: please send help",
   text: 'halps',
-  html: '<b>Hey there! </b> <br> This is our first message sent with Nodemailer<br/>',
+  html: '<b>HEY pls send help</b> <br>It's almost xmas, are u me mum???<br/>',
 };
 
 
