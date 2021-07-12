@@ -55,7 +55,7 @@ host: "smtp.gmail.com",
 secure: true,
 });
 
-var email = "andres.garza@perkinelmer.com"
+var email = "dylan.fox@perkinelmer.com"
 
 const mailData = {
 from: gm["usr"],  // sender address
