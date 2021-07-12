@@ -43,7 +43,7 @@ def main():
     payload = {'email': str(options.e), 
                'link1': "<a href=\"" + str(options.l1) + "\">download</a>", 
                'link2': "<a href=\"" + str(options.l1) + "\">view data</a>" }
-    response = requests.post(final_url, data=json.dumps(payload))
+    response = requests.post(final_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
 
     print(response.text) #TEXT/HTML
     print(response.status_code, response.reason) #HTTP
