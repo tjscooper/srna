@@ -10,9 +10,13 @@ echo "YOYOYOYOYOYO"
 echo $@
 email_split=(${2//" "/ })
 email=${email_split[0]}
+echo "YOYOYOYOYOYO"
+echo $2
 
 shift
 shift
+echo "YOYOYOYOYOYO"
+echo $@
 
 i=0
 num_files=${#@}
