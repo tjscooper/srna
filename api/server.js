@@ -344,8 +344,8 @@ app.post('/execute',function(req, res) {
     console.log(req.body)
     var cmd = "screen -S qqqq -X stuff \"bash informatics/q.sh"
     outfile = Date.now() + "-out.zip"
-    cmd = cmd.concat(" " + outfile)
-    for (x = 0; x < req.body.length; x++) {
+    cmd = cmd.concat(" " + outfile + " " + req.body[0])
+    for (x = 1; x < req.body.length; x++) {
         cmd = cmd.concat(" ")
         cmd = cmd.concat(fileMap[req.body[x]])
         console.log(cmd)
