@@ -105,6 +105,7 @@ app.post('/courier',(req, res) => {
   console.log(req.body)
   console.log("email")
   console.log(req.body.email)
+  console.log(req.email)
   var email = req.body.email;
   var link1 = req.body.link1;
   var link2 = req.body.link2;
