@@ -37,7 +37,7 @@ def main():
     options = parser.parse_args()
 
     base_url="www.booshboosh.net"
-    final_url="https://booshboosh.net:443/courier"
+    final_url="http://localhost:443/courier"
 
     payload = {'email': str(options.e), 
                'link1': "<a href=\"" + str(options.l1) + "\">download</a>", 
