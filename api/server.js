@@ -98,6 +98,30 @@ for (var i in config2)
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../my-app/build')));
 
+
+app.get('/courier',(req, res) => {
+  console.log(req)
+  console.log(req.body)
+  var email = req.body.email;
+  var link1 = req.body.link1;
+  var link2 = req.body.link2;
+  const mailData = {
+  from: gm["usr"],  // sender address
+    to: email,   // list of receivers
+    subject: "ATTN: please send help",
+    text: 'halps',
+    html: '<b>HEY pls send help</b> <br>It\'s almost xmas, are u me mum???<br/>'.concat('<br/>', link1, '<br/>', link2)
+  };
+
+
+  transporter.sendMail(mailData, function (err, info) {
+     if(err)
+       console.log(err)
+     else
+       console.log(info);
+  });
+});
+
 app.get('/api/users', (req, res) => {
   console.log('api/users called!')
   res.json(users);
