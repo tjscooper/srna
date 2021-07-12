@@ -7,7 +7,8 @@ ref_name=${ref_split[0]}
 mkdir public/$ref_name
 mkdir public/$ref_name/plots
 
-email=$2
+email_split=(${2//" "/ })
+email=${email_split[0]}
 
 shift
 shift
