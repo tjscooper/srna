@@ -538,7 +538,7 @@
 
 .custom-file-input:active{
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 9px;
   border-style: solid;
   border-radius: 4px;
   border-width: 2px;
@@ -554,7 +554,7 @@
   background-color: #FCFEFF;
   padding-top: 10px;
   padding-left: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 9px;
   padding-right: 20px;
   text-align: center;
   border-radius: 4px;
@@ -590,13 +590,42 @@
   background-color: #b4cde4;
   padding-top: 10px;
   padding-left: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 9px;
   padding-right: 20px;
   text-align: center;
   border-radius: 4px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
 
 }
+
+.custom-email-input::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 150px;
+}
+.custom-email-input{
+  background-color: #FCFEFF;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width:  66%;
+  min-width: 250px;
+  border-style: solid;
+  border-color:  #DCDCDC;
+  border-radius: 4px;
+  color: #6299c8;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+.custom-email-input:active{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 2px;
+}
+
 
 
 .App .navbar-brand {

@@ -7,7 +7,11 @@ ref_name=${ref_split[0]}
 mkdir public/$ref_name
 mkdir public/$ref_name/plots
 
+email=${ref_split[1]}
+
 shift
+shift
+
 i=0
 num_files=${#@}
 num_steps=$(( 8*num_files + 3 )) # IMPORTANT
@@ -125,5 +129,9 @@ do
     screen -S jq_pipe_queue -X stuff "jq -c '. + { \"$ele\": { \"state\": \"In Queue: Position $queue_pos\", \"progress\": \"0\" } }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
     ((i++))
 done
+
+
+echo "Sending Email"
+../../miniconda3/bin/python3.8 post_email.py -e $email -l1 https://booshboosh.net/dloading/$ref_name.zip -l2 https://booshboosh.net/boosh/pipelinedata/$ref_name-report.html # IMPORTANT PYTHON
 
  # IMPORTANT SEND EMAIL

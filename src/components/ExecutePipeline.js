@@ -19,7 +19,8 @@ class ExecutePipeline extends Component {
       intervalID: null,
       outfileExists: false,
       loaded: 0,
-      status: "No job queued"
+      status: "No job queued",
+      email: ""
     }
     this.monitorUntilJobFinished = this.monitorUntilJobFinished.bind(this)
    
@@ -108,12 +109,21 @@ class ExecutePipeline extends Component {
         }
       }
 
+  handleChange(evt) {
+    this.setState({
+      email: evt.target.value
+    })
+    console.log(this.state.email)
+  }
+
   onClickHandler = () => {
     const data = []
     console.log("EXECUTE")
+    console.log("email")
+    console.log(this.state.email)
 
 
-
+    data.push(this.state.email)
     console.log(this.props.fileNames)
     for (var x = 0; x < this.props.fileNames.length; x++) {
       console.log(this.props.fileNames[x])
@@ -142,7 +152,7 @@ class ExecutePipeline extends Component {
     }, (error) => {
       console.log(error);
       this.setState({isRunning: false})
-})
+  })
   }
 
   getColor = (quantity) => {
@@ -155,12 +165,22 @@ class ExecutePipeline extends Component {
     return (
       <div>
         <div className={( this.props.fileNames.length != 0 ? "App appear" : "App disappear" )} >
+          <div class="form-group files">
+          <div className="App short-spacer" />
+          <label className="App h2">Enter email for reports</label>
+          <div className="App short-spacer" />
+          <input type="text" name="email" className="custom-email-input" placeholder="Enter email" value={this.state.email} onChange={evt => this.handleChange(evt)}/>
+          </div>
+
+          <div className="App short-spacer" />
           { ( !this.state.isRunning && this.props.fileNames.length != 0) ? (
           <button type="button" className="App primarybutton-active" onClick={this.onClickHandler} >RUN</button>) : ( 
           <button type="button" className="App primarybutton-inactive" onClick={this.onClickHandler} disabled>RUN</button>) }
           </div>
 
-             <div className="App short-spacer" />
+
+          <div className="App short-spacer" />
+          
         <div className="form-group files" >
           <ToastContainer />
           <Progress max="100" color={(this.getColor(this.state.loaded))} value={this.state.loaded} className={(this.state.isRunning || this.state.outfileExists ? "App progress-vis" : "App progress-invis")}>{Math.round(this.state.loaded, 2) }%</Progress>
