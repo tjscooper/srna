@@ -101,7 +101,10 @@ app.use(express.static(path.join(__dirname, '../my-app/build')));
 
 app.post('/courier',(req, res) => {
   console.log(req)
+  console.log("body")
   console.log(req.body)
+  console.log("email")
+  console.log(req.body.email)
   var email = req.body.email;
   var link1 = req.body.link1;
   var link2 = req.body.link2;
