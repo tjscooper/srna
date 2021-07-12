@@ -6,7 +6,8 @@ ref_split=(${1//./ })
 ref_name=${ref_split[0]}
 mkdir public/$ref_name
 mkdir public/$ref_name/plots
-
+echo "YOYOYOYOYOYO"
+echo $@
 email_split=(${2//" "/ })
 email=${email_split[0]}
 
