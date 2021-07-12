@@ -99,7 +99,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../my-app/build')));
 
 
-app.get('/courier',(req, res) => {
+app.post('/courier',(req, res) => {
   console.log(req)
   console.log(req.body)
   var email = req.body.email;
@@ -120,6 +120,8 @@ app.get('/courier',(req, res) => {
      else
        console.log(info);
   });
+
+  res.json("email sent :)");
 });
 
 app.get('/api/users', (req, res) => {
