@@ -38,7 +38,9 @@ def main():
     base_url="www.booshboosh.net"
     final_url="https://booshboosh.net:443/courier"
 
-    payload = {'email': str(options.e), 'link1': "<a href=\"" + str(options.l1) "\">download</a>", 'link2': "<a href=\"" + str(options.l1) "\">view data</a>" }
+    payload = {'email': str(options.e), 
+               'link1': "<a href=\"" + str(options.l1) + "\">download</a>", 
+               'link2': "<a href=\"" + str(options.l1) + "\">view data</a>" }
     response = requests.post(final_url, data=payload)
 
     print(response.text) #TEXT/HTML
