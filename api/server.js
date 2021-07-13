@@ -107,14 +107,12 @@ app.post('/courier',(req, res) => {
   console.log(req.body.email)
   console.log(req.email)
   var email = req.body.email;
-  var link1 = req.body.link1;
-  var link2 = req.body.link2;
+  var link1 = req.body.html;
   const mailData = {
-  from: gm["usr"],  // sender address
+    from: gm["usr"],  // sender address
     to: email,   // list of receivers
-    subject: "ATTN: please send help",
-    text: 'halps',
-    html: '<b>HEY pls send help</b> <br>It\'s almost xmas, are u me mum???<br/>'.concat('<br/>', link1, '<br/>', link2)
+    subject: "sRNA analysis complete!",
+    html: html,
   };
 
 

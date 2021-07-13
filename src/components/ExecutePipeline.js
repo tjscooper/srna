@@ -167,7 +167,7 @@ class ExecutePipeline extends Component {
         <div className={( this.props.fileNames.length != 0 ? "App appear" : "App disappear" )} >
           <div class="form-group files">
           <div className="App short-spacer" />
-          <label className="App h2">Enter email for reports</label>
+          <label className="App h2">Enter email for reporting</label>
           <div className="App short-spacer" />
           <input type="text" name="email" className="custom-email-input" placeholder="Enter email" value={this.state.email} onChange={evt => this.handleChange(evt)}/>
           </div>

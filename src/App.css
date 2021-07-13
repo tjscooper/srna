@@ -598,10 +598,6 @@
 
 }
 
-.custom-email-input::-webkit-file-upload-button {
-  visibility: hidden;
-  width: 150px;
-}
 .custom-email-input{
   background-color: #FCFEFF;
   padding-top: 5px;
@@ -616,6 +612,13 @@
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   text-align: center;
+}
+input:autofill{
+  background-color: #FCFEFF;
+  color: var(--darkgrey);
+}
+input:-webkit-autofill {  
+  background-color: #FCFEFF;
 }
 
 .custom-email-input:active{
