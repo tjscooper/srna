@@ -114,9 +114,9 @@ def main():
                     <i style=\"letter-spacing: 25px; mso-font-width: -100%;\">&nbsp;</i> \
                     <![endif]--> \
                   </a> \
+               <br/> \
+               <br/> \
                </div> \
-               <br/> \
-               <br/> \
                <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
                <br/> \
                </div> \

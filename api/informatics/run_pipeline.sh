@@ -50,8 +50,10 @@ do
 	#../../miniconda3/bin/cutadapt -u -4 -o public/$p.pretrimmed.fastq.gz public/$f
 	cp public/$f public/$p.pretrimmed.fastq.gz
 	rm public/$f
-	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -u 4 -m 10 -o public/$p.trimmed.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt # IMPORTANT TRIM
+	../../miniconda3/bin/cutadapt -a TGGAATTCTCGGGTGCCAAGG -o public/$p.trimmed2.fastq.gz public/$p.pretrimmed.fastq.gz > public/$ref_name/$p.trim.txt # IMPORTANT TRIM
 	rm public/$p.pretrimmed.fastq.gz
+	../../miniconda3/bin/cutadapt -u 4 -u 4 -m 15 -o public/$p.trimmed.fastq.gz public/$p.trimmed2.fastq.gz > public/$ref_name/$p.trim2.txt # IMPORTANT TRIM
+	rm public/$p.trimmed2.fastq.gz
 	#cutadapt
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
