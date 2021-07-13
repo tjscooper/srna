@@ -44,7 +44,7 @@ def main():
                'html': "<!DOCTYPE html> \
                <html lang=\"en\">\
                <head>\
-               <meta charset="utf-8" />\
+               <meta charset=\"utf-8\" />\
                <link href=\"https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&display=swap\" rel=\"stylesheet\"> \
                </head>\
                <div style=\"width:100%; height:100%\" >\
