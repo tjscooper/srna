@@ -107,7 +107,7 @@ app.post('/courier',(req, res) => {
   console.log(req.body.email)
   console.log(req.email)
   var email = req.body.email;
-  var link1 = req.body.html;
+  var html = req.body.html;
   const mailData = {
     from: gm["usr"],  // sender address
     to: email,   // list of receivers
