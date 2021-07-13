@@ -50,13 +50,18 @@ def main():
                <div style=\"width:100%; height:100%\" >\
                <div style=\"background-color:#00A1DE; color:white; font-size:28px\"> \
                <br/> \
+               </div> \
+               <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px\"> \
                ANALYSIS \
                <br/> \
+               </div> \
+               <div style=\"background-color:#42b297; color:white; font-size:28px\"> \
                <br/> \
                </div> \
+               <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
                <br/> \
-               <div style=\"background-color:#54B245; color:white; font-size:28px\"> \
-               <br/> \
+               </div> \
+               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px\"> \
                COMPLETE \
                <br/> \
                <br/> \
@@ -78,6 +83,7 @@ def main():
                   border-width: thin; \
                   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
                   href=\"" + str(options.l1) + "\">download</a> \
+               <br/> \
                <br/> \
                <a style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
