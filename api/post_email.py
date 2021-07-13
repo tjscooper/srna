@@ -61,12 +61,17 @@ def main():
                <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px\"> \
+               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px; opacity:.75\"> \
                COMPLETE \
                <br/> \
+               </div> \
+               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px; opacity:.5\"> \
                <br/> \
                </div> \
-               <a style=\"color:white; line-height: 12px; \
+               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px; opacity:.25\"> \
+               <br/> \
+               </div> \
+               <button style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
                   font-size: 14px; \
                   font-family: 'Lato', sans-serif; \
@@ -82,7 +87,9 @@ def main():
                   margin: 4px 2px; \
                   border-width: thin; \
                   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
-                  href=\"" + str(options.l1) + "\">download</a> \
+                  >\
+               <a href=\"" + str(options.l1) + "\">download</a> \
+               </button> \
                <br/> \
                <br/> \
                <a style=\"color:white; line-height: 12px; \
