@@ -42,7 +42,7 @@ def main():
 
     payload = {'email': str(options.e), 
                'html': "<div style=\"background-color:blue; color:white; width:100%; height:100%\" >\
-               <a href=\"" + str(options.l1) + "\">download</a> \
+               <a style=\"color:white\" href=\"" + str(options.l1) + "\">download</a> \
                <br/> \
                <a href=\"" + str(options.l2) + "\">view data</a> \
                </div>" }
