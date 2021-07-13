@@ -105,7 +105,7 @@ def main():
                   padding: 14px 20px; \
                   border-radius: 4px; \
                   margin: 4px 2px; \" \
-                  href=\"" + str(options.l1) + "\"> \
+                  href=\"" + str(options.l2) + "\"> \
                     <!--[if mso]> \
                     <i style=\"letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;\">&nbsp;</i> \
                     <![endif]-->\
