@@ -61,22 +61,19 @@ def main():
                <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px; opacity:.75\"> \
+               <div style=\"background-color:#7fc574; color:white; text-align: center;font-size:28px;\"> \
                COMPLETE \
                <br/> \
                </div> \
-               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px; opacity:.5\"> \
+               <div style=\"background-color:#aad9a2; color:white; text-align: center;font-size:28px;\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#54B245; color:white; text-align: center;font-size:28px; opacity:.25\"> \
+               <div style=\"background-color:#aad9a2; color:white; text-align: center;font-size:28px;\"> \
                <br/> \
-               </div> \
                <button style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
                   font-size: 14px; \
-                  font-family: 'Lato', sans-serif; \
-                  font-weight: 400; \
-                  color: var(--grey1); \
+                  color: white;\
                   background-color: #003868; \
                   padding-top: 10px; \
                   padding-left: 20px; \
@@ -109,6 +106,7 @@ def main():
                   border-width: thin; \
                   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
                   href=\"" + str(options.l2) + "\">view data</a> \
+                </div> \
                 </div>\
                 </html>" }
     response = requests.post(final_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
