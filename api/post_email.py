@@ -51,7 +51,7 @@ def main():
                <div style=\"background-color:#00A1DE; color:white; font-size:28px\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px; font-weight: 300\"> \
+               <div style=\"background-color:#2faeba; color:white; text-align: center; font-family: Tahoma, Verdana, Segoe, sans-serif; font-size:28px; font-weight: 200\"> \
                Analysis complete! \
                <br/> \
                </div> \
