@@ -61,7 +61,7 @@ def main():
                <br/> \
                <h2>Your sRNA analysis is complete. </h2> \
                <br/> \
-               <p style=\"font-size:20px\">To access data, click the buttons below. </p> \
+               <p style=\"font-size:20px\">Click the buttons below to access data. </p> \
                <br/> \
                <p style=\"font-size:16px\">Reports may only be available for up to a month after analysis. For help with interpreting the analysis, please visit our \
                <a href=\"https://master.d204lzjjxsd4xn.amplifyapp.com/technical\">technical page</a>.\

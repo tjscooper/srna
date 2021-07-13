@@ -40,6 +40,7 @@ parser.add_argument('-s',
 ALIGN = 0
 COUNTS = 1
 TRIM = 2
+INSERTS = 3
 READS_W_ADAPTERS = 0
 READS_WRITTEN = 1
 COLORSCALE = [
@@ -60,6 +61,7 @@ def main():
 	raw_data = loadData(str(options.i))
 	alignPlot(raw_data[ALIGN], str(options.o))
 	sizeDistributionBarPlot(raw_data[COUNTS], str(options.o))
+	sizeDistributionBarPlot2(raw_data[INSERTS], str(options.o))
 	heatmap(raw_data[COUNTS], str(options.o))
 	normalHeatmap(raw_data[COUNTS], str(options.o))
 	normalHeatmapNoZeroes(raw_data[COUNTS], str(options.o))
@@ -71,52 +73,73 @@ def main():
 
 def conglomerate(directory, code):
 	output_name = str(code) + "-report.html"
-	html = "<div>\n" + \
-				"\t<div style=\"position:fixed; top: 0; z-index:10; font-size:22px; font-family:'Open Sans', verdana, arial, sans-serif; background-color:white\">\n" +\
-					"\t\t<a href=\"" + str(output_name) + "#trim\">Trim Stats</a>\n" +\
-					"\t\t<a href=\"" + str(output_name) + "#align\">Alignment Rates</a>\n" +\
-					"\t\t<a href=\"" + str(output_name) + "#sizes\">Size Distributions</a>\n" +\
-					"\t\t<a href=\"" + str(output_name) + "#heat\">Heatmaps</a>\n" +\
+	html = "<link rel=\"stylesheet\" href=\"App.css\">\n" + \
+			"<link href=\"https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&display=swap\" rel=\"stylesheet\">\n" + \
+			"<link rel=\'icon\' type=\'image/png\' href=\"https://booshboosh.net/boosh/pipelinedata/icon_darkgrey.png\">\n" +\
+			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><style id=\"plotly.js-style-global\"></style>\n" +\
+			"<style id=\"plotly.js-style-modebar-4e8501\"></style><style id=\"plotly.js-style-modebar-948b1e\"></style><style " +\
+			"id=\"plotly.js-style-modebar-948b1e\"></style><style id=\"plotly.js-style-modebar-0cabb2\"></style><style" +\
+			" id=\"plotly.js-style-modebar-32981d\"></style></head><body style=\"padding:0px; margin:0px;\"><div>\n" +\
+			"<div class=\"navbar-default\">\n" + \
+			"\t<div class=\"container-fluid\">\n" +\
+			"\t\t<div class=\"navbar-header\">\n" +\
+			"\t<span class=\"navbar-brand\">\n" +\
+			"\t<a target =\"_blank\" rel =\"noopener noreferrer\" href=\"https://perkinelmer-appliedgenomics.com/\">\n" +\
+				"\t\t<div class=\"logo\"></div></a>\n" +\
+				"\t<div style=\"width: 50px;\"></div>\n" +\
+				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#trim\">Trim Stats</a>\n" +\
+				"\t<div style=\"width: 50px;\"></div>\n" +\
+				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#align\">Alignment Rates</a>\n" +\
+				"\t<div style=\"width: 50px;\"></div>\n" +\
+				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#sizes\">Size Distributions</a>\n" +\
+				"\t<div style=\"width: 50px;\"></div>\n" +\
+				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#heat\">Heatmaps</a>\n" +\
+				"\t</span>\n" +\
+				"\t</div>\n" +\
 				"\t</div>\n" + \
+				"\t</div>\n" +\
 				"\t<a id=\"trim\">\n" +\
-					"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+					"\t\t<div class=\"graph-h1\">\n" +\
 						"\t\t\tTrim Stats\n" +\
 					"\t\t</div>\n" +\
 				"\t</a>\n"
 	html += loadHTMLtoString(str(directory) + "/trim_plot.html")
 	html += "\n\t<a id=\"align\">\n" +\
-				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\t<div class=\"graph-h1\">\n" +\
 					"\t\t\tAlignment Rates\n" +\
 				"\t\t</div>\n" +\
 			"\t</a>\n"
 	html += loadHTMLtoString(str(directory) + "/align_plot.html")
 	html += "\n\t<a id=\"sizes\">\n" +\
-				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\t<div class=\"graph-h1\">\n" +\
 					"\t\t\tSize Distribution\n" +\
 				"\t\t</div>\n" +\
 			"\t</a>\n"
-	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+	html += "\t<div class=\"graph-h2\">\n" +\
 				"\t\tSize Distribution Histogram Grid\n" +\
 			"\t</div>\n"
-	html += loadHTMLtoString(str(directory) + "/size_bar_grid_plot.html")
+	html += loadHTMLtoString(str(directory) + "/size_bar_grid_plot2.html")
+	'''
 	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tSize Distribution Violin Plots\n" +\
 			"\t</div>\n"
+	
 	html += loadHTMLtoString(str(directory) + "/size_violin_plot.html")
 	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
 				"\t\tSize Distribution Line and Rug Plot\n" +\
 			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/size_dist_plot.html")
+	'''
 	html += "\n\t<a id=\"heat\">\n" +\
-				"\t\t<div style=\"color:grey; font-size:30px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+				"\t\t<div class=\"graph-h1\">\n" +\
 					"\t\t\tHeatmaps\n" +\
 				"\t\t</div>\n" +\
 			"\t</a>\n"
-	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+	html += "\t<div class=\"graph-h2\">\n" +\
 				"\t\tNormalized Heatmap\n" +\
 			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/normal_heatmap.html")
-	html += "\t<div style=\"color:darkgreen; font-size:22px;font-family:'Open Sans', verdana, arial, sans-serif;padding-top: 25px;margin-left: 100px;\">\n" +\
+	html += "\t<div class=\"graph-h2\">\n" +\
 				"\t\tNormalized Heatmap (Zeroes Removed)\n" +\
 			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/normal_no_zeroes_heatmap.html")
@@ -141,6 +164,8 @@ def trimPlot(data, out_pre):
 	y2 = [ data[y][READS_WRITTEN] for y in k ]
 	fig = go.Figure()
 	fig.add_trace(go.Histogram(histfunc="sum", y=y2, x=k, name="reads written"))
+	fig.update_xaxes(title_text='File Name')
+	fig.update_yaxes(title_text='Percent Reads Trimmed')
 
 	fig.write_html(str(out_pre) + "/trim_plot.html")
 
@@ -150,6 +175,8 @@ def alignPlot(data, out_pre):
 	y = [ data[y] for y in k ]
 	fig = go.Figure()
 	fig.add_trace(go.Histogram(histfunc="sum", y=y, x=k, name="percent aligned to miR reference"))
+	fig.update_xaxes(title_text='File Name')
+	fig.update_yaxes(title_text='Percent Reads Aligned')
 	fig.write_html(str(out_pre) + "/align_plot.html")
 
 def sizeDistributionBarPlot(data, out_pre):
@@ -176,6 +203,8 @@ def sizeDistributionBarPlot(data, out_pre):
 				k2.append(sample)
 		dist_data.append(s2)
 		fig.add_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min(s), end=max(s), size=1)))
+		fig.update_xaxes(title_text='Insert Size')
+		fig.update_yaxes(title_text='Number of Counts')
 		fig3.add_trace(go.Violin(y=s2, x=k2, name=sample, box_visible=True, meanline_visible=True))
 
 	fig.update_layout(
@@ -183,13 +212,15 @@ def sizeDistributionBarPlot(data, out_pre):
 	    bargroupgap=0.0 # gap between bars of the same location coordinates
 	)
 	fig.write_html(str(out_pre) + "/size_bar_plot.html")
+	
+	'''
 	fig3.write_html(str(out_pre) + "/size_violin_plot.html")
 	
 	fig4 = ff.create_distplot(dist_data, k, show_hist=False)
 	fig5 = ff.create_distplot(dist_data, k)
 	fig4.write_html(str(out_pre) + "/size_dist_plot.html")
 	fig5.write_html(str(out_pre) + "/size_distbars_plot.html")
-
+	'''
 	min_size = min(all_sizes)
 	max_size = max(all_sizes)
 	grid = getGrid(len(k))
@@ -203,8 +234,35 @@ def sizeDistributionBarPlot(data, out_pre):
 			s.sort()
 			c = [ sizes[size] for size in s ]
 			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
+			fig2.update_xaxes(title_text='Insert Size')
+			fig2.update_yaxes(title_text='Number of Counts')
+			count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot.html")
 
+def sizeDistributionBarPlot2(data, out_pre):
+	all_sizes = []
+	samples = list(data.keys())
+	samples.sort()
+
+	for s in samples:
+		all_sizes += [int(x) for x in data[s]]
+
+	min_size = min(all_sizes)
+	max_size = max(all_sizes)
+	grid = getGrid(len(samples))
+	fig2 = make_subplots(rows=grid[0], cols=grid[1])
+	count = 0
+	for g in range(grid[0]):
+		for r in range(grid[1]): 
+			s = list(data[samples[count]].keys())
+			s.sort()
+			c = [ int(data[samples[count]][size]) for size in s ]
+			s = [int(x) for x in s]
+			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=samples[count], xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
+			fig2.update_xaxes(title_text='Insert Size')
+			fig2.update_yaxes(title_text='Number of Counts')
+			count+=1
+	fig2.write_html(str(out_pre) + "/size_bar_grid_plot2.html")
 
 
 
@@ -306,7 +364,6 @@ def loadData(directory):
 
 	#load trim files
 	trim_data = {}
-
 	for i in glob.glob(str(directory) + "/*.trim.txt"):
 		sample = "-".join(i.split("-")[1:]).split("_")[0]
 		trim_data[sample] = []
@@ -315,7 +372,18 @@ def loadData(directory):
 				if j == 8 or j == 9:
 					trim_data[sample].append(float(line.split("%")[0].split("(")[-1]))
 
-	return (align_data, count_data, trim_data)
+	insert_data = {}
+	for i in glob.glob(str(directory) + "/*.trim2.txt"):
+		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		insert_data[sample] = {}
+		with open(i, 'r') as f:
+			for j, line in enumerate(f):
+				if j >= 31:
+					fields = line.split("\t")
+					if len(fields) != 0:
+						insert_data[sample][fields[0]] = fields[1]
+
+	return (align_data, count_data, trim_data, insert_data)
 
 def getGrid(k):
 	rows = floor(sqrt(k))
