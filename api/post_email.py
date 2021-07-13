@@ -51,7 +51,7 @@ def main():
                <div style=\"background-color:#00A1DE; color:white; font-size:28px\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px\"> \
+               <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px; font-weight: 300\"> \
                Analysis complete! \
                <br/> \
                </div> \
@@ -66,10 +66,10 @@ def main():
                   color: white;\
                   text-decoration: none; \
                   background-color: #003868; \
-                  display: inline-block; miso-padding-alt: 0; \
+                  display: inline-block; \
+                  miso-padding-alt: 0; \
                   text-align: center; \
-                  -webkit-border-radius: 4px; \
-                  -moz-border-radius: 4px; \
+                  padding: 14px 20px; \
                   border-radius: 4px; \
                   margin: 4px 2px; \" \
                   href=\"" + str(options.l1) + "\"> \
