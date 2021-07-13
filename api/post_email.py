@@ -64,19 +64,22 @@ def main():
                   letter-spacing: 0px; \
                   font-size: 14px; \
                   color: white;\
+                  text-decoration: none; \
                   background-color: #003868; \
-                  padding-top: 10px; \
-                  padding-left: 20px; \
-                  padding-bottom: 10px; \
-                  padding-right: 20px; \
+                  display: inline-block; miso-padding-alt: 0; \
                   text-align: center; \
                   -webkit-border-radius: 4px; \
                   -moz-border-radius: 4px; \
                   border-radius: 4px; \
-                  margin: 4px 2px; \
-                  border-width: thin; \" \
+                  margin: 4px 2px; \" \
                   href=\"" + str(options.l1) + "\"> \
-                  <span>Download</span> \
+                    <!--[if mso]> \
+                    <i style=\"letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;\">&nbsp;</i> \
+                    <![endif]-->\
+                  <span style=\"mso-text-raise: 15pt;\">Download</span> \
+                    <!--[if mso]> \
+                    <i style=\"letter-spacing: 25px; mso-font-width: -100%;\">&nbsp;</i> \
+                    <![endif]--> \
                   </a> \
                <br/> \
                <br/> \
