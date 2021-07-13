@@ -52,25 +52,15 @@ def main():
                <br/> \
                </div> \
                <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px\"> \
-               ANALYSIS \
+               Analysis complete! \
                <br/> \
                </div> \
                <div style=\"background-color:#42b297; color:white; font-size:28px\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
+               <div style=\"background-color:white; color:#003868; text-align: center;font-size:28px;\"> \
                <br/> \
-               </div> \
-               <div style=\"background-color:#7fc574; color:white; text-align: center;font-size:28px;\"> \
-               COMPLETE \
-               <br/> \
-               </div> \
-               <div style=\"background-color:#aad9a2; color:white; text-align: center;font-size:28px;\"> \
-               <br/> \
-               </div> \
-               <div style=\"background-color:#d5ecd1; color:white; text-align: center;font-size:28px;\"> \
-               <br/> \
-               <button style=\"color:white; line-height: 12px; \
+               <a style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
                   font-size: 14px; \
                   color: white;\
@@ -84,10 +74,10 @@ def main():
                   -moz-border-radius: 4px; \
                   border-radius: 4px; \
                   margin: 4px 2px; \
-                  border-width: thin; \
-                  >\
-               <a href=\"" + str(options.l1) + "\">download</a> \
-               </button> \
+                  border-width: thin; \" \
+                  href=\"" + str(options.l1) + "\"> \
+                  <span>Download</span> \
+                  </a> \
                <br/> \
                <br/> \
                <a style=\"color:white; line-height: 12px; \
@@ -107,9 +97,18 @@ def main():
                   border-width: thin; \
                   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
                   href=\"" + str(options.l2) + "\">view data</a> \
-                </div> \
-                </div>\
-                </html>" }
+               </div> \
+               <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
+               <br/> \
+               </div> \
+               <div style=\"background-color:#7fc574; color:white; text-align: center;font-size:28px;\"> \
+               <br/> \
+               </div> \
+               <div style=\"background-color:#aad9a2; color:white; text-align: center;font-size:28px;\"> \
+               <br/> \
+               </div> \
+               </div>\
+               </html>" }
     response = requests.post(final_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
 
     print(response.text) #TEXT/HTML
