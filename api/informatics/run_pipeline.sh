@@ -54,7 +54,7 @@ do
 	rm public/$p.pretrimmed.fastq.gz
 	../../miniconda3/bin/cutadapt -u 4 -u -4 -m 15 -o public/$p.trimmed.fastq.gz public/$p.trimmed2.fastq.gz > public/$ref_name/$p.trim2.txt # IMPORTANT TRIM
 	rm public/$p.trimmed2.fastq.gz
-	../../miniconda3/bin/python3.8 informatics/make_plots.py -i public/$p.trimmed.fastq.gz -o public/$ref_name/$p
+	../../miniconda3/bin/python3.8 informatics/get_insert_sizes.py -i public/$p.trimmed.fastq.gz -o public/$ref_name/$p
 
 	#cutadapt
 	((i++))
