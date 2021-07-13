@@ -68,7 +68,7 @@ def main():
                <div style=\"background-color:#aad9a2; color:white; text-align: center;font-size:28px;\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#aad9a2; color:white; text-align: center;font-size:28px;\"> \
+               <div style=\"background-color:#d5ecd1; color:white; text-align: center;font-size:28px;\"> \
                <br/> \
                <button style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
@@ -80,10 +80,11 @@ def main():
                   padding-bottom: 10px; \
                   padding-right: 20px; \
                   text-align: center; \
+                  -webkit-border-radius: 4px; \
+                  -moz-border-radius: 4px; \
                   border-radius: 4px; \
                   margin: 4px 2px; \
                   border-width: thin; \
-                  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
                   >\
                <a href=\"" + str(options.l1) + "\">download</a> \
                </button> \
