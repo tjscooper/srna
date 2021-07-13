@@ -51,7 +51,7 @@ def main():
                <div style=\"background-color:#00A1DE; color:white; font-size:28px\"> \
                <br/> \
                </div> \
-               <div style=\"background-color:#2faeba; color:white; text-align: center; font-family: Tahoma, Verdana, Segoe, sans-serif; font-size:28px; font-weight: 200\"> \
+               <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px; font-weight: 200\"> \
                Analysis complete! \
                <br/> \
                </div> \
@@ -60,9 +60,18 @@ def main():
                </div> \
                <div style=\"background-color:white; color:#003868; text-align: center;font-size:28px;\"> \
                <br/> \
+               <h2>Your sRNA analysis is finished. </h2> \
+               <br/> \
+               <p>To access data, click the buttons below. Reports may only be available for up to a month after analysis. For help with interpreting the analysis, please visit our \
+               <a href=\"https://master.d204lzjjxsd4xn.amplifyapp.com/technical\">technical page</a>\
+               . If you have any questions, please forward this email to \
+               <a href=\"mailto:dylan.fox@perkinelmer.com>dylan.fox@perkinelmer.com</a>\
+               , as this address will not respond. </p> \
+               <br/> \
+               <br/> \
                <a style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
-                  font-size: 14px; \
+                  font-size: 18px; \
                   color: white;\
                   text-decoration: none; \
                   background-color: #003868; \
@@ -85,22 +94,28 @@ def main():
                <br/> \
                <a style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
-                  font-size: 14px; \
-                  font-family: 'Lato', sans-serif; \
-                  font-weight: 400; \
-                  color: var(--grey1); \
+                  font-size: 18px; \
+                  color: white;\
+                  text-decoration: none; \
                   background-color: #003868; \
-                  padding-top: 10px; \
-                  padding-left: 20px; \
-                  padding-bottom: 10px; \
-                  padding-right: 20px; \
+                  display: inline-block; \
+                  miso-padding-alt: 0; \
                   text-align: center; \
+                  padding: 14px 20px; \
                   border-radius: 4px; \
-                  margin: 4px 2px; \
-                  border-width: thin; \
-                  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
-                  href=\"" + str(options.l2) + "\">view data</a> \
+                  margin: 4px 2px; \" \
+                  href=\"" + str(options.l1) + "\"> \
+                    <!--[if mso]> \
+                    <i style=\"letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;\">&nbsp;</i> \
+                    <![endif]-->\
+                  <span style=\"mso-text-raise: 15pt;\">View data</span> \
+                    <!--[if mso]> \
+                    <i style=\"letter-spacing: 25px; mso-font-width: -100%;\">&nbsp;</i> \
+                    <![endif]--> \
+                  </a> \
                </div> \
+               <br/> \
+               <br/> \
                <div style=\"background-color:#54b678; color:white; font-size:28px\"> \
                <br/> \
                </div> \
