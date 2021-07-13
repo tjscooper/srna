@@ -48,20 +48,36 @@ def main():
                <link href=\"https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&display=swap\" rel=\"stylesheet\"> \
                </head>\
                <div style=\"width:100%; height:100%\" >\
-               <div style=\"background-color:#00A1DE; color:white; font-size:28px> \
+               <div style=\"background-color:#00A1DE; color:white; font-size:28px\"> \
                <br/> \
                ANALYSIS \
                <br/> \
                <br/> \
                </div> \
                <br/> \
-               <div style=\"background-color:#54B245; color:white; font-size:28px> \
+               <div style=\"background-color:#54B245; color:white; font-size:28px\"> \
                <br/> \
                COMPLETE \
                <br/> \
                <br/> \
                </div> \
-               <a style=\"color:white\" href=\"" + str(options.l1) + "\">download</a> \
+               <a style=\"color:white; line-height: 12px; \
+                  letter-spacing: 0px; \
+                  font-size: 14px; \
+                  font-family: 'Lato', sans-serif; \
+                  font-weight: 400; \
+                  color: var(--grey1); \
+                  background-color: #003868; \
+                  padding-top: 10px; \
+                  padding-left: 20px; \
+                  padding-bottom: 10px; \
+                  padding-right: 20px; \
+                  text-align: center; \
+                  border-radius: 4px; \
+                  margin: 4px 2px; \
+                  border-width: thin; \
+                  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);\" \
+                  href=\"" + str(options.l1) + "\">download</a> \
                <br/> \
                <a style=\"color:white; line-height: 12px; \
                   letter-spacing: 0px; \
