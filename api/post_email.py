@@ -41,10 +41,11 @@ def main():
     final_url="https://booshboosh.net/courier"
 
     payload = {'email': str(options.e), 
-               'html': "div style=\"background-color:blue; color:white; width:100%; height:100%\" +\
-               <a href=\"" + str(options.l1) + "\">download</a> +\
-               <br/> +\
-               <a href=\"" + str(options.l2) + "\">view data</a>" }
+               'html': "<div style=\"background-color:blue; color:white; width:100%; height:100%\" >\
+               <a href=\"" + str(options.l1) + "\">download</a> \
+               <br/> \
+               <a href=\"" + str(options.l2) + "\">view data</a> \
+               </div>" }
     response = requests.post(final_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
 
     print(response.text) #TEXT/HTML
