@@ -52,7 +52,6 @@ def main():
                <br/> \
                </div> \
                <div style=\"background-color:#2faeba; color:white; text-align: center; font-size:28px; font-weight: 200\"> \
-               Analysis complete! \
                <br/> \
                </div> \
                <div style=\"background-color:#42b297; color:white; font-size:28px\"> \
@@ -62,10 +61,10 @@ def main():
                <br/> \
                <h2>Your sRNA analysis is finished. </h2> \
                <br/> \
-               <p>To access data, click the buttons below. Reports may only be available for up to a month after analysis. For help with interpreting the analysis, please visit our \
+               <p style=\"font-size:18px\">To access data, click the buttons below. Reports may only be available for up to a month after analysis. For help with interpreting the analysis, please visit our \
                <a href=\"https://master.d204lzjjxsd4xn.amplifyapp.com/technical\">technical page</a>\
                . If you have any questions, please forward this email to \
-               <a href=\"mailto:dylan.fox@perkinelmer.com>dylan.fox@perkinelmer.com</a>\
+               <a href=\"mailto:dylan.fox@perkinelmer.com\">dylan.fox@perkinelmer.com</a>\
                , as this address will not respond. </p> \
                <br/> \
                <br/> \
