@@ -8,6 +8,8 @@ import ExecutePipeline from './../components/ExecutePipeline'
 import List from 'react-list-select'
 import CatInputs from "./CatInputs"
 import "./../App.css";
+
+
 class SetUpRun extends Component { 
   
   constructor(props) {
@@ -166,12 +168,12 @@ class SetUpRun extends Component {
       },
     })
       .then(res => { // then print response status
-        toast.success('upload success');
+        toast.success('Upload successful');
         console.log(res)
         //this.storeAndReset(res);
       })
       .catch(err => { // then print response status
-        toast.error('upload fail')
+        toast.error('Upload failure')
       })
 
     console.log(this.state)

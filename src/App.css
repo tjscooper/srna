@@ -272,6 +272,23 @@
   content: "\2026"; /* ascii code for the ellipsis character */
   width: 0px;
 }
+.App .loading:after {
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 15px;
+  display: inline-block;
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+  animation: ellipsis steps(4,end) 900ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+.App .Toastify__toast--success {
+  background-color: var(--complete);
+}
+.App .Toastify__toast--error {
+  background-color: var(--error);
+}
 
 @keyframes ellipsis {
   to {
