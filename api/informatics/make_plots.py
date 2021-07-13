@@ -73,13 +73,14 @@ def main():
 
 def conglomerate(directory, code):
 	output_name = str(code) + "-report.html"
+	report_name   = str(code).split('-')
 	html = "<link rel=\"stylesheet\" href=\"App.css\">\n" + \
 			"<link href=\"https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&display=swap\" rel=\"stylesheet\">\n" + \
 			"<link rel=\'icon\' type=\'image/png\' href=\"https://booshboosh.net/boosh/pipelinedata/icon_darkgrey.png\">\n" +\
 			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><style id=\"plotly.js-style-global\"></style>\n" +\
 			"<style id=\"plotly.js-style-modebar-4e8501\"></style><style id=\"plotly.js-style-modebar-948b1e\"></style><style " +\
 			"id=\"plotly.js-style-modebar-948b1e\"></style><style id=\"plotly.js-style-modebar-0cabb2\"></style><style" +\
-			" id=\"plotly.js-style-modebar-32981d\"></style></head><body style=\"padding:0px; margin:0px;\"><div>\n" +\
+			" id=\"plotly.js-style-modebar-32981d\"></style><title>NEXTFLEX® Report #" + str(report_name[0]) + "</title></head><body style=\"padding:0px; margin:0px;\"><div>\n" +\
 			"<div class=\"navbar-default\">\n" + \
 			"\t<div class=\"container-fluid\">\n" +\
 			"\t\t<div class=\"navbar-header\">\n" +\
