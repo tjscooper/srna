@@ -164,7 +164,7 @@ def trimPlot(data, out_pre):
 	y1 = [ data[y][READS_W_ADAPTERS] for y in k ]
 	y2 = [ data[y][READS_WRITTEN] for y in k ]
 	fig = go.Figure()
-	fig.add_trace(go.Histogram(histfunc="sum", y=y2, x=k, name="reads written"))
+	fig.add_trace(go.Histogram(histfunc="sum", y=y1, x=k, name="reads written"))
 	fig.update_xaxes(title_text='File Name')
 	fig.update_yaxes(title_text='Percent Reads Trimmed')
 
@@ -205,7 +205,7 @@ def sizeDistributionBarPlot(data, out_pre):
 		dist_data.append(s2)
 		fig.add_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min(s), end=max(s), size=1)))
 		fig.update_xaxes(title_text='Insert Size')
-		fig.update_yaxes(title_text='Number of Counts')
+		fig.update_yaxes(title_text='# Reads')
 		fig3.add_trace(go.Violin(y=s2, x=k2, name=sample, box_visible=True, meanline_visible=True))
 
 	fig.update_layout(
@@ -236,7 +236,7 @@ def sizeDistributionBarPlot(data, out_pre):
 			c = [ sizes[size] for size in s ]
 			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
 			fig2.update_xaxes(title_text='Insert Size')
-			fig2.update_yaxes(title_text='Number of Counts')
+			fig2.update_yaxes(title_text='# Reads')
 			count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot.html")
 
@@ -261,7 +261,7 @@ def sizeDistributionBarPlot2(data, out_pre):
 			s = [int(x) for x in s]
 			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=samples[count], xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
 			fig2.update_xaxes(title_text='Insert Size')
-			fig2.update_yaxes(title_text='Number of Counts')
+			fig2.update_yaxes(title_text='# Reads')
 			count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot2.html")
 
@@ -370,7 +370,7 @@ def loadData(directory):
 		trim_data[sample] = []
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
-				if j == 8:
+				if j == 8 or j == 9:
 					print(line)
 					trim_data[sample].append(float(line.split("%")[0].split("(")[-1]))
 					print(float(line.split("%")[0].split("(")[-1]))
