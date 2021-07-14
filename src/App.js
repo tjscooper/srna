@@ -73,6 +73,8 @@ class App extends Component {
         <Navbar fluid collapseOnSelect>
           <Navbar.Header  >
             <Navbar.Brand>
+
+              <div style={{width: "20px"}} />
               <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
                 <div className="App logo"/>
               </a>
@@ -80,12 +82,18 @@ class App extends Component {
               <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
               <div style={{width: "100px"}} />
               <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
-              <div style={{width: "100px"}} />
-              <Link to="/references" className={(this.state.tab == "/references" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/references"}) }>References</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
         </Navbar>
+        <footer className="App footer">
+          <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
+          <br/>
+          <div className="App footer2">
+            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved.</p>
+          </div>
+        </footer>
+      
         <div className="App spacer"/>
 
 
@@ -96,9 +104,6 @@ class App extends Component {
         </span>
       <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
           <Technical />
-      </div>
-      <div className="App Technical" style={{display: this.state.tab == "/references" ? "block" : "none" }}>
-        <References />
       </div>
       </div>
       </Switch>

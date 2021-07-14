@@ -122,8 +122,12 @@ class ExecutePipeline extends Component {
     console.log("email")
     console.log(this.state.email)
 
-
-    data.push(this.state.email)
+    if (this.state.email === ""){
+      data.push("empty")
+    }
+    else{
+      data.push(this.state.email)  
+    }
     console.log(this.props.fileNames)
     for (var x = 0; x < this.props.fileNames.length; x++) {
       console.log(this.props.fileNames[x])
@@ -199,6 +203,8 @@ class ExecutePipeline extends Component {
           <a target="_blank" rel="noopener noreferrer" href={this.state.dataPath}><button type="button" className="App primarybutton-active" >VIEW DATA</button></a>) : ( 
           <button type="button" className="primarybutton-inactive" disabled>VIEW DATA</button>) }
         </div>
+          <div className="App short-spacer" />
+          <div className="spacer" />
       </div>
     );
   }

@@ -74,8 +74,6 @@
 .mrgnbtm {
   margin-top: 20px;
 }
-.App container{
-}
 
 
 
@@ -244,6 +242,15 @@
   font-weight: 400;
   color: #464646;
 }
+.App .p-foot {
+  line-height: 18px;
+  letter-spacing: 0px;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif,;
+  font-style: italic;
+  font-weight: 400;
+  color: white;
+}
 
 .App .link {
   line-height: 18px;
@@ -261,6 +268,39 @@
   font-weight: 400;
   color: #3F3F3F;
 }
+.App .label-foot {
+  line-height: 15px;
+  letter-spacing: 0px;
+  font-size: 12px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
+}
+
+.App .footer {
+  position: fixed;
+  width: 100%;
+  height: 65px;
+  padding-top: 15px;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to top, rgba(37, 175, 181, 1), rgba(37, 175, 181, .7));
+  color: white;
+  box-shadow: 4px 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  z-index: 10;
+}
+.App .footer2 {
+  position: fixed;
+  width: 100%;
+  vertical-align: middle;
+  left: 0;
+  bottom: 0;
+  margin-bottom: -8px;
+  background-color: var(--darkgrey);
+  color: white;
+  text-align: center;
+  z-index: 10;}
 
 .App .loading:after {
   overflow: hidden;
@@ -309,6 +349,14 @@
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   color: #4C5267;
+}
+.App .footnote-white{
+  line-height: 12px;
+  letter-spacing: 0px;
+  font-size: 10px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  color: white;
 }
 .App .tab1 {
   padding-left: 20px;
@@ -498,9 +546,10 @@
 
 .App .navbar .navbar-default{
   height:  105px;
-  width: 100vw;
+  width: 100%;
   background-image: linear-gradient(to right, var(--blue2) , var(--green));
   border-radius: 0px;
+
   vertical-align:   bottom ;
   position:  fixed;
   top: 0;
@@ -517,14 +566,21 @@
   border-radius: 0px;
   vertical-align:   bottom ;
   position:  fixed;
+  margin:  0;
+  padding:  0;
   top: 0;
   z-index: 10;
   opacity: .9;
 }
+.App .navbar {
+  border: 0;
+}
 .App .navbar .navbar-header{
-  width:  100%;
+  width:  100vw;
   height:  100px;
   background-color:rgba(0, 0, 0, 0);
+  margin:  0;
+  padding:  0;
   vertical-align:   bottom ;
 }
 .App .navbar-brand{
