@@ -34,15 +34,15 @@ class App extends Component {
       this.state = {
         tab:"/"
       };
-
-    if (window.performance) {
-      if (performance.navigation.type == 1) {
-        alert( "This page is reloaded" );
-      } else {
-        alert( "This page is not reloaded");
+    window.onbeforeunload = (event) => {
+      const e = event || window.event;
+      // Cancel the event
+      e.preventDefault();
+      if (e) {
+        e.returnValue = ''; // Legacy method for cross browser support
       }
-}
-   
+      return ''; // Legacy method for cross browser support
+    };
   }
 
   componentDidUpdate(){ 

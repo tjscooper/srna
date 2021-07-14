@@ -370,7 +370,7 @@ def loadData(directory):
 		trim_data[sample] = []
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
-				if j == 8 or j == 9:
+				if j == 8:
 					trim_data[sample].append(float(line.split("%")[0].split("(")[-1]))
 
 	insert_data = {}
