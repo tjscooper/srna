@@ -371,10 +371,8 @@ def loadData(directory):
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
 				if j == 8 or j == 9:
-					print(line)
 					trim_data[sample].append(float(line.split("%")[0].split("(")[-1]))
-					print(float(line.split("%")[0].split("(")[-1]))
-
+					
 	insert_data = {}
 	for i in glob.glob(str(directory) + "/*.inserts.txt"):
 		sample = "-".join(i.split("-")[1:]).split("_")[0]
