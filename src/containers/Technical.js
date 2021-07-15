@@ -69,7 +69,7 @@ export default function Technical() {
         Script as imbedded into the API server can be found at this<a href="https://github.com/dfox3/srna_bioinformatics" className="App link"> repo</a>. 
         Feel free to use this analysis locally,
         especially if scale is a concern. 
-        At the moment, these script are not functional outside of the API environment. 
+        At the moment, these scripts are not functional outside of the API environment. 
         There will be future efforts strip down this analysis and package it in an easy-to-install way.
       </p>
 
@@ -103,7 +103,7 @@ export default function Technical() {
       <p className="App p tab3">
         Gathering the insert sizes of reads from a trimmed fastq.gz is calculated with the custom python 3 script, get_insert_sizes.py. 
         This script only requires default packages to run. 
-        It basically opens up a fastq.gz file and tallies all the read lengths. 
+        It basically opens a fastq.gz file and tallies all the read lengths. 
         Output is saved in a *.inserts.txt file.
       </p>
       <h4 className="App h4 tab2">4. Alignment</h4>
@@ -113,8 +113,8 @@ export default function Technical() {
         <br/>
         <br/>
         Reads are aligned to a human miRNA hairpin reference from 
-        <a href="http://mirbase.org/">miRBase</a>. 
-        This reference is used because it allows reads to map to a greater variety of isomirs and variants. 
+        <a href="http://mirbase.org/"> miRBase</a>. 
+        This reference is used because it allows reads to map to a greater variety of isomiRs and variants. 
         The output is saved in the *.align.txt file. 
       </p>
       <h4 className="App h4 tab2">5. Generating feature counts</h4>
@@ -177,7 +177,7 @@ export default function Technical() {
       <h1 className="App h1">Support</h1>
       <h3 className="App h3">
       If you need any help with using or interpreting this website, 
-      please send and email to 
+      please send an email to 
       <a href="mailto:NGS@perkinelmer.com"> NGS@perkinelmer.com</a>.
       </h3>
       <div className="App short-spacer" />
