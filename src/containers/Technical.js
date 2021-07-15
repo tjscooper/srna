@@ -139,34 +139,34 @@ export default function Technical() {
       <p className="App p tab3">
         Histogram with the percentage of reads that had adapters trimmed plotted on the y-axis and the sample category on the x-axis.
         <br/>
-        <img src={require("../assets/trim_stats.jpg")} style={{"min-width": "400px", "width": "100%"}}/>
+        <img src={require("../assets/trim_stats.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
       </p>
       <h4 className="App h4 tab2">Alignment stats</h4>
       <p className="App p tab3">
         Histogram with the percentage of reads that map to the reference on the y-axis and the sample category on the x-axis.
         <br/>
-        <img src={require("../assets/align_stats.jpg")} style={{"min-width": "400px", "width": "100%"}}/>
+        <img src={require("../assets/align_stats.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
       </p>
       <h4 className="App h4 tab2">Insert sizes</h4>
       <p className="App p tab3">
         A grid with histograms for each sample with the number of reads is on the y-axis and the insert sized is on the x-axis.
         These are sizes of all reads post-trimming and prior to alignment. 
         <br/>
-        <img src={require("../assets/insert_sizes.jpg")} style={{"min-width": "400px", "width": "100%"}}/>
+        <img src={require("../assets/insert_sizes.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
       </p>
       <h4 className="App h4 tab2">Normalized heatmap</h4>
       <p className="App p tab3">
         A heatmap where all the reference features are displayed as rows and the samples are displayed as columns. 
         The "heat" is linearly scaled and represents a percentage of reads mapped.
         <br/>
-        <img src={require("../assets/normal_heat.jpg")} style={{"min-width": "400px", "width": "100%"}}/>
+        <img src={require("../assets/normal_heat.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
       </p>
       <h4 className="App h4 tab2">Normalized heatmap with zeroes removed</h4>
       <p className="App p tab3">
         A heatmap where the reference features that have at least one count in any of the samples are displayed as rows and the samples are displayed as columns. 
         The "heat" is linearly scaled and represents a percentage of reads mapped.
         <br/>
-        <img src={require("../assets/normal_heat_no_zeroes.jpg")} style={{"min-width": "400px", "width": "100%"}}/>
+        <img src={require("../assets/normal_heat_no_zeroes.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
       </p>
       <h3 className="App h3 tab1">Tool installation</h3>
       <p className="App p tab2">
