@@ -919,7 +919,7 @@ input:-webkit-autofill {
   height: 9.375vw;
   min-height: 93.75px;
   width: 25%;
-  min-width: 250px;
+  min-width: 150px;
   z-index: 11;
 }
 .App .hamLink {
