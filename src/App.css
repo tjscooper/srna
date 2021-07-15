@@ -590,7 +590,6 @@
   align-items: bottom;
   display: flex;
   background-color:rgba(0, 0, 0, 0);
-  justify-content: space-around;
 }
 .App .navbar-overwrite{
   height: 100%;
