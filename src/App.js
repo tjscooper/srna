@@ -111,7 +111,7 @@ class App extends Component {
                   <div className="hamburgerDropContainer">
                     <Link style={{"textDecoration": "none"}} to="/" onClick={() => this.setState({tab:"/", hamburger:!this.state.hamburger })}>
                       <div className={(this.state.tab == "/" ? "App hamLink-selected" : "App hamLink")} >
-                        NEXTFLEX<sup>®</sup> sRNA Tool
+                        Home
                       </div>
                     </Link>
                     <Link style={{"textDecoration": "none"}} to="/technical" onClick={() => this.setState({tab:"/technical", hamburger:!this.state.hamburger }) }>
