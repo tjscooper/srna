@@ -22,7 +22,11 @@ import ExecutePipeline from './components/ExecutePipeline'
 import List from 'react-list-select'
 import CatInputs from "./components/CatInputs"
 
+import MediaQuery from 'react-responsive';
+
 import logo_header from './assets/pki_logo_header_mostly_white.png'
+import ham from './assets/ham50.png'
+import cross from './assets/cross50.png'
 
 
 
@@ -32,8 +36,10 @@ class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        tab:"/"
+        tab:"/",
+        hamburger: false
       };
+
     window.onbeforeunload = (event) => {
       const e = event || window.event;
       // Cancel the event
@@ -43,6 +49,10 @@ class App extends Component {
       }
       return ''; // Legacy method for cross browser support
     };
+  }
+
+  hamburgerToggle () {
+    this.setState({hamburger: !this.state.hamburger})
   }
 
   componentDidUpdate(){ 
@@ -70,22 +80,54 @@ class App extends Component {
 
       <div className="App major-container">
         <Router>
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header  >
-            <Navbar.Brand>
+        <MediaQuery minDeviceWidth={1224}>
+          <Navbar fluid collapseOnSelect>
+            <Navbar.Header  >
+              <Navbar.Brand>
 
-              <div style={{width: "20px"}} />
-              <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
+                <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
+                  <div className="App logo"/>
+                </a>
+                <div style={{width: "100px"}} />
+                <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
+                <div style={{width: "100px"}} />
+                <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
+              </Navbar.Brand>
+            </Navbar.Header>
+          </Navbar>
+        </MediaQuery>
+
+        <MediaQuery maxDeviceWidth={1224}>
+          <Navbar fluid collapseOnSelect>
+            <Navbar.Header  >
+              <Navbar.Brand>
+
+                <div className="App navbar-overwrite">
+                <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
                 <div className="App logo"/>
-              </a>
-              <div style={{width: "100px"}} />
-              <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
-              <div style={{width: "100px"}} />
-              <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-        </Navbar>
+                </a>
+                <div style={{"width":"25%"}}/>
+                { ( !this.state.hamburger ) ? (<div className="hamburgerDropContainer" ><div style={{"width": "50px"}}/> </div>) : ( 
+                  <div className="hamburgerDropContainer">
+                    <Link style={{"textDecoration": "none"}} to="/" onClick={() => this.setState({tab:"/", hamburger:!this.state.hamburger })}>
+                      <div className={(this.state.tab == "/" ? "App hamLink-selected" : "App hamLink")} >
+                        NEXTFLEX<sup>®</sup> sRNA Tool
+                      </div>
+                    </Link>
+                    <Link style={{"textDecoration": "none"}} to="/technical" onClick={() => this.setState({tab:"/technical", hamburger:!this.state.hamburger }) }>
+                      <div className={(this.state.tab == "/technical" ? "App hamLink-selected" : "App hamLink")} >
+                        Technical
+                      </div>
+                    </Link>
+                  </div> ) }
+                <div onClick={()=>this.hamburgerToggle() }>
+                    { ( this.state.hamburger ) ? ( <img src={cross} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) : ( <img src={ham} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) }
+                  </div>
+                </div>
+              </Navbar.Brand>
+            </Navbar.Header>
+          </Navbar>
+        </MediaQuery>
         <footer className="App footer">
           <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
           <br/>

@@ -585,11 +585,20 @@
 }
 .App .navbar-brand{
   height: 100%;
+  width: 100%;
   vertical-align:   bottom ;
   align-items: bottom;
   display: flex;
   background-color:rgba(0, 0, 0, 0);
   justify-content: space-around;
+}
+.App .navbar-overwrite{
+  height: 100%;
+  vertical-align:   bottom ;
+  align-items: bottom;
+  display: flex;
+  background-color:rgba(0, 0, 0, 0);
+  justify-content: space-between;
 }
 
 .custom-file-input::-webkit-file-upload-button {
@@ -884,3 +893,67 @@ input:-webkit-autofill {
   user-select: none; 
   cursor: pointer;
 }
+
+.ghostContainer {
+  display: flex;
+}
+.ghostSubContainer {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 32px;
+  min-width: 750px;
+
+}
+
+.App .short-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+
+.hamburgerDropContainer {
+
+  padding-top: 90px;
+  height: 9.375vw;
+  min-height: 93.75px;
+  width: 25%;
+  min-width: 250px;
+  z-index: 11;
+}
+.App .hamLink {
+  height: 10.125vw;
+  min-height: 31.25px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: linear-gradient(to bottom, rgba(76, 82, 103, 1), rgba(76, 82, 103, .9));
+  font-size: 23px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  line-height: 10.125vw;
+}
+.App .hamLink:hover {
+  color: var(--green);}
+.App .hamLink-selected {
+  height: 10.125vw;
+  min-height: 31.25px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 23px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  line-height: 10.125vw;
+  background-image: linear-gradient(to bottom, rgba(37, 175, 181, 1), rgba(37, 175, 181, .7));
+}
+.App .hamLink-selected:hover {
+  color: var(--darkgrey);}

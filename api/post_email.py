@@ -64,7 +64,7 @@ def main():
                <p style=\"font-size:20px\">Click the buttons below to access data. </p> \
                <br/> \
                <p style=\"font-size:16px\">Reports may only be available for up to a month after analysis. For help with interpreting the analysis, please visit our \
-               <a href=\"/technical\">https://www.nextflex.io/technical page</a>.\
+               <a href=\"https://www.nextflex.io/technical\"> technical page</a>.\
                If you have any questions, please forward this email to \
                <a href=\"mailto:NGS@perkinelmer.com\">NGS@perkinelmer.com</a>,\
                 as this address will not respond. </p> \
