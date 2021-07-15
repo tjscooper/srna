@@ -64,9 +64,9 @@ def main():
                <p style=\"font-size:20px\">Click the buttons below to access data. </p> \
                <br/> \
                <p style=\"font-size:16px\">Reports may only be available for up to a month after analysis. For help with interpreting the analysis, please visit our \
-               <a href=\"https://master.d204lzjjxsd4xn.amplifyapp.com/technical\">technical page</a>.\
+               <a href=\"/technical\">https://www.nextflex.io/technical page</a>.\
                If you have any questions, please forward this email to \
-               <a href=\"mailto:dylan.fox@perkinelmer.com\">dylan.fox@perkinelmer.com</a>,\
+               <a href=\"mailto:NGS@perkinelmer.com\">NGS@perkinelmer.com</a>,\
                 as this address will not respond. </p> \
                <br/> \
                <br/> \
