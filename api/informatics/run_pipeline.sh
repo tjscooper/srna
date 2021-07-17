@@ -20,7 +20,7 @@ echo $@
 
 i=0
 num_files=${#@}
-num_steps=$(( 7*num_files + 3 )) # IMPORTANT
+num_steps=$(( 8*num_files + 3 )) # IMPORTANT
 echo "Number of steps: $num_steps"
 
 #screen -S jq_qq_queue -X stuff "jq -c '. + [\"$ref_name\"]' public/json/queue.json > public/json/tmp2.$$.json && mv --force public/json/tmp.$$.json public/json/queue.json^M"
@@ -63,8 +63,16 @@ do
 	
     echo "Aligning with bowtie2"
 	#bowtie
-	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz | samtools view -bS - > public/$p.bam) #2> public/$ref_name/$p.align.txt  # IMPORTANT ALIGN
+	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
     rm public/$p.trimmed.fastq.gz
+	((i++))
+	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
+	screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Converting sams $f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
+
+    echo "Converting sam to bam with samtools"
+    #samtools
+    ../../samtools-1.9/samtools view -bS public/$p.sam > public/$p.bam
+    rm public/$p.sam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Sorting bams $f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
