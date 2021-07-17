@@ -20,7 +20,7 @@ echo $@
 
 i=0
 num_files=${#@}
-num_steps=$(( 8*num_files + 3 )) # IMPORTANT
+num_steps=$(( 7*num_files + 3 )) # IMPORTANT
 echo "Number of steps: $num_steps"
 
 #screen -S jq_qq_queue -X stuff "jq -c '. + [\"$ref_name\"]' public/json/queue.json > public/json/tmp2.$$.json && mv --force public/json/tmp.$$.json public/json/queue.json^M"
@@ -44,7 +44,7 @@ do
 	aws s3 cp public/$f s3://booshboosh/pipelinedata/$f
 	((i++))
     progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-    screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Trimming \"$f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
+    screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Trimming $f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
     
 	echo "Trimming with cutadapt"
 	#../../miniconda3/bin/cutadapt -u -4 -o public/$p.pretrimmed.fastq.gz public/$f
@@ -63,16 +63,8 @@ do
 	
     echo "Aligning with bowtie2"
 	#bowtie
-	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
+	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -b public/$p.bam) 2> public/$ref_name/$p.align.txt  # IMPORTANT ALIGN
     rm public/$p.trimmed.fastq.gz
-	((i++))
-	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
-	screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Converting sams $f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
-
-    echo "Converting sam to bam with samtools"
-    #samtools
-    ../../samtools-1.9/samtools view -bS public/$p.sam > public/$p.bam
-    rm public/$p.sam
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 	screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Sorting bams $f\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
@@ -125,6 +117,7 @@ echo "Final cleaning"
 aws s3 cp public/$ref_name/plots/$ref_name-report.html s3://booshboosh/pipelinedata/
 aws s3 cp reports/$ref_name.zip s3://booshboosh/pipelinedata/$ref_name.zip
 rm -rf public/$ref_name
+rm reports/$ref_name.zip
 ((i++))
 progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
 screen -S jq_pipe_queue -X stuff "jq -c '.\"$ref_name\" = { \"state\": \"Complete\", \"progress\": \"$progress\" }' public/json/pipeline_status.json > public/json/tmp.$$.json && mv --force public/json/tmp.$$.json public/json/pipeline_status.json^M"
