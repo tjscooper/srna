@@ -31,6 +31,8 @@ import logo_header from './assets/pki_logo_header_mostly_white.png'
 import ham from './assets/ham50.png'
 import cross from './assets/cross50.png'
 import wrench from './assets/wrench.png'
+import wrench_blue1 from './assets/wrench_blue1.png'
+import wrench_darkgrey from './assets/wrench_darkgrey.png'
 import empty from './assets/empty.png'
 
 
@@ -43,7 +45,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: true,
+        dev: false,
       };
 
     window.onbeforeunload = (event) => {
@@ -156,8 +158,8 @@ class App extends Component {
 
             <div className="App dev"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={wrench} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
 
-            <div className="App dev2"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={empty} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
-            <div className="App dev3"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={empty} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
+            <div className="App dev2"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={wrench_blue1} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
+            <div className="App dev3"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={wrench_darkgrey} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
             </span>
           <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
               <Technical />
