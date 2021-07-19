@@ -30,6 +30,8 @@ import MediaQuery from 'react-responsive';
 import logo_header from './assets/pki_logo_header_mostly_white.png'
 import ham from './assets/ham50.png'
 import cross from './assets/cross50.png'
+import wrench from './assets/wrench.png'
+import empty from './assets/empty.png'
 
 
 
@@ -41,7 +43,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: false,
+        dev: true,
       };
 
     window.onbeforeunload = (event) => {
@@ -85,10 +87,84 @@ class App extends Component {
       <div className="App major-container" style={{"height":"100%"}} >
       { (this.state.dev) ? 
         (
+        <Router>
+        <MediaQuery minDeviceWidth={1224}>
+          <Navbar fluid collapseOnSelect>
+            <Navbar.Header  >
+              <Navbar.Brand>
+
+                <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
+                  <div className="App logo"/>
+                </a>
+                <div style={{width: "100px"}} />
+                <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
+                <div style={{width: "100px"}} />
+                <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
+              </Navbar.Brand>
+            </Navbar.Header>
+          </Navbar>
+        </MediaQuery>
+
+        <MediaQuery maxDeviceWidth={1224}>
+          <Navbar fluid collapseOnSelect>
+            <Navbar.Header  >
+              <Navbar.Brand>
+
+                <div className="App navbar-overwrite">
+                <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
+                <div className="App logo"/>
+                </a>
+                <div style={{"width":"25%"}}/>
+                { ( !this.state.hamburger ) ? (<div className="hamburgerDropContainer" ><div style={{"width": "50px"}}/> </div>) : ( 
+                  <div className="hamburgerDropContainer">
+                    <Link style={{"textDecoration": "none"}} to="/" onClick={() => this.setState({tab:"/", hamburger:!this.state.hamburger })}>
+                      <div className={(this.state.tab == "/" ? "App hamLink-selected" : "App hamLink")} >
+                        Home
+                      </div>
+                    </Link>
+                    <Link style={{"textDecoration": "none"}} to="/technical" onClick={() => this.setState({tab:"/technical", hamburger:!this.state.hamburger }) }>
+                      <div className={(this.state.tab == "/technical" ? "App hamLink-selected" : "App hamLink")} >
+                        Technical
+                      </div>
+                    </Link>
+                  </div> ) }
+                <div onClick={()=>this.hamburgerToggle() }>
+                    { ( this.state.hamburger ) ? ( <img src={cross} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) : ( <img src={ham} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) }
+                  </div>
+                </div>
+              </Navbar.Brand>
+            </Navbar.Header>
+          </Navbar>
+        </MediaQuery>
+        <footer className="App footer">
+          <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
+          <br/>
+          <div className="App footer2">
+            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved.</p>
+          </div>
+        </footer>
+
+          <Switch>
+          <div>
+            <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>
+                
           <div style={{'height': '100vw', 'width': '100%', 'minHeight': '1000px',
           'minWidth': '1000px', position: 'fixed', zIndex: '0', overflowY: 'hidden'}}>
             <Divide limit={7} i={0} path={""} stops={stps} backgroundColors={bgs} colors={clrs} html={jsxs} />
+
           </div>
+
+            <div className="App dev"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={wrench} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
+
+            <div className="App dev2"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={empty} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
+            <div className="App dev3"><h1 className="App dev-head">Website is down for maintenance  </h1> <img src={empty} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/></div>
+            </span>
+          <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
+              <Technical />
+          </div>
+          </div>
+          </Switch>
+        </Router>
           
         ) :
         (

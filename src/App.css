@@ -52,6 +52,78 @@
   background-color: var(--white);
 }
 
+.App .dev {
+  padding:  0;
+  margin:  0;
+  display: flex;
+  position: absolute;
+  z-index: 20;
+  height: 150px;
+  width: 100vw;
+  top: 25%;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 36px;
+  letter-spacing: 0px;
+  font-size: 36px;
+  font-family: 'Lato', cursive;
+  color:  var(--white);
+
+}
+.App .dev2 {
+  padding:  0;
+  margin:  0;
+  display: flex;
+  position: absolute;
+  z-index: 19;
+  height: 150px;
+  width: 100vw;
+  top: 25.25%;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 36px;
+  letter-spacing: 0px;
+  font-size: 36px;
+  font-family: 'Lato', cursive;
+  color:  var(--blue1);
+
+}
+.App .dev3 {
+  padding:  0;
+  margin:  0;
+  display: flex;
+  position: absolute;
+  z-index: 18;
+  height: 150px;
+  width: 100vw;
+  top: 25.5%;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 36px;
+  letter-spacing: 0px;
+  font-size: 36px;
+  font-family: 'Lato', cursive;
+  color:  var(--darlgrey);
+
+}
+
+.App .dev-head {
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+  padding:  0;
+  margin:  0;
+  vertical-align: middle;
+  line-height: 36px;
+  letter-spacing: 0px;
+  font-size: 60px;
+  font-family: 'Lato', cursive;
+}
 
 .display-board {
   width: 100%;
