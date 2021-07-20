@@ -171,6 +171,7 @@ class SetUpRun extends Component {
         toast.success('Upload successful');
         console.log(res)
         //this.storeAndReset(res);
+        //ADD ISLOADED RIGHT HERE - USE ISLOADED TO PREVENT RUN BUTTON BEING HIT PREMATURELY
       })
       .catch(err => { // then print response status
         toast.error('Upload failure')

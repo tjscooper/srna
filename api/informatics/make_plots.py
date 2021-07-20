@@ -5,6 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.figure_factory as ff
+import plotly.io as pio
 import argparse
 import glob
 from collections import defaultdict 
@@ -81,6 +82,14 @@ def conglomerate(directory, code):
 			"<style id=\"plotly.js-style-modebar-4e8501\"></style><style id=\"plotly.js-style-modebar-948b1e\"></style><style " +\
 			"id=\"plotly.js-style-modebar-948b1e\"></style><style id=\"plotly.js-style-modebar-0cabb2\"></style><style" +\
 			" id=\"plotly.js-style-modebar-32981d\"></style><title>NEXTFLEX® Report #" + str(report_name[0]) + "</title></head><body style=\"padding:0px; margin:0px;\"><div>\n" +\
+			"<footer class='footer'>\n" +\
+				"\t<p class=\"p-foot\">For research use only. Not for use in diagnostic procedures.</p>\n" +\
+			"<br/>\n" +\
+			"<div class=\"footer2\">\n" +\
+				"\t<p class=\"footnote-white\">© Copyright | PerkinElmer Inc. All rights reserved.</p>\n" +\
+			"</div>\n" +\
+			"</footer>\n" +\
+			"<script src=\"https://cdn.plot.ly/plotly-latest.min.js\"></script>\n" +\
 			"<div class=\"navbar-default\">\n" + \
 			"\t<div class=\"container-fluid\">\n" +\
 			"\t\t<div class=\"navbar-header\">\n" +\
@@ -144,6 +153,8 @@ def conglomerate(directory, code):
 				"\t\tNormalized Heatmap (Zeroes Removed)\n" +\
 			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/normal_no_zeroes_heatmap.html")
+	html += "\t<div class=big-spacer></div>\n"
+
 	html += "</div>\n</html>"
 	
 	with open(str(directory) + "/" + str(output_name), "w") as f:
@@ -165,8 +176,9 @@ def trimPlot(data, out_pre):
 	y2 = [ data[y][READS_WRITTEN] for y in k ]
 	fig = go.Figure()
 	fig.add_trace(go.Histogram(histfunc="sum", y=y1, x=k, name="reads written"))
+	fig.update_layout(autosize=True, height=700)
 	fig.update_xaxes(title_text='File Name')
-	fig.update_yaxes(title_text='Percent Reads Trimmed')
+	fig.update_yaxes(title_text='Percent Trimmed with 3\' Adapter Found')
 
 	fig.write_html(str(out_pre) + "/trim_plot.html")
 
@@ -176,8 +188,9 @@ def alignPlot(data, out_pre):
 	y = [ data[y] for y in k ]
 	fig = go.Figure()
 	fig.add_trace(go.Histogram(histfunc="sum", y=y, x=k, name="percent aligned to miR reference"))
+	fig.update_layout(autosize=True, height=700)
 	fig.update_xaxes(title_text='File Name')
-	fig.update_yaxes(title_text='Percent Reads Aligned')
+	fig.update_yaxes(title_text='Percent of Trimmed Reads Aligned')
 	fig.write_html(str(out_pre) + "/align_plot.html")
 
 def sizeDistributionBarPlot(data, out_pre):
@@ -205,7 +218,7 @@ def sizeDistributionBarPlot(data, out_pre):
 		dist_data.append(s2)
 		fig.add_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min(s), end=max(s), size=1)))
 		fig.update_xaxes(title_text='Insert Size')
-		fig.update_yaxes(title_text='# Reads')
+		fig.update_yaxes(title_text='Number of Counts')
 		fig3.add_trace(go.Violin(y=s2, x=k2, name=sample, box_visible=True, meanline_visible=True))
 
 	fig.update_layout(
@@ -225,7 +238,7 @@ def sizeDistributionBarPlot(data, out_pre):
 	min_size = min(all_sizes)
 	max_size = max(all_sizes)
 	grid = getGrid(len(k))
-	fig2 = make_subplots(rows=grid[0], cols=grid[1])
+	fig2 = make_subplots(rows=grid[0], cols=grid[1], subplot_titles = k)
 	count = 0
 	for g in range(grid[0]):
 		for r in range(grid[1]): 
@@ -236,7 +249,8 @@ def sizeDistributionBarPlot(data, out_pre):
 			c = [ sizes[size] for size in s ]
 			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
 			fig2.update_xaxes(title_text='Insert Size')
-			fig2.update_yaxes(title_text='# Reads')
+			fig2.update_yaxes(title_text='Number of Counts')
+			fig2.update_layout(showlegend=False)
 			count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot.html")
 
@@ -261,7 +275,7 @@ def sizeDistributionBarPlot2(data, out_pre):
 			s = [int(x) for x in s]
 			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=samples[count], xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
 			fig2.update_xaxes(title_text='Insert Size')
-			fig2.update_yaxes(title_text='# Reads')
+			fig2.update_yaxes(title_text='Number of Counts')
 			count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot2.html")
 
@@ -296,6 +310,7 @@ def normalHeatmap(data, out_pre):
 	                   hoverongaps = False,
 	                   colorscale=COLORSCALE[0],
 	                   ))
+	fig.update_layout(autosize=True, height=725)
 	fig.write_html(str(out_pre) + "/normal_heatmap.html")
 
 def normalHeatmapNoZeroes(data, out_pre):
@@ -314,6 +329,7 @@ def normalHeatmapNoZeroes(data, out_pre):
 	                   hoverongaps = False,
 	                   colorscale=COLORSCALE[0],
 	                   ))
+	fig.update_layout(autosize=True, height=725)
 	fig.write_html(str(out_pre) + "/normal_no_zeroes_heatmap.html")
 
 def ScatterPlotReg():
@@ -344,17 +360,19 @@ def loadData(directory):
 
 	for i in glob.glob(str(directory) + "/*.align.txt"):
 		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		sample = name_format(sample)
 		align_data[sample] = 0
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
 				if j == 5:
 					align_data[sample] = float(line.split("%")[0])
-
+	
 	#load counts files
 	count_data = {}
 
 	for i in glob.glob(str(directory) + "/*.counts.txt"):
 		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		sample = name_format(sample)
 		count_data[sample] = {}
 		with open(i, 'r') as f:
 			for line in f:
@@ -367,15 +385,17 @@ def loadData(directory):
 	trim_data = {}
 	for i in glob.glob(str(directory) + "/*.trim.txt"):
 		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		sample = name_format(sample)
 		trim_data[sample] = []
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
 				if j == 8 or j == 9:
 					trim_data[sample].append(float(line.split("%")[0].split("(")[-1]))
-					
+
 	insert_data = {}
 	for i in glob.glob(str(directory) + "/*.inserts.txt"):
 		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		sample = name_format(sample)
 		insert_data[sample] = {}
 		with open(i, 'r') as f:
 			for j, line in enumerate(f):
@@ -384,6 +404,12 @@ def loadData(directory):
 					insert_data[sample][fields[0]] = fields[1]
 
 	return (align_data, count_data, trim_data, insert_data)
+
+def name_format(unformatted):
+	temp = list(unformatted.split('-'))
+	temp.pop(0)
+	formatted = "-".join(temp)
+	return formatted
 
 def getGrid(k):
 	rows = floor(sqrt(k))
