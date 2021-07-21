@@ -366,7 +366,8 @@ def loadData(directory):
 			for j, line in enumerate(f):
 				if j == 5:
 					align_data[sample] = float(line.split("%")[0])
-	
+	print(align_data)
+
 	#load counts files
 	count_data = {}
 

@@ -45,7 +45,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: false,
+        dev: true,
       };
 
     window.onbeforeunload = (event) => {
