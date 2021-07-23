@@ -160,7 +160,7 @@ export default function Technical() {
       <p className="App p tab3">
         Gathering the insert sizes of reads from a trimmed .fastq.gz is calculated with the custom python 3 script, 
         get_insert_sizes.py. This script only requires default packages to run. 
-        Basically, it opens a .fastq.gz file and tallies all the read lengths. Output is saved in a *.inserts.txt file.
+        Basically, it opens a .fastq.gz file and tallies all the read lengths. The output is saved in a *.inserts.txt file.
       </p>
       <h4 className="App h4 tab2">4. Alignment</h4>
       <p className="App p tab3">
