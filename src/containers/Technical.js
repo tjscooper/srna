@@ -11,25 +11,82 @@ export default function Technical() {
       <h3 className="App h3 tab1">Kits compatible</h3>
       <p className="App p tab2">
         This analysis is compatible with 
-        <a href="https://perkinelmer-appliedgenomics.com/home/products/library-preparation-kits/small-rna-library-prep/nextflex-small-rna-seq-kit-v3/" className="App link"> NEXTFLEX Small RNA v3 </a>
-        libraries. The analysis is current compatible with these SKUs:
-        <p className="App p tab2">
+        <a href="https://perkinelmer-appliedgenomics.com/home/products/library-preparation-kits/small-rna-library-prep/nextflex-small-rna-seq-kit-v3/" className="App link"> NEXTFLEX<sup>®</sup> Small RNA v3 </a>
+        libraries. The analysis is current compatible with these kits in the catalog:
         <br/>
-        NOVA-5132-05
         <br/>
-        NOVA-5132-06
-        <br/>
-        5132-18
-        <br/>
-        5132-19
-        <br/>
-        </p>
-        Additionally, this analysis will be updated for compatibility with future NEXTFLEX Small RNA products.
+        <table className="App table tab2">
+          <tr className="App tr-h">
+            <th className="App th">Catalog #</th>
+            <th className="App th">Kit Name</th>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-05</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 (8 barcodes)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-06</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 (48 barcodes)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-08</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 for Automation (48 barcodes)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-18</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (1 – 96) for Automation</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-19</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (97-192) for Automation</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-20</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (193-288) for Automation</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-21</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (289-384) for Automation</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-22</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (1-48)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-23</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (49-96)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-24</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (97-144)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-25</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (145-192)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-26</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (193-240)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-27</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (241-288)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-28</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (289-336)</td>
+          </tr>
+          <tr className="App tr">
+            <td className="App td">NOVA-5132-29</td>
+            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (337-384)</td>
+          </tr>
+        </table>
+        Additionally, this analysis will be updated for compatibility with future NEXTFLEX<sup>®</sup> Small RNA products.
       </p>
       <h3 className="App h3 tab1">Data requirements</h3>
       <p className="App p tab2">
         This analysis requires a single R1.fastq.gz file per library. 
-        These files must be generated from an Illumina sequencing platform. R2 and I1/2 files will not be processed.
+        These files must be generated from an Illumina<sup>®</sup> sequencing platform. R2 and I1/2 files will not be processed.
         <br/>
         <br/>
         If the files are empty, 
@@ -41,7 +98,7 @@ export default function Technical() {
         Files with the same name will allow for analysis execution, 
         but only one file will yield data. 
         If the data is generated from a sequencer with multiple lanes, 
-        like a NovaSeq, 
+        like an Illumina<sup>®</sup> NovaSeq instrument, 
         consider merging the separated lane fastq.gz files into one file per library prior to upload. 
         Alternatively, 
         upload the separated lane files and run the analysis multiple time for files only of the same lane.
@@ -120,7 +177,7 @@ export default function Technical() {
       <h4 className="App h4 tab2">5. Generating feature counts</h4>
       <p className="App p tab3">
         <a href="http://www.htslib.org/">Samtools</a> version 1.9 is used to convert alignment files into feature counts. 
-        This step will likely stransition to Sambamba in future versions.
+        This step will likely transition to Sambamba in future versions.
         <br/>
         <br/>
         First, the human-readable alignment file (.sam) file is converted to a binary alignment file (.bam) by using's Samtools' view command. 

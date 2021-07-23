@@ -29,7 +29,8 @@
     "react-scripts": "3.4.3",
     "react-toastify": "^6.0.8",
     "reactstrap": "^8.6.0",
-    "s3-proxy": "^1.2.1"
+    "s3-proxy": "^1.2.1",
+    "semantic-ui-react": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -42,8 +42,12 @@ ALIGN = 0
 COUNTS = 1
 TRIM = 2
 INSERTS = 3
+TOTAL = 4
 READS_W_ADAPTERS = 0
 READS_WRITTEN = 1
+TOTAL_READS_NOT_ALIGNED = 0
+TOTAL_READS_ALIGNED = 1
+TOTAL_READS_AFTER_TRIM = 2
 COLORSCALE = [
         [0, 'rgb(7, 0, 77)'],        #0
         [1./10000, 'rgb(76, 0, 112)'], #10
@@ -61,6 +65,7 @@ def main():
 	options = parser.parse_args()
 	raw_data = loadData(str(options.i))
 	alignPlot(raw_data[ALIGN], str(options.o))
+	stacked_bar(raw_data[TOTAL], str(options.o))
 	sizeDistributionBarPlot(raw_data[COUNTS], str(options.o))
 	sizeDistributionBarPlot2(raw_data[INSERTS], str(options.o))
 	heatmap(raw_data[COUNTS], str(options.o))
@@ -97,9 +102,7 @@ def conglomerate(directory, code):
 			"\t<a target =\"_blank\" rel =\"noopener noreferrer\" href=\"https://perkinelmer-appliedgenomics.com/\">\n" +\
 				"\t\t<div class=\"logo\"></div></a>\n" +\
 				"\t<div style=\"width: 50px;\"></div>\n" +\
-				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#trim\">Trim Stats</a>\n" +\
-				"\t<div style=\"width: 50px;\"></div>\n" +\
-				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#align\">Alignment Rates</a>\n" +\
+				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#readprofiles\">Read Profiles</a>\n" +\
 				"\t<div style=\"width: 50px;\"></div>\n" +\
 				"\t<a class=\"h2-b\" href=\"" + str(output_name) + "#sizes\">Size Distributions</a>\n" +\
 				"\t<div style=\"width: 50px;\"></div>\n" +\
@@ -108,6 +111,14 @@ def conglomerate(directory, code):
 				"\t</div>\n" +\
 				"\t</div>\n" + \
 				"\t</div>\n" +\
+				"\t<div class=\"graph-container\">\n" +\
+				"\t<a id=\"trim\">\n" +\
+					"\t\t<div class=\"graph-h1\">\n" +\
+						"\t\t\tRead Profile\n" +\
+					"\t\t</div>\n" +\
+				"\t</a>\n"
+	html += loadHTMLtoString(str(directory) + "/stacked_bar.html")
+	'''
 				"\t<a id=\"trim\">\n" +\
 					"\t\t<div class=\"graph-h1\">\n" +\
 						"\t\t\tTrim Stats\n" +\
@@ -120,6 +131,7 @@ def conglomerate(directory, code):
 				"\t\t</div>\n" +\
 			"\t</a>\n"
 	html += loadHTMLtoString(str(directory) + "/align_plot.html")
+	'''
 	html += "\n\t<a id=\"sizes\">\n" +\
 				"\t\t<div class=\"graph-h1\">\n" +\
 					"\t\t\tSize Distribution\n" +\
@@ -154,6 +166,8 @@ def conglomerate(directory, code):
 			"\t</div>\n"
 	html += loadHTMLtoString(str(directory) + "/normal_no_zeroes_heatmap.html")
 	html += "\t<div class=big-spacer></div>\n"
+
+	html += "\t</div>"
 
 	html += "</div>\n</html>"
 	
@@ -192,6 +206,22 @@ def alignPlot(data, out_pre):
 	fig.update_xaxes(title_text='File Name')
 	fig.update_yaxes(title_text='Percent of Trimmed Reads Aligned')
 	fig.write_html(str(out_pre) + "/align_plot.html")
+
+def stacked_bar(data, out_pre):
+
+	k = list(data['file_names'])
+	k.sort()
+	fig = go.Figure(data=[
+		go.Bar(name='miRNA-aligned Reads', x=k, y=data[TOTAL_READS_ALIGNED]),
+		go.Bar(name='Other (Not Aligned)', x=k, y =data[TOTAL_READS_NOT_ALIGNED]),
+		go.Bar(name='Inserts Less than 15bp', x=k, y=data[TOTAL_READS_AFTER_TRIM])
+		])
+	fig.update_layout(barmode='stack')
+	fig.update_layout(autosize=True, height=700)
+	fig.update_yaxes(title_text='Percent of Total Reads')
+	fig.write_html(str(out_pre) + "/stacked_bar.html")
+
+
 
 def sizeDistributionBarPlot(data, out_pre):
 	all_sizes = []
@@ -241,17 +271,18 @@ def sizeDistributionBarPlot(data, out_pre):
 	fig2 = make_subplots(rows=grid[0], cols=grid[1], subplot_titles = k)
 	count = 0
 	for g in range(grid[0]):
-		for r in range(grid[1]): 
-			for d in data[k[count]]:
-				sizes[data[k[count]][d]["length"]] += data[k[count]][d]["count"]
-			s = list(sizes.keys())
-			s.sort()
-			c = [ sizes[size] for size in s ]
-			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
-			fig2.update_xaxes(title_text='Insert Size')
-			fig2.update_yaxes(title_text='Number of Counts')
-			fig2.update_layout(showlegend=False)
-			count+=1
+		for r in range(grid[1]):
+			if ((g + 1) + (r + 1)) <= len(k):  #the ol' prime numba bug phix
+				for d in data[k[count]]:
+					sizes[data[k[count]][d]["length"]] += data[k[count]][d]["count"]
+				s = list(sizes.keys())
+				s.sort()
+				c = [ sizes[size] for size in s ]
+				fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=sample, xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
+				fig2.update_xaxes(title_text='Insert Size')
+				fig2.update_yaxes(title_text='Number of Counts')
+				fig2.update_layout(showlegend=False)
+				count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot.html")
 
 def sizeDistributionBarPlot2(data, out_pre):
@@ -268,15 +299,16 @@ def sizeDistributionBarPlot2(data, out_pre):
 	fig2 = make_subplots(rows=grid[0], cols=grid[1])
 	count = 0
 	for g in range(grid[0]):
-		for r in range(grid[1]): 
-			s = list(data[samples[count]].keys())
-			s.sort()
-			c = [ int(data[samples[count]][size]) for size in s ]
-			s = [int(x) for x in s]
-			fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=samples[count], xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
-			fig2.update_xaxes(title_text='Insert Size')
-			fig2.update_yaxes(title_text='Number of Counts')
-			count+=1
+		for r in range(grid[1]):
+			if ((g + 1) + (r + 1)) <= len(samples):  #the ol' prime numba bug phix 
+				s = list(data[samples[count]].keys())
+				s.sort()
+				c = [ int(data[samples[count]][size]) for size in s ]
+				s = [int(x) for x in s]
+				fig2.append_trace(go.Histogram(histfunc="sum", y=c, x=s, name=samples[count], xbins=dict(start=min_size, end=max_size, size=1)), g+1, r+1)
+				fig2.update_xaxes(title_text='Insert Size')
+				fig2.update_yaxes(title_text='Number of Counts')
+				count+=1
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot2.html")
 
 
@@ -369,6 +401,50 @@ def loadData(directory):
 	print(align_data)
 
 	#load counts files
+
+	#load alignment and trim files for new plot
+	sample_totals = {}
+	total_data = {TOTAL_READS_NOT_ALIGNED:[], TOTAL_READS_ALIGNED:[], TOTAL_READS_AFTER_TRIM:[], 'file_names':[]}
+	for i in glob.glob(str(directory) + "/*.align.txt"):
+		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		sample = name_format(sample)
+		sample_totals[sample] = [0,0]
+		with open(i, 'r') as f:
+			for j, line in enumerate(f):
+				if j == 2:
+					sample_totals[sample][0] += int(line.split()[0])
+				if j == 3 or j == 4:
+					sample_totals[sample][1] += int(line.split()[0])
+		total_data['file_names'].append(str(sample))
+	for i in glob.glob(str(directory) + "/*.trim2.txt"):
+		sample = "-".join(i.split("-")[1:]).split("_")[0]
+		sample = name_format(sample)
+		with open(i, 'r') as f:
+			total_reads = 0
+			reads_trimmed = 0
+			for j, line in enumerate(f):
+				if j == 7:
+					k = line.split()
+					l = k[3]
+					l = "".join(l.split(","))
+					total_reads = int(l)
+				if j == 10:
+					kk = line.split()
+					ll = kk[4]
+					ll = "".join(ll.split(","))
+					reads_trimmed = int(ll)
+					print(ll)
+			sample_totals[sample].append((total_reads - reads_trimmed))
+			sample_totals[sample].append(int(total_reads))
+
+	for i in sample_totals:
+		total_data[TOTAL_READS_NOT_ALIGNED].append(round((sample_totals[i][0] / sample_totals[i][3]) *100 , 2))
+		total_data[TOTAL_READS_ALIGNED].append(round((sample_totals[i][1] / sample_totals[i][3]) *100, 2))
+		total_data[TOTAL_READS_AFTER_TRIM].append(round((sample_totals[i][2] / sample_totals[i][3]) *100, 2))
+
+
+
+
 	count_data = {}
 
 	for i in glob.glob(str(directory) + "/*.counts.txt"):
@@ -404,7 +480,7 @@ def loadData(directory):
 				if len(fields) != 0:
 					insert_data[sample][fields[0]] = fields[1]
 
-	return (align_data, count_data, trim_data, insert_data)
+	return (align_data, count_data, trim_data, insert_data, total_data)
 
 def name_format(unformatted):
 	temp = list(unformatted.split('-'))
@@ -415,6 +491,9 @@ def name_format(unformatted):
 def getGrid(k):
 	rows = floor(sqrt(k))
 	columns = ceil(k / rows)
+	if k == 3:
+		rows = 2
+		columns = 2
 	return (int(rows), int(columns))
 
 #-------------------------------------------------------------------------------------------

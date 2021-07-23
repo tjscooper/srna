@@ -4,7 +4,18 @@ import {Progress} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import download from 'js-file-download';
+import { Dropdown } from 'semantic-ui-react';
 
+
+const referenceOptions = ["total_miRNA_hairpin_miRBase22", 
+                          "total_plant_miRNA_PNRD",
+                          "human_miRNA_hairpin_miRBase22",
+                          "arabidopsis_thaliana_miRNA_PNRD",
+                          "glycine_max_miRNA_PNRD",
+                          "gossypium_hirsutum_miRNA_PNRD",
+                          "hordeum_vulgare_miRNA_PNRD",
+                          "medicacgo_truncatula_miRNA_PNRD",
+                          "oryza_sativa_miRNA_PNRD"]
 
 class ExecutePipeline extends Component { 
   
@@ -20,7 +31,8 @@ class ExecutePipeline extends Component {
       outfileExists: false,
       loaded: 0,
       status: "No job queued",
-      email: ""
+      email: "",
+      reference: "total_miRNA_hairpin_miRBase22"
     }
     this.monitorUntilJobFinished = this.monitorUntilJobFinished.bind(this)
    
