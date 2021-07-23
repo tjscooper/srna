@@ -63,7 +63,7 @@ do
 	
     echo "Aligning with bowtie2"
 	#bowtie
-	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
+	(../../miniconda3/bin/bowtie2 -x informatics/indices/human_miRNA_hairpin_miRBase22 -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
     rm public/$p.trimmed.fastq.gz
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")
