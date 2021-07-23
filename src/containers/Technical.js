@@ -12,7 +12,7 @@ export default function Technical() {
       <p className="App p tab2">
         This analysis is compatible with 
         <a href="https://perkinelmer-appliedgenomics.com/home/products/library-preparation-kits/small-rna-library-prep/nextflex-small-rna-seq-kit-v3/" className="App link"> NEXTFLEX<sup>®</sup> Small RNA v3 </a>
-        libraries. The analysis is current compatible with these kits in the catalog:
+        libraries. Currently, it’s compatible with these specific kits in the catalog:
         <br/>
         <br/>
         <table className="App table tab2">
@@ -22,63 +22,63 @@ export default function Technical() {
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-05</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 (8 barcodes)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 (8 barcodes)&nbsp;</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-06</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 (48 barcodes)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 (48 barcodes)</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-08</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 for Automation (48 barcodes)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 for Automation (48 barcodes)</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-18</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (1 – 96) for Automation</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes  (1–96)&nbsp;&nbsp;&nbsp; for Automation</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-19</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (97-192) for Automation</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes  (97-192)&nbsp; for Automation</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-20</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (193-288) for Automation</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (193-288) for Automation</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-21</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (289-384) for Automation</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (289-384) for Automation</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-22</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (1-48)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes    (1-48)&nbsp;&nbsp;&nbsp;</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-23</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (49-96)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes   (49-96)&nbsp;&nbsp;</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-24</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (97-144)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes  (97-144)&nbsp;</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-25</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (145-192)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (145-192)</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-26</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (193-240)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (193-240)</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-27</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (241-288)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (241-288)</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-28</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (289-336)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (289-336)</td>
           </tr>
           <tr className="App tr">
             <td className="App td">NOVA-5132-29</td>
-            <td className="App td">NEXTFLEX® Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (337-384)</td>
+            <td className="App td">NEXTFLEX<sup>®</sup> Small RNA-Seq Kit v3 with Unique Dual Index Barcodes (337-384)</td>
           </tr>
         </table>
         Additionally, this analysis will be updated for compatibility with future NEXTFLEX<sup>®</sup> Small RNA products.
@@ -89,9 +89,9 @@ export default function Technical() {
         These files must be generated from an Illumina<sup>®</sup> sequencing platform. R2 and I1/2 files will not be processed.
         <br/>
         <br/>
-        If the files are empty, 
-        or the files contain only reads that do not align to the reference (like adapter-dimer), 
-        then the analysis will only yield trimming and alignment stats. In this scenario the "View Data" button will yield a broken link.
+        If the files are empty or the files only contain reads that do not align to the reference (like adapter-dimer), 
+        then the analysis will only yield trimming and alignment stats. 
+        In this scenario the "View Data" button may yield a broken link.
         <br/>
         <br/>
         File names must contain a unique name before the first underscore.
@@ -123,11 +123,11 @@ export default function Technical() {
       <h2 className="App h2">Bioinformatics</h2>
       <h3 className="App h3 tab1">Analysis github</h3>
       <p className="App p tab2">
-        Script as imbedded into the API server can be found at this<a href="https://github.com/dfox3/srna_bioinformatics" className="App link"> repo</a>. 
+        The analysis pipeline script as imbedded into the API server can be found at this<a href="https://github.com/dfox3/srna_bioinformatics" className="App link"> repo</a>. 
         Feel free to use this analysis locally,
         especially if scale is a concern. 
-        At the moment, these scripts are not functional outside of the API environment. 
-        There will be future efforts strip down this analysis and package it in an easy-to-install way.
+        As of now, these scripts are not functional outside of the API environment. 
+        There will be future efforts strip down the analysis pipeline and package it in an easy-to-install way.
       </p>
 
       <h3 className="App h3 tab1">Pipeline steps</h3>
@@ -158,15 +158,14 @@ export default function Technical() {
       </p>
       <h4 className="App h4 tab2">3. Calculating insert sizes</h4>
       <p className="App p tab3">
-        Gathering the insert sizes of reads from a trimmed fastq.gz is calculated with the custom python 3 script, get_insert_sizes.py. 
-        This script only requires default packages to run. 
-        It basically opens a fastq.gz file and tallies all the read lengths. 
-        Output is saved in a *.inserts.txt file.
+        Gathering the insert sizes of reads from a trimmed fastq.gz is calculated with the custom python 3 script, 
+        get_insert_sizes.py. This script only requires default packages to run. 
+        Basically, it opens a fastq.gz file and tallies all the read lengths. Output is saved in a *.inserts.txt file.
       </p>
       <h4 className="App h4 tab2">4. Alignment</h4>
       <p className="App p tab3">
         <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a> version 2.4.4 is used for alignment. 
-        This analysis will likely transition to the STAR aligner in future version. 
+        This step will likely transition to using the STAR aligner in future version. 
         <br/>
         <br/>
         Reads are aligned to a human miRNA hairpin reference from 
@@ -177,7 +176,7 @@ export default function Technical() {
       <h4 className="App h4 tab2">5. Generating feature counts</h4>
       <p className="App p tab3">
         <a href="http://www.htslib.org/">Samtools</a> version 1.9 is used to convert alignment files into feature counts. 
-        This step will likely transition to Sambamba in future versions.
+        This step will likely transition to using Sambamba in future versions.
         <br/>
         <br/>
         First, the human-readable alignment file (.sam) file is converted to a binary alignment file (.bam) by using's Samtools' view command. 
@@ -192,44 +191,59 @@ export default function Technical() {
         All plots are printed as html, and a wrapping html is also generated.
       </p>
       <h3 className="App h3 tab1">Plots</h3>
-      <h4 className="App h4 tab2">Trim stats</h4>
+      <h4 className="App h4 tab2">Read profile</h4>
       <p className="App p tab3">
-        Histogram with the percentage of reads that had adapters trimmed plotted on the y-axis and the sample category on the x-axis.
+        This is a stacked bar-chart with different read categories plotted as a percentage of total reads y-axis and the sample category on the x-axis. 
+        The “trimmed reads” category contain reads removed during the cutadapt step - 
+        this can indicate the amount of adapter dimer in the libraries. 
+        The “aligned reads” category contain reads that map to the miRNA reference. 
+        The “other” category contains reads that are neither trimmed away or aligned - 
+        these could be miRNA, other RNA reads, or anything else, but they do not match the reference.
         <br/>
-        <img src={require("../assets/trim_stats.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
-      </p>
-      <h4 className="App h4 tab2">Alignment stats</h4>
-      <p className="App p tab3">
-        Histogram with the percentage of reads that map to the reference on the y-axis and the sample category on the x-axis.
         <br/>
-        <img src={require("../assets/align_stats.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
+        <img src={require("../assets/sample_profile.jpg")} style={{"min-width": "300px", "width": "100%"}} className="App tech-img"/>
+        <br/>
+        <br/>
+        <br/>
       </p>
       <h4 className="App h4 tab2">Insert sizes</h4>
       <p className="App p tab3">
-        A grid with histograms for each sample with the number of reads is on the y-axis and the insert sized is on the x-axis.
-        These are sizes of all reads post-trimming and prior to alignment. 
+        This is a grid of histograms for each sample, 
+        each displaying the number of reads on the y-axis and the insert sizes on the x-axis. 
+        These sizes are of all reads post-trimming and prior to alignment.
         <br/>
-        <img src={require("../assets/insert_sizes.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
+        <br/>
+        <img src={require("../assets/insert_sizes.jpg")} style={{"min-width": "300px", "width": "100%"}} className="App tech-img"/>
+        <br/>
+        <br/>
+        <br/>
       </p>
       <h4 className="App h4 tab2">Normalized heatmap</h4>
       <p className="App p tab3">
-        A heatmap where all the reference features are displayed as rows and the samples are displayed as columns. 
-        The "heat" is linearly scaled and represents a percentage of reads mapped.
+        This is a heatmap where all the reference features are displayed as rows and the samples are displayed as columns. 
+        The "heat" is linearly scaled and represents a percentage of total mapped reads.
         <br/>
-        <img src={require("../assets/normal_heat.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
+        <br/>
+        <img src={require("../assets/normal_heat.jpg")} style={{"min-width": "300px", "width": "100%"}} className="App tech-img"/>
+        <br/>
+        <br/>
+        <br/>
       </p>
       <h4 className="App h4 tab2">Normalized heatmap with zeroes removed</h4>
       <p className="App p tab3">
-        A heatmap where the reference features that have at least one count in any of the samples are displayed as rows and the samples are displayed as columns. 
-        The "heat" is linearly scaled and represents a percentage of reads mapped.
+        This is a heatmap where the reference features that have at least one count in any of the samples are displayed as rows and the samples are displayed as columns. 
+        The "heat" is linearly scaled and represents a percentage of total mapped reads.
         <br/>
-        <img src={require("../assets/normal_heat_no_zeroes.jpg")} style={{"min-width": "300px", "width": "100%"}}/>
+        <br/>
+        <img src={require("../assets/normal_heat_no_zeroes.jpg")} style={{"min-width": "300px", "width": "100%"}} className="App tech-img"/>
+        <br/>
+        <br/>
+        <br/>
       </p>
       <h3 className="App h3 tab1">Tool installation</h3>
       <p className="App p tab2">
-        Almost all tools listed are installed with a Miniconda environment in a Linux OS. 
-        Samtools is the only exception,
-        being installed by a series of wget + tar + make commands.
+        Almost all tools listed are installed in a Miniconda environment on a Linux OS. 
+        Samtools is the only exception, being installed by a series of wget + tar + make commands.
       </p>
       <h1 className="App h1">Support</h1>
       <h3 className="App h3">

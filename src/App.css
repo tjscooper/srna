@@ -316,12 +316,20 @@
 }
 
 
+
+
+.App .tech-img {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+
 .App .table {
   line-height: 18px;
   letter-spacing: 0px;
-  font-size: 13px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Inconsolata', monospace;
+  font-weight: 300;
   color: #464646;
   border: 1px solid var(--grey2);
   border-collapse: collapse;
