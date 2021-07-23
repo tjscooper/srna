@@ -114,7 +114,7 @@ export default function Technical() {
       <p className="App p tab2">
         Because there isn't any account information required to use this website, 
         data will be deleted after a set period of time. 
-        Uploaded sequence data is stored for a week before purging. 
+        Uploaded sequencing data is stored for a week before purging. 
         HTML reports and archived data files are stored for up to a month before purging.
         <br/>
         <br/>
