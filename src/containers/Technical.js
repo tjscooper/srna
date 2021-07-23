@@ -99,9 +99,9 @@ export default function Technical() {
         but only one file will yield data. 
         If the data is generated from a sequencer with multiple lanes, 
         like an Illumina<sup>®</sup> NovaSeq instrument, 
-        consider merging the separated lane fastq.gz files into one file per library prior to upload. 
+        consider merging the separated lane .fastq.gz files into one file per library prior to upload. 
         Alternatively, 
-        upload the separated lane files and run the analysis multiple time for files only of the same lane.
+        upload the separated lane files and run the analysis multiple times for files only of the same lane.
         <br/>
         <br/>
         The maximum file upload size is 2gb. 
