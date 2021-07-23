@@ -165,7 +165,7 @@ export default function Technical() {
       <h4 className="App h4 tab2">4. Alignment</h4>
       <p className="App p tab3">
         <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a> version 2.4.4 is used for alignment. 
-        This step will likely transition to using the STAR aligner in future version. 
+        This step will likely transition to using the STAR aligner in future versions. 
         <br/>
         <br/>
         Reads are aligned to a human miRNA hairpin reference from 
