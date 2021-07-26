@@ -12,7 +12,9 @@ email_split=(${2//" "/ })
 email=${email_split[0]}
 echo "YOYOYOYOYOYO"
 echo $2
+ref=$3
 
+shift
 shift
 shift
 echo "YOYOYOYOYOYO"
@@ -63,7 +65,7 @@ do
 	
     echo "Aligning with bowtie2"
 	#bowtie
-	(../../miniconda3/bin/bowtie2 -x informatics/indices/total_miRNA_miRBase22 -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
+	(../../miniconda3/bin/bowtie2 -x informatics/indices/$ref -U public/$p.trimmed.fastq.gz -S public/$p.sam) 2> public/$ref_name/$p.align.txt # IMPORTANT ALIGN
     rm public/$p.trimmed.fastq.gz
 	((i++))
 	progress=$(bc -l <<< "scale=2;$i*100/$num_steps")

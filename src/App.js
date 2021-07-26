@@ -29,10 +29,12 @@ import MediaQuery from 'react-responsive';
 
 import logo_header from './assets/pki_logo_header_mostly_white.png'
 import ham from './assets/ham50.png'
+import hamSVG from './assets/hamSVG.svg'
 import cross from './assets/cross50.png'
-import wrench from './assets/wrench.png'
-import wrench_blue1 from './assets/wrench_blue1.png'
-import wrench_darkgrey from './assets/wrench_darkgrey.png'
+import crossSVG from './assets/crossSVG.svg'
+import wrench from './assets/wrench.svg'
+import wrench_blue1 from './assets/wrench_blue1.svg'
+import wrench_darkgrey from './assets/wrench_darkgrey.svg'
 import empty from './assets/empty.png'
 
 
@@ -45,7 +47,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: false,
+        dev: true,
       };
 
     window.onbeforeunload = (event) => {
@@ -131,7 +133,7 @@ class App extends Component {
                     </Link>
                   </div> ) }
                 <div onClick={()=>this.hamburgerToggle() }>
-                    { ( this.state.hamburger ) ? ( <img src={cross} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) : ( <img src={ham} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) }
+                    { ( this.state.hamburger ) ? ( <img src={crossSVG} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}} className="App fade"/> ) : ( <img src={hamSVG} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}} className="App fade"/> ) }
                   </div>
                 </div>
               </Navbar.Brand>
@@ -212,7 +214,7 @@ class App extends Component {
                     </Link>
                   </div> ) }
                 <div onClick={()=>this.hamburgerToggle() }>
-                    { ( this.state.hamburger ) ? ( <img src={cross} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) : ( <img src={ham} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}}/> ) }
+                    { ( this.state.hamburger ) ? ( <img src={crossSVG} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}} className="App fade"/> ) : ( <img src={hamSVG} style={{"height":"100%", "vertical-align":"bottom", "display":"inline-block"}} className="App fade"/> ) }
                   </div>
                 </div>
               </Navbar.Brand>

@@ -5,6 +5,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import * as serviceWorker from './serviceWorker';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
+import pkg from 'semantic-ui-react/package.json'
+
+
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
 
 ReactDOM.render(
   <div>
