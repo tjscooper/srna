@@ -11,7 +11,7 @@ import human from './../assets/human.svg'
 
 
 const referenceOptions = [
-                          { key: "total_miRNA_hairpin_miRBase22", value: "total_miRNA_hairpin_miRBase22", text: "Total species miRBase22", image: { avatar: true, src: sigma}}, 
+                          { key: "total_miRNA_miRBase22", value: "total_miRNA_miRBase22", text: "Total species miRBase22", image: { avatar: true, src: sigma}}, 
                           { key: "total_plant_miRNA_PNRD", value: "total_plant_miRNA_PNRD", text: "Total plant species PNRD", image: { avatar: true, src: plant}}, 
                           { key: "human_miRNA_hairpin_miRBase22", value: "human_miRNA_hairpin_miRBase22", text: "Human miRBase22", image: { avatar: true, src: human}}, 
                           { key: "arabidopsis_thaliana_miRNA_PNRD", value: "arabidopsis_thaliana_miRNA_PNRD", text: "Arabidopsis thaliana PNRD", image: { avatar: true, src: plant}}, 
