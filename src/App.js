@@ -7,6 +7,7 @@ import "./App.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
+import GitInfo from 'react-git-info/macro';
 
 import Home from "./containers/Home";
 import SetUpRun from "./components/SetUpRun";
@@ -39,6 +40,9 @@ import empty from './assets/empty.png'
 
 
 
+
+
+
 class App extends Component {
 
 
@@ -48,7 +52,10 @@ class App extends Component {
         tab:"/",
         hamburger: false,
         dev: false,
+        git: GitInfo().tags[0]
       };
+      console.log(this.state.git)
+
 
     window.onbeforeunload = (event) => {
       const e = event || window.event;
@@ -60,6 +67,8 @@ class App extends Component {
       return ''; // Legacy method for cross browser support
     };
   }
+
+
 
   hamburgerToggle () {
     this.setState({hamburger: !this.state.hamburger})
@@ -144,7 +153,7 @@ class App extends Component {
           <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
           <br/>
           <div className="App footer2">
-            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved.</p>
+            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved. {this.state.git}</p>
           </div>
         </footer>
 
@@ -225,7 +234,7 @@ class App extends Component {
           <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
           <br/>
           <div className="App footer2">
-            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved.</p>
+            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved. {this.state.git}</p>
           </div>
         </footer>
       
