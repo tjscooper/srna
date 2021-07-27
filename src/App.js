@@ -50,7 +50,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: false,
+        dev: true,
         gitTag: "",
       };
       this.getGit().then(res => this.setState({gitTag:res}))
@@ -71,7 +71,7 @@ class App extends Component {
 
   getGit () {
       return axios.get('https://booshboosh.net:443/version')
-        .then(response => response.data.split("-")[0] + "-" + response.data.split("-")[1])
+        .then(response => response.data.split("-")[0])
         .catch(function (error) {
           console.log(error);
         })  
