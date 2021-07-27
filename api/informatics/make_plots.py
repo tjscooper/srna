@@ -272,7 +272,7 @@ def sizeDistributionBarPlot(data, out_pre):
 	count = 0
 	for g in range(grid[0]):
 		for r in range(grid[1]):
-			if ((g + 1) + (r + 1)) <= len(k):  #the ol' prime numba bug phix
+			if ((g + 1) + (r + 1)) < len(k) or len(samples) < 3:  #the ol' prime numba bug phix
 				for d in data[k[count]]:
 					sizes[data[k[count]][d]["length"]] += data[k[count]][d]["count"]
 				s = list(sizes.keys())
@@ -300,7 +300,7 @@ def sizeDistributionBarPlot2(data, out_pre):
 	count = 0
 	for g in range(grid[0]):
 		for r in range(grid[1]):
-			if ((g + 1) + (r + 1)) <= len(samples):  #the ol' prime numba bug phix 
+			if ((g + 1) + (r + 1)) < len(samples) or len(samples) < 3:  #the ol' prime numba bug phix 
 				s = list(data[samples[count]].keys())
 				s.sort()
 				c = [ int(data[samples[count]][size]) for size in s ]
