@@ -255,6 +255,7 @@ def sizeDistributionBarPlot(data, out_pre):
 	    bargap=0.01, # gap between bars of adjacent location coordinates
 	    bargroupgap=0.0 # gap between bars of the same location coordinates
 	)
+	fig.update_layout(autosize=True, height=700)
 	fig.write_html(str(out_pre) + "/size_bar_plot.html")
 	
 	'''
@@ -283,6 +284,8 @@ def sizeDistributionBarPlot(data, out_pre):
 				fig2.update_yaxes(title_text='Number of Counts')
 				fig2.update_layout(showlegend=False)
 				count+=1
+
+	fig2.update_layout(autosize=True, height=700)
 	fig2.write_html(str(out_pre) + "/size_bar_grid_plot.html")
 
 def sizeDistributionBarPlot2(data, out_pre):
