@@ -16,7 +16,6 @@
     "@testing-library/user-event": "^7.2.1",
     "aws-sdk": "^2.780.0",
     "axios": "^0.20.0",
-    "babel-plugin-macros": "^2.8.0",
     "bootstrap": "^4.5.2",
     "es6-promise": "^4.2.8",
     "git-describe": "^4.0.4",
@@ -32,8 +31,7 @@
     "react-toastify": "^6.0.8",
     "reactstrap": "^8.6.0",
     "s3-proxy": "^1.2.1",
-    "semantic-ui-react": "^2.0.3",
-    "react-git-info": "^2.0.0"
+    "semantic-ui-react": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -56,6 +54,4 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-  }
 }
