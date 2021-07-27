@@ -14,7 +14,6 @@ import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Technical from "./containers/Technical";
 import References from "./containers/References";
-import GitInfo from "./gitinfo/macro";
 
 import Divide from './components/divideFour.js';
 
@@ -52,7 +51,7 @@ class App extends Component {
         tab:"/",
         hamburger: false,
         dev: false,
-        gitTag: this.getGitTag(),
+        gitTag: "",
       };
       console.log(this.state.gitTag)
 
@@ -69,17 +68,14 @@ class App extends Component {
   }
 
 
-  getGitTag () {
+  getGit () {
+      return axios.get('https://booshboosh.net:443/version')
+        .then(response => response.data.split("-")[0] + "-" + response.data.split("-")[1])
+        .catch(function (error) {
+          console.log(error);
+        })  
+      
 
-    //var xmlHttp = new XMLHttpRequest();
-    console.log("GET GIT TAG")
-    axios.get('https://booshboosh.net:443/version')
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })  
   }
 
   hamburgerToggle () {
@@ -106,6 +102,7 @@ class App extends Component {
 
 
   render() {
+    this.getGit().then(res => this.setState({gitTag:res}))
     
     return (
 
