@@ -53,6 +53,7 @@ class App extends Component {
         dev: false,
         gitTag: "",
       };
+      this.getGit().then(res => this.setState({gitTag:res}))
       console.log(this.state.gitTag)
 
 
@@ -102,7 +103,7 @@ class App extends Component {
 
 
   render() {
-    this.getGit().then(res => this.setState({gitTag:res}))
+    
     
     return (
 
