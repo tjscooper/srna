@@ -367,6 +367,28 @@ app.post('/execute',function(req, res) {
     
 });
 
+
+
+app.get('/version',function(req, res) {
+  //executes a pipeline on currently uploaded file\
+    var cmd = "git describe"
+    child = exec(cmd,
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+      return res.send(stdout);
+    });
+    try {
+      child();
+    } catch (error) {
+      console.log("VERSION ERROR")
+    }
+    
+});
+
 /*
 
 -Install cutadapt and samtools and bowtie2:

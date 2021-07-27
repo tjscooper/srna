@@ -7,7 +7,6 @@ import "./App.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
-import GitInfo from 'react-git-info/macro';
 
 import Home from "./containers/Home";
 import SetUpRun from "./components/SetUpRun";
@@ -15,6 +14,7 @@ import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Technical from "./containers/Technical";
 import References from "./containers/References";
+import GitInfo from "./gitinfo/macro";
 
 import Divide from './components/divideFour.js';
 
@@ -52,9 +52,9 @@ class App extends Component {
         tab:"/",
         hamburger: false,
         dev: false,
-        git: GitInfo().tags[0]
+        gitTag: this.getGitTag(),
       };
-      console.log(this.state.git)
+      console.log(this.state.gitTag)
 
 
     window.onbeforeunload = (event) => {
@@ -69,6 +69,18 @@ class App extends Component {
   }
 
 
+  getGitTag () {
+
+    //var xmlHttp = new XMLHttpRequest();
+    console.log("GET GIT TAG")
+    axios.get('https://booshboosh.net:443/version')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })  
+  }
 
   hamburgerToggle () {
     this.setState({hamburger: !this.state.hamburger})
@@ -153,7 +165,7 @@ class App extends Component {
           <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
           <br/>
           <div className="App footer2">
-            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved. {this.state.git}</p>
+            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved. {this.state.gitTag}</p>
           </div>
         </footer>
 
@@ -234,7 +246,7 @@ class App extends Component {
           <p className="App p-foot">For research use only. Not for use in diagnostic procedures.</p>
           <br/>
           <div className="App footer2">
-            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved. {this.state.git}</p>
+            <p className="App footnote-white">© Copyright | PerkinElmer Inc. All rights reserved. {this.state.gitTag}</p>
           </div>
         </footer>
       
