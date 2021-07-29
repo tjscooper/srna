@@ -7,6 +7,8 @@ import "./App.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
+import firebase from "firebase"
+import StyledFirebaseAuth from "react-firebaseui/StyleFirebaseAuth"
 
 import Home from "./containers/Home";
 import SetUpRun from "./components/SetUpRun";
