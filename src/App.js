@@ -8,7 +8,7 @@ import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
 import firebase from "firebase"
-import StyledFirebaseAuth from "react-firebaseui/StyleFirebaseAuth"
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 import Home from "./containers/Home";
 import SetUpRun from "./components/SetUpRun";
@@ -43,6 +43,10 @@ import empty from './assets/empty.png'
 
 
 
+  firebase.initializeApp({
+    apiKey: "AIzaSyAzbCZRLHRoa2_n9HZEsaFMmPgwSiZAUF8", 
+    authDomain: "srna-5ba19.firebaseapp.com"
+  })
 
 class App extends Component {
 
@@ -54,6 +58,7 @@ class App extends Component {
         hamburger: false,
         dev: false,
         gitTag: "",
+        isSignedIn: false,
       };
       this.getGit().then(res => this.setState({gitTag:res}))
       console.log(this.state.gitTag)
@@ -101,11 +106,24 @@ class App extends Component {
       console.log(e.target.location.pathname)
       this.setState({tab:e.target.location.pathname})
     }
+
+  firebase.auth().onAuthStateChanged(user => this.setState({isSignedIn:!!user}))
   }
 
 
   render() {
     
+  const uiConfig = {
+    signInFlow: 'popup',
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    ],
+    callbacks: {
+      signInSuccess: () => false
+    }
+
+  } 
     
     return (
 
@@ -256,6 +274,7 @@ class App extends Component {
       <Switch>
       <div>
         <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             <SetUpRun />
         </span>
       <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
