@@ -117,7 +117,7 @@ class App extends Component {
     signInFlow: 'popup',
     signInOptions: [
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
       signInSuccess: () => false
@@ -143,7 +143,7 @@ class App extends Component {
                 <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
                 <div style={{width: "100px"}} />
                 <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
-              </Navbar.Brand>
+                    </Navbar.Brand>
             </Navbar.Header>
           </Navbar>
         </MediaQuery>
@@ -224,6 +224,19 @@ class App extends Component {
                 <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
                 <div style={{width: "100px"}} />
                 <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
+                <div style={{width: "100px"}} />
+                
+                { ( this.state.isSignedIn) ?
+                  ( <span>
+                      <div>SIGNED IN!</div>
+                      <button onClick={() => firebase.auth().signOut()}>SIGN OUT</button>
+                      <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+                      <img alt="profile picture" src={firebase.auth().currentUser.photoURL}/>
+                    </span>
+                    ) : 
+                  (
+                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                    )}
               </Navbar.Brand>
             </Navbar.Header>
           </Navbar>
@@ -274,7 +287,7 @@ class App extends Component {
       <Switch>
       <div>
         <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>
-            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+            
             <SetUpRun />
         </span>
       <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
