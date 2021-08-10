@@ -36,8 +36,6 @@
       "public/*",
       "reports/*"
     ]
-
-    //
   },
   "devDependencies": {
     "del": "^5.1.0",
