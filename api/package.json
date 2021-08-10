@@ -7,7 +7,8 @@
     "start": "node server.bundle.js",
     "build": "webpack",
     "dev": "./informatics/reset_jsons.sh & nodemon ./server.js",
-    "yo": "nodemon ./server.js"
+    "yo": "nodemon ./server.js",
+    "dibs": "nodemon ./dibs_server.js",
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,8 @@
       "public/*",
       "reports/*"
     ]
+
+    //
   },
   "devDependencies": {
     "del": "^5.1.0",
