@@ -15,6 +15,7 @@ import SetUpRun from "./components/SetUpRun";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Technical from "./containers/Technical";
+import Dibs from "./components/Dibs";
 import References from "./containers/References";
 
 import Divide from './components/divideFour.js';
@@ -225,6 +226,8 @@ class App extends Component {
                 <div style={{width: "100px"}} />
                 <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
                 <div style={{width: "100px"}} />
+                <Link to="/dibs" className={(this.state.tab == "/dibs" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/dibs"}) }>DIBS</Link>
+                <div style={{width: "100px"}} />
                 
                 { ( this.state.isSignedIn) ?
                   ( <span>
@@ -292,6 +295,9 @@ class App extends Component {
         </span>
       <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
           <Technical />
+      </div>
+      <div className="App Technical" style={{display: this.state.tab == "/dibs" ? "block" : "none" }}>
+          <Dibs />
       </div>
       </div>
       </Switch>
