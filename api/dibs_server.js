@@ -36,7 +36,7 @@ app.post('/add',function(req, res) {
     console.log("you've made it this far")
     console.log(req.body)
     console.log(req)
-    var cmd = "python3 dib3.py"
+    var cmd = "python3 dibs/dib3.py"
     cmd = cmd.concat(" add " + req.body[0] + " " + req.body[1] + " -n " + req.body[2] + ' -r 1 -s 110')
     child = exec(cmd,
     function (error, stdout, stderr) {

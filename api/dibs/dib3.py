@@ -174,7 +174,7 @@ def handle_del_args(args):
 
 #accessed in add arguments will eliminate any given barcodes that are already taken
 def get_availiable_barcodes(barcode_type, barcodes):
-    with open('/sheets/barcodes_master_copy.csv', 'r') as csvfile:
+    with open('sheets/barcodes_master_copy.csv', 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter='\t')
         for row in reader:
             if row[TYPE] == barcode_type and (row[BC_NUMBER] in barcodes):
@@ -185,7 +185,7 @@ def get_availiable_barcodes(barcode_type, barcodes):
 #accessed in del_arguments and will eliminate barcodes that are not allowed to be deleted
 def can_delete_barcodes (barcode_type, barcodes):
     print(barcodes)
-    with open('/sheets/barcodes_master_copy.csv', 'r') as csvfile:
+    with open('sheets/barcodes_master_copy.csv', 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter='\t')
         for row in reader:
             if row[TYPE] == barcode_type and (row[BC_NUMBER] in barcodes):
@@ -202,7 +202,7 @@ def write_barcodes(args, command):
 
     if command =='add':
         add_lines = []
-        csv_file = open('/sheets/barcodes_master_copy.csv', 'r')
+        csv_file = open('sheets/barcodes_master_copy.csv', 'r')
         for x,row in enumerate(csv_file):
             row_list = row.strip().split('\t')
             barcode_lines.append(row_list)
@@ -227,7 +227,7 @@ def write_barcodes(args, command):
             barcode_lines[i][READS] = str(args[ADD_READS])
             barcode_lines[i][SIZE] = str(args[ADD_SIZES])
 
-        with open('barcodes_master_copy.csv', 'w', newline='') as csv_file:
+        with open('sheets/barcodes_master_copy.csv', 'w', newline='') as csv_file:
                 writer = csv.writer(csv_file, delimiter="\t")
                 for i in barcode_lines:
                     writer.writerow(i)
@@ -235,7 +235,7 @@ def write_barcodes(args, command):
 
     if command =='delete':
         delete_lines = []
-        csv_file = open('barcodes_master_copy.csv', 'r')
+        csv_file = open('sheets/barcodes_master_copy.csv', 'r')
         for x,row in enumerate(csv_file):
             row_list = row.strip().split('\t')
             barcode_lines.append(row_list)
@@ -255,7 +255,7 @@ def write_barcodes(args, command):
             barcode_lines[i][SIZE] = '0'
             barcode_lines[i][FLAG] = '0,0,0,0'
 
-        with open('barcodes_master_copy.csv', 'w', newline='') as csv_file:
+        with open('sheets/barcodes_master_copy.csv', 'w', newline='') as csv_file:
                 writer = csv.writer(csv_file, delimiter="\t")
                 for i in barcode_lines:
                     writer.writerow(i)
