@@ -33,15 +33,7 @@ app.post('/add',function(req, res) {
     console.log("you've made it this far")
     console.log(req.body)
     var cmd = "python3 dib3.py"
-    outfile = Date.now() + "-out.zip"
-    cmd = cmd.concat(" " + outfile + " " + req.body[0] + " " + req.body[1])
-    for (x = 2; x < req.body.length; x++) {
-        cmd = cmd.concat(" ")
-        cmd = cmd.concat(fileMap[req.body[x]])
-        console.log(cmd)
-
-    }
-    cmd = cmd.concat("^M\"")
+    cmd = cmd.concat(" add " + req.body[0] + " " + req.body[1] + " -n " + req.body[2] + ' -r 1 -s 110')
     child = exec(cmd,
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
