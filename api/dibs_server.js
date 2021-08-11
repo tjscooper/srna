@@ -26,6 +26,38 @@ app.get('/hello',function(req,res){
   res.send("Hello World!");
 });
 
+var exec = require('child_process').exec;
+
+app.post('/add',function(req, res) {
+  //add a barcode to dibs\
+    console.log("you've made it this far")
+    console.log(req.body)
+    var cmd = "python3 dib3.py"
+    outfile = Date.now() + "-out.zip"
+    cmd = cmd.concat(" " + outfile + " " + req.body[0] + " " + req.body[1])
+    for (x = 2; x < req.body.length; x++) {
+        cmd = cmd.concat(" ")
+        cmd = cmd.concat(fileMap[req.body[x]])
+        console.log(cmd)
+
+    }
+    cmd = cmd.concat("^M\"")
+    child = exec(cmd,
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+    });
+    try {
+      child();
+    } catch (error) {
+      console.log("finished")
+      res.json(outfile)
+    }
+    
+});
 /*
 
 -Install cutadapt and samtools and bowtie2:
