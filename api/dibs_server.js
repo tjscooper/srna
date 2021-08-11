@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
-
 const http = require('http');
 var https = require('https');
 const fs = require('fs');
 
+var cors = require('cors');
 
 
 // serve the API with signed certificate on 443 (SSL/HTTPS) port
@@ -12,9 +12,10 @@ const fs = require('fs');
 const app = express(),
       bodyParser = require("body-parser");
       port = 443;
-var cors = require('cors');
-app.use(cors())
 
+app.use(cors())
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../my-app/build')));
 
 
 // serve the API on 80 (HTTP) port
@@ -34,6 +35,7 @@ app.post('/add',function(req, res) {
   //add a barcode to dibs\
     console.log("you've made it this far")
     console.log(req.body)
+    console.log(req)
     var cmd = "python3 dib3.py"
     cmd = cmd.concat(" add " + req.body[0] + " " + req.body[1] + " -n " + req.body[2] + ' -r 1 -s 110')
     child = exec(cmd,
@@ -46,6 +48,7 @@ app.post('/add',function(req, res) {
     });
     try {
       child();
+      res.send("goodjob")
     } catch (error) {
       console.log("finished")
       res.json(outfile)

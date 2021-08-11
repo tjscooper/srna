@@ -49,11 +49,9 @@ class Dibs extends Component {
 
   onAddButtonPush = () => {
     console.log("I've been clicked")
-    const data = []
-    data.push(this.state.type)
-    data.push(this.state.number)
-    data.push(this.state.name)
-    
+    const data = [this.state.type, this.state.number, this.state.name]
+    console.log(data)
+
     axios.post("https://dibsbase.net:443/add", data, {})
     .then(res => {
       console.log("post execute")
