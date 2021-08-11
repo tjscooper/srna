@@ -12,6 +12,8 @@ const fs = require('fs');
 const app = express(),
       bodyParser = require("body-parser");
       port = 443;
+var cors = require('cors');
+app.use(cors())
 
 
 
