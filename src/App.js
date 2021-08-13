@@ -119,6 +119,9 @@ class App extends Component {
     signInOptions: [
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
       signInSuccess: () => false
@@ -211,6 +214,7 @@ class App extends Component {
         </Router>
           
         ) :
+
         (
         <Router>
         <MediaQuery minDeviceWidth={1224}>
@@ -222,11 +226,19 @@ class App extends Component {
                   <div className="App logo"/>
                 </a>
                 <div style={{width: "100px"}} />
-                <Link to="/" className={(this.state.tab == "/" ? "App h1-b-selected" : "App h1-b")} onClick={() => this.setState({tab:"/"}) }>NEXTFLEX<sup>®</sup> sRNA Tool</Link>
+                <Link to="/" className={(this.state.tab == "/" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/"}) }>Home</Link>
+                <div style={{width: "100px"}} />
+                <Link to="/analyze" className={(this.state.tab == "/" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/analyze"}) }>Analyze</Link>
+                <div style={{width: "100px"}} />
+                <Link to="/dibs" className={(this.state.tab == "/dibs" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/dibs"}) }>DIBS</Link>
                 <div style={{width: "100px"}} />
                 <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
                 <div style={{width: "100px"}} />
-                <Link to="/dibs" className={(this.state.tab == "/dibs" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/dibs"}) }>DIBS</Link>
+                { (this.state.isSignedIn) ?
+                  (<Link to="/user" className={(this.state.tab == "/user" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/user"}) }>
+                    <div className="App avi-flex"><img alt="profile picture" className="App avi" src={firebase.auth().currentUser.photoURL}/><div style={{width: "7px"}} /><div>{firebase.auth().currentUser.displayName}</div></div>
+                  </Link>) : 
+                  (<Link to="/user" className={(this.state.tab == "/user" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/user"}) }>Login</Link>) } 
                 <div style={{width: "100px"}} />
                 
                 { ( this.state.isSignedIn) ?
@@ -289,15 +301,20 @@ class App extends Component {
 
       <Switch>
       <div>
-        <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>
-            
-            <SetUpRun />
-        </span>
+      <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>  
+          <Home />
+      </span>
+      <span className="App Home" style={{display: this.state.tab == "/analyze" ? "block" : "none" }}>  
+          <SetUpRun />
+      </span>
       <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
           <Technical />
       </div>
       <div className="App Technical" style={{display: this.state.tab == "/dibs" ? "block" : "none" }}>
           <Dibs />
+      </div>
+      <div className="App Technical" style={{display: this.state.tab == "/user" ? "block" : "none" }}>
+          <Login />
       </div>
       </div>
       </Switch>

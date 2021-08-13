@@ -1142,3 +1142,15 @@ input:-webkit-autofill {
   min-height: 2%;
     overflow: hidden;
 }
+
+.App .avi {
+  border-radius: 50%;
+  border: 2px dotted var(--grey1);
+  height: 33px;
+  text-shadow: 2px 2px 3px var(--darkgrey);
+  
+}
+
+.App .avi-flex {
+  display: flex;
+  align-items: center}

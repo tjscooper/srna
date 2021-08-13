@@ -18,7 +18,7 @@ export default function Home() {
 	          <div className="row">
 	            <div className="col-md-8">
                 <input type='text'/>
-	              <SetUpRun/>
+	              Homepage
 	            </div>
 	          </div>
 	        </div>
