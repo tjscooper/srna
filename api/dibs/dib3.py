@@ -203,7 +203,7 @@ def full_view():
     for row in csv_file:
             row_list = row.strip().split('\t')
             if row_list[USER] != '---':
-                view_sheet.append[row_list]
+                view_sheet.append(row_list)
     return view_sheet
 
 def user_view():
@@ -212,7 +212,7 @@ def user_view():
     for row in csv_file:
             row_list = row.strip().split('\t')
             if row_list[USER] != str(getpass.getuser()):
-                view_sheet.append[row_list]
+                view_sheet.append(row_list)
     return view_sheet
 
 
