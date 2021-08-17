@@ -66,7 +66,8 @@ parser_view.add_argument('-c',
     help='show i7/i5 matches and warnings') 
     #action='store_true')
 #parser_view.set_defaults(func=view)
- 
+
+parser_push = subparser.add_parser('push') 
 parser_push.add_argument('-e', 
     metavar='--exclude', 
     type=str, 
@@ -87,7 +88,7 @@ parser_push.add_argument('-d',
     #action='store_true')
 #parser_push.set_defaults(func=push)
 
-parser_push = subparser.add_parser('unpush')
+
 #parser_push.set_defaults(func=unpush)
 
 parser_ready = subparser.add_parser('ready')
