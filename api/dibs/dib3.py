@@ -211,7 +211,7 @@ def user_view():
     csv_file = open(os.path.join(dirname, 'sheets/barcodes_master_copy.csv'), 'r')
     for row in csv_file:
             row_list = row.strip().split('\t')
-            if row_list[USER] != str(getpass.getuser()):
+            if row_list[USER] == str(getpass.getuser()):
                 view_sheet.append(row_list)
     return view_sheet
 
