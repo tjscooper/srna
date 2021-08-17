@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Dropdown } from 'semantic-ui-react';
 import "./../App.css";
 
+
 const typeOptions = [
                           { key: "sRNA", value: "sRNA", text: "Nextflex sRNA"} , 
                           { key: "6-nt", value: "6-nt", text: "Nextflex 6-NT"} , 
@@ -32,8 +33,9 @@ const numIndicesMap = {
 }
 
 
+class Dibs extends Component {
 
-class Dibs extends Component { 
+
   
   constructor(props) {
     super(props);
@@ -42,10 +44,13 @@ class Dibs extends Component {
         number:0,
         name:'',
         min:1,
-        max:999999999999999
-      };
+        max:999999999999999,
+    }
+  };
 
-}
+
+
+
 
   onAddButtonPush = () => {
     console.log("I've been clicked")
@@ -62,6 +67,23 @@ class Dibs extends Component {
       console.log(error);
   })
   }
+
+  onDeleteButtonPush = () => {
+    console.log("I've been clicked")
+    const data = [this.state.type, this.state.number, this.state.name]
+    console.log(data)
+
+    axios.post("https://dibsbase.net:443/delete", data, {})
+    .then(res => {
+      console.log("post execute")
+      console.log(res)
+
+    }, (error) => {
+      console.log("post error")
+      console.log(error);
+  })
+  }
+
 
   handleTypeChange = (e, result) => {
   const { name, value } = result;
@@ -84,6 +106,9 @@ class Dibs extends Component {
     })
     console.log(this.state.name)
   }
+
+
+
 
 
   render() {
@@ -119,7 +144,10 @@ class Dibs extends Component {
           <div className="App short-spacer" />
           { (this.state.min != 0 && this.state.type != '' && this.state.name != '') ? 
           (<button className="App primarybutton-active" onClick={() => this.onAddButtonPush()}>ADD</button>) :
-          (<button type="button" className="App primarybutton-inactive" onClick={this.onAddButtonPush} disabled>ADD</button>) }
+          (<button type="button" className="App primarybutton-inactive" onClick={this.onDeleteButtonPush} disabled>ADD</button>) }
+          { (this.state.min != 0 && this.state.type != '' && this.state.name != '') ? 
+          (<button className="App primarybutton-active" onClick={() => this.onDeleteButtonPush()}>DELETE</button>) :
+          (<button type="button" className="App primarybutton-inactive" onClick={this.onDeleteButtonPush} disabled>DELETE</button>) }
           </div>
         </div>
       </div>

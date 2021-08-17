@@ -61,18 +61,12 @@ parser_view.add_argument('-u',
     type=str, 
     default='all', 
     help='only show barcodes claimed by specified user')
-parser_view.add_argument('-t', 
-    metavar='--type', 
-    type=str, 
-    default='all', 
-    help='only show barcodes of specified type')
 parser_view.add_argument('-c', 
     metavar='--conflicts', 
     help='show i7/i5 matches and warnings') 
     #action='store_true')
 #parser_view.set_defaults(func=view)
-
-parser_push = subparser.add_parser('push')
+ 
 parser_push.add_argument('-e', 
     metavar='--exclude', 
     type=str, 
@@ -148,11 +142,17 @@ def main():
     command = options.subparser_name
     if command == 'add':
         args = handle_add_args(options)
+        write_barcodes(args, command)
     if command == 'delete':
         args = handle_del_args(options)
+        write_barcodes(args, command)
+    if command == 'view':
+        full = full_view()
+        print(full)
+        user_list = user_view()
+        print(user_list)
 
-    print(args)
-    write_barcodes(args, command)
+
 
 #handles argument list for any subparser
 def arg_list(args):
@@ -196,6 +196,28 @@ def can_delete_barcodes (barcode_type, barcodes):
                     barcodes.remove(row[BC_NUMBER])
     return barcodes
 
+def full_view():
+    view_sheet = []
+    csv_file = open(os.path.join(dirname, 'sheets/barcodes_master_copy.csv'), 'r')
+    for row in csv_file:
+            row_list = row.strip().split('\t')
+            if row_list[USER] != '---':
+                view_sheet.append[row_list]
+    return view_sheet
+
+def user_view():
+    view_sheet = []
+    csv_file = open(os.path.join(dirname, 'sheets/barcodes_master_copy.csv'), 'r')
+    for row in csv_file:
+            row_list = row.strip().split('\t')
+            if row_list[USER] != str(getpass.getuser()):
+                view_sheet.append[row_list]
+    return view_sheet
+
+
+
+
+
 #write barcodes back to master barcode list
 #the big guns that handles flag checking, hamming manipulation, and flag writing
 ##want: make it so that this master file can be changed            
@@ -203,7 +225,7 @@ def write_barcodes(args, command):
     edit_lines = []
     barcode_lines = []
 
-    if command =='add':
+    if command =='add' and arg[ADD_NUMBER_OF_SAMPLES] != 0:
         add_lines = []
         csv_file = open(os.path.join(dirname, 'sheets/barcodes_master_copy.csv'), 'r')
         for x,row in enumerate(csv_file):
@@ -236,7 +258,7 @@ def write_barcodes(args, command):
                     writer.writerow(i)
         csv_file.close()
 
-    if command =='delete':
+    if command =='delete' and len(args[BARCODE_NUMBERS]) != 0:
         delete_lines = []
         csv_file = open(os.path.join(dirname, 'sheets/barcodes_master_copy.csv'), 'r')
         for x,row in enumerate(csv_file):
