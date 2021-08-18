@@ -55,7 +55,18 @@ parser_delete.add_argument('-c',
     help='label for custom barcode, must have barcodes_custom.csv in home dir')
 #parser_delete.set_defaults(func=delete)
 
-parser_view = subparser.add_parser('view')
+parser_view = subparser.add_parser('full_view')
+parser_view.add_argument('-u', 
+    metavar='--user', 
+    type=str, 
+    default='all', 
+    help='only show barcodes claimed by specified user')
+parser_view.add_argument('-c', 
+    metavar='--conflicts', 
+    help='show i7/i5 matches and warnings') 
+    #action='store_true')
+
+parser_view = subparser.add_parser('user_view')
 parser_view.add_argument('-u', 
     metavar='--user', 
     type=str, 
@@ -147,9 +158,10 @@ def main():
     if command == 'delete':
         args = handle_del_args(options)
         write_barcodes(args, command)
-    if command == 'view':
+    if command == 'full_view':
         full = full_view()
         print(full)
+    if command == 'user_view'
         user_list = user_view()
         print(user_list)
 

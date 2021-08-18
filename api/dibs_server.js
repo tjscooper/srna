@@ -55,6 +55,52 @@ app.post('/add',function(req, res) {
     }
     
 });
+
+
+app.post('/delete',function(req, res) {
+  //add a barcode to dibs\
+    console.log("you've made it this far")
+    console.log(req.body)
+    console.log(req)
+    var cmd = "python3 dibs/dib3.py"
+    cmd = cmd.concat(" delete " + req.body[0] + " " + req.body[1] + " -n " + req.body[2] + ' -r 1 -s 110')
+    child = exec(cmd,
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+    });
+    try {
+      child();
+      res.send("goodjob")
+    } catch (error) {
+      console.log("finished")
+      res.json(outfile)
+    }
+    
+});
+
+app.get('/fullview',function(req, res) {
+  //executes a pipeline on currently uploaded file\
+    var cmd = "python3 dib3.py full_view"
+    child = exec(cmd,
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+      return res.send(stdout);
+    });
+    try {
+      child();
+    } catch (error) {
+      console.log("FULL VIEW ERROR")
+    }
+    
+});
 /*
 
 -Install cutadapt and samtools and bowtie2:

@@ -36,6 +36,7 @@ const numIndicesMap = {
 class Dibs extends Component {
 
 
+
   
   constructor(props) {
     super(props);
@@ -45,12 +46,25 @@ class Dibs extends Component {
         name:'',
         min:1,
         max:999999999999999,
+        fullView:[]
     }
+    this.getFullView().then(res => this.setState({fullView:res}))
+      console.log(this.state.fullView)
+
   };
 
 
 
 
+  getFullView () {
+      return axios.get('https://dibsbase.net:443/fullview')
+        .then(response => {console.log(response.data)})
+        .catch(function (error) {
+          console.log(error);
+        })  
+      
+
+  }
 
   onAddButtonPush = () => {
     console.log("I've been clicked")
@@ -106,6 +120,8 @@ class Dibs extends Component {
     })
     console.log(this.state.name)
   }
+
+
 
 
 
