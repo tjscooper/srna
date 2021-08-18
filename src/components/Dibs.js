@@ -4,6 +4,7 @@ import React, { Component ,useState } from 'react';
 import axios from 'axios';
 import { Dropdown } from 'semantic-ui-react';
 import "./../App.css";
+import fullViewJSON from '../api/dibs/views/full_view.json';
 
 
 const typeOptions = [
@@ -48,10 +49,13 @@ class Dibs extends Component {
         max:999999999999999,
         fullView:[]
     }
-    this.getFullView().then(res => this.setState({fullView:res}))
+    this.getFullView()
+    this.setState({fullView:fullViewJSON})
+
       console.log(this.state.fullView)
 
   };
+
 
 
 
@@ -141,6 +145,7 @@ class Dibs extends Component {
                       </tr>
                     ))}
                 </table>
+                
             </div>
           <div className="App short-spacer" />
           <label className="App h2">Barcode Type</label>

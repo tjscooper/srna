@@ -99,7 +99,6 @@ app.get('/fullview',function(req, res) {
     } catch (error) {
       console.log("FULL VIEW ERROR")
     }
-    
 });
 /*
 
