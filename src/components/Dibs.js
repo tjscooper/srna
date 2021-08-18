@@ -133,6 +133,15 @@ class Dibs extends Component {
         <div class="row">
           <div class="offset-md-3 col-md-6">
           <p className = "App h1">Hello, welcome to DIBS</p>
+          <div>
+                <table>
+                    {this.state.fullView.map((r) => (
+                      <tr>
+                          <td>{r}</td>
+                      </tr>
+                    ))}
+                </table>
+            </div>
           <div className="App short-spacer" />
           <label className="App h2">Barcode Type</label>
           <div className="App short-spacer" />
