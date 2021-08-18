@@ -1,6 +1,7 @@
 import sys
 import csv
 import argparse
+import json
 import getpass
 import os
 
@@ -56,11 +57,6 @@ parser_delete.add_argument('-c',
 #parser_delete.set_defaults(func=delete)
 
 parser_view = subparser.add_parser('full_view')
-parser_view.add_argument('-u', 
-    metavar='--user', 
-    type=str, 
-    default='all', 
-    help='only show barcodes claimed by specified user')
 parser_view.add_argument('-c', 
     metavar='--conflicts', 
     help='show i7/i5 matches and warnings') 
@@ -217,7 +213,8 @@ def full_view():
             row_list = row.strip().split('\t')
             if row_list[USER] != '---':
                 view_sheet.append(row_list)
-    return view_sheet
+    with open(os.path.join(dirname, 'sheets/full_view.json'), 'w') as f:
+        json.dump(view_sheet, f, indent=2)
 
 def user_view():
     view_sheet = []
@@ -226,7 +223,8 @@ def user_view():
             row_list = row.strip().split('\t')
             if row_list[USER] == str(getpass.getuser()):
                 view_sheet.append(row_list)
-    return view_sheet
+    with open(os.path.join(dirname, 'sheets/user_view.json'), 'w') as f:
+        json.dump(view_sheet, f, indent=2)
 
 
 
