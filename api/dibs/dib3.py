@@ -213,7 +213,7 @@ def full_view():
             row_list = row.strip().split('\t')
             if row_list[USER] != '---':
                 view_sheet.append(row_list)
-    with open(os.path.join(dirname, 'sheets/full_view.json'), 'w') as f:
+    with open(os.path.join(dirname, 'views/full_view.json'), 'w') as f:
         json.dump(view_sheet, f, indent=2)
 
 def user_view():
@@ -223,7 +223,7 @@ def user_view():
             row_list = row.strip().split('\t')
             if row_list[USER] == str(getpass.getuser()):
                 view_sheet.append(row_list)
-    with open(os.path.join(dirname, 'sheets/user_view.json'), 'w') as f:
+    with open(os.path.join(dirname, 'views/user_view.json'), 'w') as f:
         json.dump(view_sheet, f, indent=2)
 
 
