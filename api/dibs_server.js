@@ -93,10 +93,10 @@ app.get('/fullview',function(req,res) {
           return;
         }
         if(stderr) {
-          console.log('stderr: ${stderr}');
+          console.log('stderr:' + stderr);
           return;
         }
-        console.log('stdout: ${stdout}');
+        console.log('stdout: ' +stdout);
     });
     try {
       child();
