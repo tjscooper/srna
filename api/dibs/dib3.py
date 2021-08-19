@@ -157,7 +157,6 @@ def main():
     if command == 'full_view':
         full = full_view()
         print(full)
-        return full
     if command == 'user_view':
         user_list = user_view()
         print(user_list)
