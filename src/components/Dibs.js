@@ -58,6 +58,7 @@ class Dibs extends Component {
 
   getFullView () {
       return axios.get('https://dibsbase.net:443/fullview')
+      console.log('view in progress')
         .then(response => {console.log(response.data)})
         .catch(function (error) {
           console.log(error);

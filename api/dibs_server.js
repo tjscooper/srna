@@ -103,7 +103,6 @@ app.get('/fullview',function(req,res) {
       res.send("goodjob")
     } catch (error) {
       console.log("finished")
-      res.json(outfile)
     }
     
 });
