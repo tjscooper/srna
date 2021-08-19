@@ -48,7 +48,7 @@ class Dibs extends Component {
         max:999999999999999,
         fullView:[]
     }
-    this.getFullViewQuiet()
+    this.getFullView().then(res => this.setState({fullView:res}))
       console.log(this.state.fullView)
 
   };
@@ -56,8 +56,8 @@ class Dibs extends Component {
 
 
 
-  getFullViewQuiet () {
-      return axios.post('https://dibsbase.net:443/fullviewquiet',)
+  getFullView () {
+      return axios.post('https://dibsbase.net:443/fullview')
         .then(response => {console.log(response.data)})
         .catch(function (error) {
           console.log(error);
