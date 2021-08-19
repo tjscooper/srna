@@ -89,7 +89,7 @@ app.get('/fullview',function(req,res) {
     child = exec(cmd,
     function (error, stdout, stderr) {
         if (error) {
-          console.log('exec error: ${error.message}');
+          console.log('exec error: ' + error.message);
           return;
         }
         if(stderr) {
