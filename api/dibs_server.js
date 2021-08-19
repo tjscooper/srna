@@ -82,17 +82,21 @@ app.post('/delete',function(req, res) {
     
 });
 
-app.post('/fullview',function(res) {
+app.post('/fullview',function(req,res) {
   //executes a pipeline on currently uploaded file\
 
     var cmd = "python3 dib3.py full_view"
     child = exec(cmd,
-    function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-             console.log('exec error: ' + error);
+    function (error, stdout, stderr) => {
+        if (error) {
+          console.log('exec error: ${error.message}');
+          return;
         }
+        if(stderr) {
+          console.log('stderr: ${stderr}');
+          return;
+        }
+        console.log('stdout: ${stdout}');
     });
     try {
       child();
