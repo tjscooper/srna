@@ -87,7 +87,7 @@ app.post('/fullview',function(req,res) {
 
     var cmd = "python3 dib3.py full_view"
     child = exec(cmd,
-    function (error, stdout, stderr) => {
+    function (error, stdout, stderr) {
         if (error) {
           console.log('exec error: ${error.message}');
           return;
