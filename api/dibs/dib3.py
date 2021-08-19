@@ -237,7 +237,7 @@ def write_barcodes(args, command):
     edit_lines = []
     barcode_lines = []
 
-    if command =='add' and arg[ADD_NUMBER_OF_SAMPLES] != 0:
+    if command =='add' and args[ADD_NUMBER_OF_SAMPLES] != 0:
         add_lines = []
         csv_file = open(os.path.join(dirname, 'sheets/barcodes_master_copy.csv'), 'r')
         for x,row in enumerate(csv_file):
