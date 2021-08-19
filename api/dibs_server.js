@@ -82,9 +82,9 @@ app.post('/delete',function(req, res) {
     
 });
 
-app.post('/fullview',function(req, res) {
+app.post('/fullview',function(res) {
   //executes a pipeline on currently uploaded file\
-  console.log(req)
+
     var cmd = "python3 dib3.py full_view"
     child = exec(cmd,
     function (error, stdout, stderr) {
@@ -93,13 +93,15 @@ app.post('/fullview',function(req, res) {
         if (error !== null) {
              console.log('exec error: ' + error);
         }
-      return res.send(stdout);
     });
     try {
       child();
+      res.send("goodjob")
     } catch (error) {
-      console.log("FULL VIEW ERROR")
+      console.log("finished")
+      res.json(outfile)
     }
+    
 });
 /*
 
