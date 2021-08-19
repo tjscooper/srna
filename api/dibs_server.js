@@ -84,6 +84,7 @@ app.post('/delete',function(req, res) {
 
 app.get('/fullview',function(req, res) {
   //executes a pipeline on currently uploaded file\
+  console.log(req)
     var cmd = "python3 dib3.py full_view"
     child = exec(cmd,
     function (error, stdout, stderr) {
