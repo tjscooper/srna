@@ -82,7 +82,7 @@ app.post('/delete',function(req, res) {
     
 });
 
-app.get('/fullview',function(req,res) {
+app.post('/fullview',function(req,res) {
   //executes a pipeline on currently uploaded file\
 
     var cmd = "python3 dibs/dib3.py full_view"
