@@ -214,6 +214,7 @@ def full_view():
                 view_sheet.append(row_list)
     with open(os.path.join(dirname, 'views/full_view.json'), 'w') as f:
         json.dump(view_sheet, f, indent=2)
+    return view_sheet
 
 def user_view():
     view_sheet = []

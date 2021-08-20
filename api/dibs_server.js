@@ -96,7 +96,7 @@ app.get('/fullview',function(req,res) {
           console.log('stderr:' + stderr);
           return;
         }
-        console.log('stdout: ' +stdout);
+        console.log('stdout: ' + stdout);
     });
     try {
       child();
