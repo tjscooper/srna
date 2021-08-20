@@ -3,6 +3,7 @@ const path = require('path');
 const http = require('http');
 var https = require('https');
 const fs = require('fs');
+const { spawn } = require('child_process');
 
 var cors = require('cors');
 
@@ -86,7 +87,39 @@ app.get('/fullview',function(req,res) {
   //executes a pipeline on currently uploaded file\
 
     var cmd = "python3 dibs/dib3.py full_view"
-    child = exec(cmd,
+    child = spawn('python3', ['dibs/dib3.py', 'full_view']
+    function (error, stdout, stderr) {
+        python.stdout.on('data', (data) => {
+        console.log('pattern: ', data.toString());
+        });
+
+        python.stderr.on('data', (data) => {
+        console.error('err: ', data.toString());
+        });
+
+        python.on('error', (error) => {
+        console.error('error: ', error.message);
+        });
+
+        python.on('close', (code) => {
+        console.log('child process exited with code ', code);
+        });
+    });
+    try {
+      child();
+      res.send("goodjob")
+    } catch (error) {
+      console.log("finished")
+    }
+    
+});
+/*
+
+app.get('/fullview',function(req,res) {
+  //executes a pipeline on currently uploaded file\
+
+    var cmd = "python3 dibs/dib3.py full_view"
+    child = spawn('python3', ['dibs/dib3.py
     function (error, stdout, stderr) {
         if (error) {
           console.log('exec error: ' + error.message);
@@ -107,7 +140,6 @@ app.get('/fullview',function(req,res) {
     }
     
 });
-/*
 
 -Install cutadapt and samtools and bowtie2:
 scp -i 2020DYLANDO.pem Downloads/Miniconda3-latest-Linux-x86_64.sh ec2-user@ec2-52-41-194-224.us-west-2.compute.amazonaws.com:

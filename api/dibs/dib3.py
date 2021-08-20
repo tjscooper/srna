@@ -156,7 +156,7 @@ def main():
         write_barcodes(args, command)
     if command == 'full_view':
         full = full_view()
-        print(full)
+        sys.stdout.write(full)
     if command == 'user_view':
         user_list = user_view()
         print(user_list)
