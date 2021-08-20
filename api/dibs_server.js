@@ -87,7 +87,7 @@ app.get('/fullview',function(req,res) {
   //executes a pipeline on currently uploaded file\
 
     var cmd = "python3 dibs/dib3.py full_view"
-    child = spawn('python3', ['dibs/dib3.py', 'full_view']
+    child = spawn('python3', ['dibs/dib3.py', 'full_view'],
     function (error, stdout, stderr) {
         python.stdout.on('data', (data) => {
         console.log('pattern: ', data.toString());
