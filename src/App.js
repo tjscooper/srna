@@ -7,9 +7,6 @@ import "./App.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
-import firebase from "firebase"
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-
 import Home from "./containers/Home";
 import SetUpRun from "./components/SetUpRun";
 import NotFound from "./containers/NotFound";
@@ -27,6 +24,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import ExecutePipeline from './components/ExecutePipeline'
 import List from 'react-list-select'
 import CatInputs from "./components/CatInputs"
+import firebase from "firebase"
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+
 
 import MediaQuery from 'react-responsive';
 
@@ -39,6 +39,8 @@ import wrench from './assets/wrench.svg'
 import wrench_blue1 from './assets/wrench_blue1.svg'
 import wrench_darkgrey from './assets/wrench_darkgrey.svg'
 import empty from './assets/empty.png'
+import question_grey from './assets/question_grey.svg'
+import question_white from './assets/question_white_no_rim.svg'
 
 
 
@@ -54,15 +56,22 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-      this.state = {
-        tab:"/",
-        hamburger: false,
-        dev: false,
-        gitTag: "",
-        isSignedIn: false,
-      };
-      this.getGit().then(res => this.setState({gitTag:res}))
-      console.log(this.state.gitTag)
+    let path = window.location.href.split("/")
+    path.shift()
+    path.shift()
+    path.shift()
+    this.state = {
+      tab: "/" + path.join("/"),
+      hamburger: false,
+      dev: false,
+      gitTag: "",
+      isSignedIn: false,
+      resetPwd: false,
+      email: "",
+    };
+    this.getGit().then(res => this.setState({gitTag:res}))
+    console.log(this.state.gitTag)
+    console.log(this.state.tab)
 
 
     window.onbeforeunload = (event) => {
@@ -89,6 +98,29 @@ class App extends Component {
 
   hamburgerToggle () {
     this.setState({hamburger: !this.state.hamburger})
+  }
+
+
+  handleEmailChange(evt) {
+    this.setState({
+      email: evt.target.value
+    })
+  }
+
+
+  sendReset() {
+    firebase.auth().sendPasswordResetEmail(this.state.email)
+      .then(() => {
+        toast.success('Password reset email sent!');
+    
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        toast.error('Email is not found to be registered with this site.') 
+        // ..
+      });
   }
 
   componentDidUpdate(){ 
@@ -132,6 +164,8 @@ class App extends Component {
     return (
 
       <div className="App major-container" style={{"height":"100%"}} >
+
+      <ToastContainer />
       { (this.state.dev) ? 
         (
         <Router>
@@ -225,33 +259,42 @@ class App extends Component {
                 <a target="_blank" rel="noopener noreferrer"  href="https://perkinelmer-appliedgenomics.com/">
                   <div className="App logo"/>
                 </a>
-                <div style={{width: "100px"}} />
-                <Link to="/" className={(this.state.tab == "/" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/"}) }>Home</Link>
-                <div style={{width: "100px"}} />
-                <Link to="/analyze" className={(this.state.tab == "/" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/analyze"}) }>Analyze</Link>
-                <div style={{width: "100px"}} />
-                <Link to="/dibs" className={(this.state.tab == "/dibs" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/dibs"}) }>DIBS</Link>
-                <div style={{width: "100px"}} />
-                <Link to="/technical" className={(this.state.tab == "/technical" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/technical"}) }>Technical</Link>
-                <div style={{width: "100px"}} />
+                <div style={{width: "50px"}} />
+                <Link to="/" className={"App h2-c"} onClick={() => this.setState({tab:"/"}) }>
+                  <button className={(this.state.tab == "/" ? "App headerbutton-active shadow" : "App headerbutton-active")} >Home</button>
+                </Link>
+                <div style={{width: "50px"}} />
+                <Link to="/analyze" className={"App h2-c"} onClick={() => this.setState({tab:"/analyze"}) }>
+                  <button className={(this.state.tab == "/analyze" ? "App headerbutton-active shadow" : "App headerbutton-active")} >Analyze</button>
+                </Link>
+                <div style={{width: "50px"}} />
+                <Link to="/dibs" className={"App h2-c"} onClick={() => this.setState({tab:"/dibs"}) }>
+                  <button className={(this.state.tab == "/dibs" ? "App headerbutton-active shadow" : "App headerbutton-active")} >DIBS</button>
+                </Link>
+                <div style={{width: "50px"}} />
+                <Link to="/technical" className={"App h2-c"} onClick={() => this.setState({tab:"/technical"}) }>
+                  <button className={(this.state.tab == "/technical" ? "App headerbutton-active shadow" : "App headerbutton-active")} >Technical</button>
+                </Link>
+                 <div style={{width: "50px"}} />
                 { (this.state.isSignedIn) ?
-                  (<Link to="/user" className={(this.state.tab == "/user" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/user"}) }>
-                    <div className="App avi-flex"><img alt="profile picture" className="App avi" src={firebase.auth().currentUser.photoURL}/><div style={{width: "7px"}} /><div>{firebase.auth().currentUser.displayName}</div></div>
+                  (<Link to="/user" className={"App h2-c"} onClick={() => this.setState({tab:"/user"}) }>
+                    <button className={(this.state.tab == "/user" ? "App headerbutton-active shadow" : "App headerbutton-active")} >
+                      <div className="App avi-flex">
+                        <img alt="profile picture" className="App avi" src={
+                         (firebase.auth().currentUser.photoURL !== null) ?
+                          (firebase.auth().currentUser.photoURL) :
+                          (question_white)}/>
+                        <div style={{width: "7px"}} />
+                        <div>{firebase.auth().currentUser.displayName}</div>
+                      </div>
+                    </button>
                   </Link>) : 
-                  (<Link to="/user" className={(this.state.tab == "/user" ? "App h2-b-selected" : "App h2-b")} onClick={() => this.setState({tab:"/user"}) }>Login</Link>) } 
-                <div style={{width: "100px"}} />
+                  (<Link to="/user" className={"App h2-c"} onClick={() => this.setState({tab:"/user"}) }>
+                     <button className={(this.state.tab == "/user" ? "App headerbutton-active shadow" : "App headerbutton-active")} >Login</button>
+                   </Link>
+                ) } 
+                <div style={{width: "50px"}} />
                 
-                { ( this.state.isSignedIn) ?
-                  ( <span>
-                      <div>SIGNED IN!</div>
-                      <button onClick={() => firebase.auth().signOut()}>SIGN OUT</button>
-                      <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-                      <img alt="profile picture" src={firebase.auth().currentUser.photoURL}/>
-                    </span>
-                    ) : 
-                  (
-                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-                    )}
               </Navbar.Brand>
             </Navbar.Header>
           </Navbar>
@@ -300,25 +343,48 @@ class App extends Component {
 
 
       <Switch>
-      <div>
-      <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>  
-          <Home />
-      </span>
-      <span className="App Home" style={{display: this.state.tab == "/analyze" ? "block" : "none" }}>  
-          <SetUpRun />
-      </span>
-      <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
-          <Technical />
-      </div>
-      <div className="App Technical" style={{display: this.state.tab == "/dibs" ? "block" : "none" }}>
-          <Dibs />
-      </div>
-      <div className="App Technical" style={{display: this.state.tab == "/user" ? "block" : "none" }}>
-          <Login />
-      </div>
-      </div>
+        <div>
+          <span className="App Home" style={{display: this.state.tab == "/" ? "block" : "none" }}>  
+              <Home auth={firebase.auth()} config={uiConfig}/>
+          </span>
+          <span className="App Home" style={{display: this.state.tab == "/analyze" ? "block" : "none" }}>  
+              <SetUpRun />
+          </span>
+          <div className="App Technical" style={{display: this.state.tab == "/technical" ? "block" : "none" }}>
+              <Technical />
+          </div>
+          <div className="App Technical" style={{display: this.state.tab == "/dibs" ? "block" : "none" }}>
+              <Dibs />
+          </div>
+          <div className="App Technical" style={{display: this.state.tab == "/user" ? "block" : "none" }}>
+            { ( this.state.isSignedIn) ?
+              ( <Login auth={firebase.auth()} config={uiConfig}/>) : 
+              (
+                <div style={{"text-align": "center"}}>
+                  <h1 className ="App h1">Please sign in below.</h1>
+                  <div className="App short-spacer" />
+                  <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                  <button className="App tertiarybutton-active" onClick={() => this.setState({resetPwd: !this.state.resetPwd})} >Reset password with email</button>
+                  { ( this.state.resetPwd) ?
+                    (<div style={{"text-align": "center"}}>
+                      <div className="App short-spacer" />
+                      <label className="App h2">Enter email*</label>
+                      <div className="App short-spacer" />
+                      <input type="text" name="email" className="App custom-email-input" style={{"width": "250px"}} placeholder="Enter email" value={this.state.email} onChange={evt => this.handleEmailChange(evt)}/>
+                      <div className="App short-spacer" />
+                      <button className="App primarybutton-active" onClick={() => this.sendReset()}>SEND</button>
+                      <div className="App short-spacer" />
+                    </div>) :
+                    (<div/>)
+                  }
+                  <div className="App spacer"/>
+                </div>
+              )
+            }
+          </div>
+        </div>
       </Switch>
-        </Router>
+      </Router>
       )}
       </div>
     );
