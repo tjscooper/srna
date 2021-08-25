@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const firebase = require("firebase")
+const {firebase, admin} = require("firebase")
 
 const http = require('http');
 var https = require('https');
@@ -202,10 +202,9 @@ app.post('/auth', async (req, res) => {
 
   console.log(req.body.token)
 
-  firebase.auth().signInWithCustomToken(req.body.token)
-  .then((userCredential) => {
+  admin.auth().verifydToken(req.body.token)
+  .then((user) => {
     // Signed in
-    var user = userCredential.user;
     console.log(user)
     // ...
   })
