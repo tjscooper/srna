@@ -202,7 +202,7 @@ app.post('/auth', async (req, res) => {
 
   console.log(req.body.token)
 
-  firebase.auth().signInWithToken(req.body.token)
+  firebase.auth().signInWithCustomToken(req.body.token)
   .then((userCredential) => {
     // Signed in
     var user = userCredential.user;
