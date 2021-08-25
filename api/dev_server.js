@@ -208,7 +208,7 @@ app.post('/auth', async (req, res) => {
 
   console.log(req.body.token)
 
-  admin.auth().verifydToken(req.body.token)
+  admin.auth().verifyIdToken(req.body.token)
   .then((user) => {
     // Signed in
     console.log(user)
