@@ -7,8 +7,6 @@ import "./App.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
-import firebase from "firebase"
-import StyledFirebaseAuth from "react-firebaseui/StyleFirebaseAuth"
 
 import Home from "./containers/Home";
 import SetUpRun from "./components/SetUpRun";
@@ -52,7 +50,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: false,
+        dev: true,
         gitTag: "",
       };
       this.getGit().then(res => this.setState({gitTag:res}))
