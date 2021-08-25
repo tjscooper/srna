@@ -22,6 +22,11 @@ firebase.initializeApp({
     authDomain: "srna-5ba19.firebaseapp.com"
   })
 
+admin.initializeApp({
+    apiKey: "AIzaSyAzbCZRLHRoa2_n9HZEsaFMmPgwSiZAUF8", 
+    authDomain: "srna-5ba19.firebaseapp.com"
+  })
+
 // serve the API on 80 (HTTP) port
 //
 
