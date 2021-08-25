@@ -16,7 +16,10 @@ const app = express(),
       bodyParser = require("body-parser");
       port = 443;
 
-
+firebase.initializeApp({
+    apiKey: "AIzaSyAzbCZRLHRoa2_n9HZEsaFMmPgwSiZAUF8", 
+    authDomain: "srna-5ba19.firebaseapp.com"
+  })
 
 // serve the API on 80 (HTTP) port
 //
