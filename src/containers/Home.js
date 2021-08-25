@@ -24,7 +24,7 @@ class Home extends Component {
   	this.props.auth.currentUser.getIdToken().then(idToken => {
   	  console.log(idToken)
   	  let data = {token: idToken}
-  	  axios.post("https://booshboosh.net:3000/auth", data, {}).then(res => {
+  	  axios.post("https://booshboosh.net:443/auth", data, {}).then(res => {
 	    console.log("post execute")
 	    console.log(res)
 	  }, (error) => {

@@ -10,11 +10,11 @@ var s3Proxy = require('s3-proxy');
 var gm = require('./../../gm.json');
 
 
-// serve the API with signed certificate on 3000 (SSL/HTTPS) port
+// serve the API with signed certificate on 443 (SSL/HTTPS) port
 
 const app = express(),
       bodyParser = require("body-parser");
-      port = 3000;
+      port = 443;
 
 
 
@@ -490,8 +490,8 @@ const httpsServer = https.createServer({
   dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
 }, app);
 
-httpsServer.listen(3000, () => {
-    console.log('HTTPS Server running on port 3000');
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
 });
 
 /*
