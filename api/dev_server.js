@@ -212,6 +212,8 @@ app.post('/auth', async (req, res) => {
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorCodeerrorMessage)
     // ...
   });
 
