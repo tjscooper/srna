@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const {firebase, admin} = require("firebase")
+const firebase = require("firebase")
+const admin = require("firebase-admin")
 
 const http = require('http');
 var https = require('https');
