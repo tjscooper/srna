@@ -7,7 +7,7 @@ const fs = require('fs');
 var aws = require('aws-sdk');
 var s3Proxy = require('s3-proxy');
 var gm = require('./../../gm.json');
-import firebase = "firebase"
+import firebase from "firebase"
 
 
 // serve the API with signed certificate on 3000 (SSL/HTTPS) port
