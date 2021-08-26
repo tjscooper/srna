@@ -50,7 +50,7 @@ class App extends Component {
       this.state = {
         tab:"/",
         hamburger: false,
-        dev: true,
+        dev: false,
         gitTag: "",
       };
       this.getGit().then(res => this.setState({gitTag:res}))

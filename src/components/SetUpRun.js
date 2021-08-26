@@ -148,7 +148,7 @@ class SetUpRun extends Component {
       data.append('file', this.state.selectedFile[x])
     }
     //axios.post("http://35.162.241.80:443/upload", data, {
-    axios.post("https://booshboosh.net:3000/upload", data, {
+    axios.post("https://booshboosh.net:443/upload", data, {
       onUploadProgress: ProgressEvent => {
         if (ProgressEvent.loaded / ProgressEvent.total*100 == 100) {
           const uFiles = []
