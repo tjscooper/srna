@@ -15,7 +15,7 @@ var gm = require('./../../gm.json');
 
 const app = express(),
       bodyParser = require("body-parser");
-      port = 443;
+      port = 3000;
 
 firebase.initializeApp({
     apiKey: "AIzaSyAzbCZRLHRoa2_n9HZEsaFMmPgwSiZAUF8", 
@@ -497,8 +497,8 @@ const httpsServer = https.createServer({
   dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
 }, app);
 
-httpsServer.listen(443, () => {
-    console.log('HTTPS Server running on port 443');
+httpsServer.listen(3000, () => {
+    console.log('HTTPS Server running on port 3000');
 });
 
 /*
