@@ -407,6 +407,7 @@ sudo miniconda3/bin/conda install scipy
 rm miniconda3/pkgs/*.bz2
 sudo yum group install "Development Tools"
 sudo yum install ncurses-devel bzip2-devel xz-devel
+sudo yum install nginx
 cd
 wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
 tar xvjf samtools-1.9.tar.bz2
@@ -446,7 +447,7 @@ for helmet: https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 https://aws.amazon.com/blogs/compute/extending-amazon-linux-2-with-epel-and-lets-encrypt/
 ***
 
--first, update IP on google domains DNS settings
+-first, update IP on google domains DNS settings!!!!!!! REMEMBER!!!!!!!
 -then, use these commands:
 sudo mkdir /var/www/test
 sudo openssl dhparam -out /var/www/test/dh-strong.pem 2048
@@ -465,8 +466,8 @@ sudo npm run dev
 */
 
 const httpsServer = https.createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/booshboosh.net/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/dontmindifido.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/dontmindifido.net/fullchain.pem'),
   dhparam: fs.readFileSync("/var/www/test/dh-strong.pem")
 }, app);
 
