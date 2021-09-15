@@ -49,6 +49,7 @@ app.post('/add',function(req, res) {
     });
     try {
       child();
+      console.log('completed add')
       res.send("goodjob")
     } catch (error) {
       console.log("finished")
