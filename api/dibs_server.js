@@ -71,6 +71,7 @@ app.post('/delete',function(req, res) {
         console.log('stderr: ' + stderr);
         if (error !== null) {
              console.log('exec error: ' + error);
+             return res.send(error)
         }
         console.log('completed delete')
         return res.send("goodjob")
