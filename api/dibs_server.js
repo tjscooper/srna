@@ -70,17 +70,16 @@ app.post('/delete',function(req, res) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
         console.log('exec error: ' + error)
-        if (error !== null) {
-             console.log('exec error: ' + error);
-             return res.send(error)
-        }
         console.log('completed delete')
         return res.send("goodjob")
     });
     try {
       child();
     } catch (error) {
-      console.log('exec error: ' + error)
+      if (error !== null) {
+             console.log('exec error: ' + error);
+             return res.send(error)
+        }
       console.log("delete execute failed")
     }
     
