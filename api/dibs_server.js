@@ -46,14 +46,13 @@ app.post('/add',function(req, res) {
         if (error !== null) {
              console.log('exec error: ' + error);
         }
+        console.log('completed add')
+        return res.send("goodjob")
     });
     try {
       child();
-      console.log('completed add')
-      res.send("goodjob")
     } catch (error) {
-      console.log("finished")
-      res.json(outfile)
+      console.log("add execution error")
     }
     
 });
