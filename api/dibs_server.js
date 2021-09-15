@@ -80,6 +80,7 @@ app.post('/delete',function(req, res) {
     try {
       child();
     } catch (error) {
+      console.log('exec error: ' + error)
       console.log("delete execute failed")
     }
     
