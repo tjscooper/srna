@@ -64,7 +64,7 @@ app.post('/delete',function(req, res) {
     console.log(req.body)
     console.log(req)
     var cmd = "python3 dibs/dib3.py"
-    cmd = cmd.concat(" delete " + req.body[0] + " " + req.body[1] + " -n " + req.body[2] + ' -r 1 -s 110')
+    cmd = cmd.concat(" delete " + req.body[0] + " " + req.body[1])
     child = exec(cmd,
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
