@@ -72,13 +72,13 @@ app.post('/delete',function(req, res) {
         if (error !== null) {
              console.log('exec error: ' + error);
         }
+        console.log('completed delete')
+        return res.send("goodjob")
     });
     try {
       child();
-      res.send("goodjob")
     } catch (error) {
-      console.log("finished")
-      res.json(outfile)
+      console.log("delete execute failed")
     }
     
 });
