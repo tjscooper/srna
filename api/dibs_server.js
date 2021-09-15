@@ -69,7 +69,7 @@ app.post('/delete',function(req, res) {
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
-        if (error !== null) {
+        if (stderr !== null) {
              console.log('exec error: ' + error);
              return res.send(error)
         }
