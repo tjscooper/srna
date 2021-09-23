@@ -93,23 +93,27 @@ class Dibs extends Component {
         },
         ]
     }
-    this.getFullView()
-      console.log(this.state.fullView)
 
   };
 
 
 
 
-  getFullView () {
-      return axios.get('https://dibsbase.net:443/fullview')
-      console.log('view in progress')
-        .then(response => this.setState({getFullView:response}))
-        .catch(function (error) {
-          console.log(error);
-        })  
-      
+  onGetFullView () {
+      console.log("I've been clicked")
+      const data = [this.state.type, this.state.number, this.state.name]
+      console.log(data)
 
+      axios.post('https://dibsbase.net:443/fullview', data, {})
+      console.log('view in progress')
+        .then(res => {
+          console.log("post execute")
+          console.log(res)
+
+        }, (error) => {
+          console.log("post error")
+          console.log(error);
+    })
   }
 
   onAddButtonPush = () => {
@@ -217,7 +221,9 @@ class Dibs extends Component {
           (<button type="button" className="App primarybutton-inactive" onClick={this.onDeleteButtonPush} disabled>ADD</button>) }
           { (this.state.min != 0 && this.state.type != '' && this.state.name != '') ? 
           (<button className="App primarybutton-active" onClick={() => this.onDeleteButtonPush()}>DELETE</button>) :
-          (<button type="button" className="App primarybutton-inactive" onClick={this.onDeleteButtonPush} disabled>DELETE</button>) }
+          (<button type="button" className="App primarybutton-inactive" onClick={this.onAddButtonPush} disabled>DELETE</button>) }
+          <div className="App short-spacer" />
+          <button className="App primarybutton-active" onClick={() => this.onGetFullView()}>DISPLAY DIBS</button>
           <div className="App short-spacer" />
           <DynamicTable data={this.state.fullView}/>
           </div>

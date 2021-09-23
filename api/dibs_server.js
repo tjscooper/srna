@@ -90,7 +90,7 @@ app.get('/fullview',function(req,res) {
   //executes a pipeline on currently uploaded file\
 
     var cmd = "python3 dibs/dib3.py full_view"
-    child = exec('python3', ['dibs/dib3.py', 'full_view'],
+    child = exec(cmd,
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('err: ' + stderr);
