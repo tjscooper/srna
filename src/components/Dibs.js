@@ -3,6 +3,9 @@
 import React, { Component ,useState } from 'react';
 import axios from 'axios';
 import { Dropdown } from 'semantic-ui-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DynamicTable from "./DynamicTable"
 import "./../App.css";
 
 
@@ -46,7 +49,49 @@ class Dibs extends Component {
         name:'',
         min:1,
         max:999999999999999,
-        fullView:[]
+        fullView:[
+        {
+          _id:1,
+          barcodeType:'12-nt',
+          barcodeNumber:79,
+          owner:'g.p.bailey',
+          barcodeSeq1:'TTGCATGTGGCC',
+          ready:true
+        },
+        {
+          _id:2,
+          barcodeType:'12-nt',
+          barcodeNumber:80,
+          owner:'g.p.bailey',
+          barcodeSeq1:'CCCGGAACCCTT',
+          ready:true
+        },
+        {
+          _id:3,
+          barcodeType:'12-nt',
+          barcodeNumber:81,
+          owner:'g.p.bailey',
+          barcodeSeq1:'AACGTTGTGTCC',
+          ready:false
+        },
+        {
+          _id:4,
+          barcodeType:'12-nt',
+          barcodeNumber:82,
+          owner:'g.p.bailey',
+          barcodeSeq1:'GGGCCAACCCTT',
+          ready:true
+        },
+        {
+          _id:5,
+          barcodeType:'budi',
+          barcodeNumber:99,
+          owner:'g.p.bailey',
+          barcodeSeq1:'CTGCCCGTGG',
+          barcodeSeq2:'AACTACCGTA',
+          ready:true
+        },
+        ]
     }
     this.getFullView()
       console.log(this.state.fullView)
@@ -92,7 +137,14 @@ class Dibs extends Component {
     .then(res => {
       console.log("post execute")
       console.log(res)
-
+      console.log(res.data)
+      console.log(res.data.code)
+      if(res.data.code === 2){
+        toast.error("Trying to delete unclaimed barcode.")
+      }
+      else{
+        toast.success('Barcode deleted.')
+      }
     }, (error) => {
       console.log("post error")
       console.log(error);
@@ -132,7 +184,8 @@ class Dibs extends Component {
     return (
       <div class="container">
         <div class="row">
-          <div class="offset-md-3 col-md-6">
+          <div class="App dibs-container">
+          <ToastContainer />
           <p className = "App h1">Hello, welcome to DIBS</p>
           <div className="App short-spacer" />
           <label className="App h2">Barcode Type</label>
@@ -165,6 +218,8 @@ class Dibs extends Component {
           { (this.state.min != 0 && this.state.type != '' && this.state.name != '') ? 
           (<button className="App primarybutton-active" onClick={() => this.onDeleteButtonPush()}>DELETE</button>) :
           (<button type="button" className="App primarybutton-inactive" onClick={this.onDeleteButtonPush} disabled>DELETE</button>) }
+          <div className="App short-spacer" />
+          <DynamicTable data={this.state.fullView}/>
           </div>
         </div>
       </div>
