@@ -70,16 +70,17 @@ app.post('/delete',function(req, res) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
         console.log('exec error: ' + error)
+        if (error !== null) {
+             console.log('exec error: ' + error);
+             return res.send(error)
+        }
         console.log('completed delete')
         return res.send("goodjob")
     });
     try {
       child();
     } catch (error) {
-      if (error !== null) {
-             console.log('exec error: ' + error);
-             return res.send(error)
-        }
+      console.log('exec error: ' + error)
       console.log("delete execute failed")
     }
     
@@ -89,23 +90,11 @@ app.get('/fullview',function(req,res) {
   //executes a pipeline on currently uploaded file\
 
     var cmd = "python3 dibs/dib3.py full_view"
-    child = spawn('python3', ['dibs/dib3.py', 'full_view'],
+    child = exec('python3', ['dibs/dib3.py', 'full_view'],
     function (error, stdout, stderr) {
-        python.stdout.on('data', (data) => {
-        console.log('pattern: ', data.toString());
-        });
-
-        python.stderr.on('data', (data) => {
-        console.error('err: ', data.toString());
-        });
-
-        python.on('error', (error) => {
-        console.error('error: ', error.message);
-        });
-
-        python.on('close', (code) => {
-        console.log('child process exited with code ', code);
-        });
+        console.log('stdout: ' + stdout);
+        console.log('err: ' + stderr);
+        console.log('error: ' + error);
     });
     try {
       child();
